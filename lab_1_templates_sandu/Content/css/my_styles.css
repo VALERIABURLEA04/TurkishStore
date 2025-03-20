@@ -1,0 +1,176 @@
+﻿
+body {
+   
+}
+
+#background_image {
+   /* width: 1000px;
+    height: 1000px;*/
+    background-image: url("https://www.maisonju.com/cdn/shop/files/Beige_Minimalist_Creative_Promotional_Sale_Banner_1.png?v=1733570799&width=1200");
+    background-size: cover; /* Acoperă toată suprafața */
+    background-position: center; /* Centrează imaginea */
+    background-repeat: no-repeat; /* Nu repetă imaginea */
+    height: 100vh; /* Înălțimea body-ului să fie cât ecranul */
+    margin: 0;
+    padding: 0;
+}
+
+.logo-img {
+    width: 90px; /* Set width to 50px */
+    height: auto; /* Keep the aspect ratio */
+    padding: 0px; /* Optional: adjust padding if needed */
+}
+
+.navbar-icons i {
+    color: black;
+}
+
+
+.body-content {
+    width: 100vw; /* Acoperă întreaga lățime a ferestrei */
+    height: 100vh; /* Acoperă întreaga înălțime a ferestrei */
+    background-image: url("https://www.maisonju.com/cdn/shop/files/Beige_Minimalist_Creative_Promotional_Sale_Banner_1.png?v=1733570799&width=1200");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.must-haves {
+    background-color: #f8f9fa; /* Light background */
+    padding: 50px 0; /* Add space around */
+    text-align: center; /* Center the text */
+}
+
+    .must-haves h1 {
+        font-size: 3rem;
+        color: #343a40; /* Dark text color */
+    }
+
+    .must-haves h2 {
+        font-size: 2rem;
+        color: #6c757d; /* Lighter text color */
+    }
+
+.custom-offcanvas {
+    background-color: #f8f9fa; /* Fundalul dorit */
+}
+/* Fundal alb pentru offcanvas */
+.offcanvas {
+    background-color: #ffffff !important; /* Asigură-te că fundalul este alb */
+    color: #000000; /* Textul va fi negru */
+}
+
+/* Stilizarea mesajului când coșul este gol */
+#cart-content p {
+    color: #000000; /* Textul va fi negru */
+    font-size: 1.2rem; /* Optional, îți poți modifica dimensiunea fontului */
+    font-weight: lighter; /* Optional, îți poți modifica grosimea fontului */
+}
+
+#checkout-btn {
+    background-color: #007bff; /* Fundal albastru pentru buton */
+    color: #ffffff; /* Text alb */
+    border: none; /* Fără bordură */
+}
+
+    #checkout-btn:hover {
+        background-color: #0056b3; /* Schimbă culoarea când treci cu mouse-ul */
+    }
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+#header {
+    position: center;
+    color: forestgreen;
+}
+
+.person_info {
+    color: red;
+    font-size: 25px;
+}
+
+.nav-item {
+    color: red;
+}
+
+
+.navbar-toggler {
+    color: green;
+}
+
+
+.display-4 {
+    color: white;
+}
+
+
+#buton_menu{
+
+    background:none;
+    border:none;
+}
+
+
+#sidebar{
+
+
+    background-color:black;
+    
+    
+}
+
+#close_btn {
+    filter: invert(1);
+}
+
+#home_main_text{
+
+    margin-right:870px;
+    color:lightpink;
+}
+
+
+.hamburgercolor{
+    color:red;
+}
+
+
+.about-title {
+    font-size: 3rem;
+    font-weight: light;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-card {
+    width: 350px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-btn {
+    background-color: black;
+    border: 1px solid red display: block;
+    display: block;
+}
+
+    .auth-btn:hover {
+        background-color: #333;
+    }
