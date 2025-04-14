@@ -83,3 +83,7 @@ D:\lab web\lab_1 - Copy\Solution1\lab_1_templates_sandu\bin\System.Web.Http.xml
 D:\lab web\lab_1 - Copy\Solution1\lab_1_templates_sandu\bin\System.Web.Http.WebHost.xml
 D:\lab web\lab_1 - Copy\Solution1\lab_1_templates_sandu\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\lab web\lab_1 - Copy\Solution1\lab_1_templates_sandu\obj\Debug\ProjectO.011C3AE6.Up2Date
+D:\turkishclothes\onlinestore66\TurkishStore\lab_1_templates_sandu\obj\Debug\ProjectOnlineStore.csproj.AssemblyReference.cache
+D:\turkishclothes\onlinestore66\TurkishStore\lab_1_templates_sandu\obj\Debug\ProjectOnlineStore.csproj.CoreCompileInputs.cache
+D:\turkishclothes\onlinestore66\TurkishStore\lab_1_templates_sandu\obj\Debug\lab_1_templates_sandu.dll
+D:\turkishclothes\onlinestore66\TurkishStore\lab_1_templates_sandu\obj\Debug\lab_1_templates_sandu.pdb
