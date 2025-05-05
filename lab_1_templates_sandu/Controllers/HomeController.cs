@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
-namespace lab_1_templates_sandu.Controllers
+namespace ProjectOnlineStore.Controllers
 {
     public class HomeController : Controller
     {

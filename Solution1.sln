@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectOnlineStore", "lab_1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControlBusinessLogic", "businessLogic\eUseControlBusinessLogic.csproj", "{7EB12C28-CBE0-4E02-9ADC-79FB7DB4E9CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.BusinessLogic", "businessLogic\eUseControl.BusinessLogic.csproj", "{7EB12C28-CBE0-4E02-9ADC-79FB7DB4E9CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseControl.Domain\eUseControl.Domain.csproj", "{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}"
 EndProject

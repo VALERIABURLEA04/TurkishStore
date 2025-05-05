@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\businessLogic\eUseControlBusinessLogic.csproj">
+    <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">
       <Project>{7eb12c28-cbe0-4e02-9adc-79fb7db4e9ce}</Project>
-      <Name>eUseControlBusinessLogic</Name>
+      <Name>eUseControl.BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
       <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>

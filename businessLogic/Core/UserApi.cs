@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eUseControlBussinessLogic.Core
 {
-    class UserApi
+    public class UserApi
     {
     }
 }

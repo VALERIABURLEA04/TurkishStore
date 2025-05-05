@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace lab_1_templates_sandu
+namespace ProjectOnlineStore
 {
     public class RouteConfig
     {

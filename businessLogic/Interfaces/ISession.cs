@@ -8,7 +8,7 @@ namespace eUseControlBussinessLogic.Interfaces
 {
     public  interface ISession
     {
-        void StratSession(string userId);
+        void StartSession(string userId);
         void EndSession();
     }
 }

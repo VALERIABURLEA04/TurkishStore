@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Optimization;
 using ProjectOnlineStore;
 
-namespace lab_1_templates_sandu
+namespace ProjectOnlineStore
 {
     public class Global : HttpApplication
     {

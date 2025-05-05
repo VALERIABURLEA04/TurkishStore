@@ -1,0 +1,12 @@
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.dll.config
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.dll
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.pdb
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.dll
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.xml
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseCont.031189D9.Up2Date
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.dll
+C:\Users\USER\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.pdb
