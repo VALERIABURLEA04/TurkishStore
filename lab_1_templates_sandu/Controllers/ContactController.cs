@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Data.Entity;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.User;
+using System;
 
 namespace lab_1_templates_sandu.Controllers
 {
@@ -38,16 +39,30 @@ namespace lab_1_templates_sandu.Controllers
         // Add new contact data to the database
         public IHttpActionResult Post([FromBody] UContactData contactData)
         {
-            if (!ModelState.IsValid)
+            if (contactData == null)
             {
-                return BadRequest("Invalid data."); // If data is invalid, return a bad request with a message
+                return BadRequest("Contact data cannot be null."); // Handle null data scenario
             }
 
-            _context.ContactData.Add(contactData); // Add the new contact data
-            _context.SaveChanges(); // Save changes to the database
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Return validation errors if any
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = contactData.Id }, contactData); // Return a response with the created contact data
+            try
+            {
+                _context.ContactData.Add(contactData); // Add the new contact data to the context
+                _context.SaveChanges(); // Save changes to the database
+
+                return CreatedAtRoute("DefaultApi", new { id = contactData.Id }, contactData); // Return the created contact data
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during saving
+                return InternalServerError(ex); // Return a 500 error with the exception details
+            }
         }
+
 
         // PUT api/contact/5
         // Update an existing contact entry

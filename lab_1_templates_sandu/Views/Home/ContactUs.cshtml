@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 
+
 @{
     ViewBag.Title = "About";
     Layout = null;
@@ -8,6 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - SACCHARINE</title>
@@ -51,65 +54,106 @@
     </style>
 </head>
 
-    
-    <body>
-            @Html.Partial("_Header")
-        <!-- Contact Form Section -->
-        <div class="container content-wrapper">
-            <div class="contact-card">
-                <h2 class="text-center mb-4">Contact us!</h2>
 
-                <!-- Contact Details -->
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> Email: saccharinesupport@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> Telephone: +373 123 456 789</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Address: Strada Studenților 9/7, Chișinău, Moldova</p>
+<body>
+    @Html.Partial("_Header")
+    <!-- Contact Form Section -->
+    <div class="container content-wrapper">
+        <div class="contact-card">
+            <h2 class="text-center mb-4">Contact us!</h2>
+
+            <!-- Contact Details -->
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> Email: saccharinesupport@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Telephone: +373 123 456 789</p>
+                <p><i class="fas fa-map-marker-alt"></i> Address: Strada Studenților 9/7, Chișinău, Moldova</p>
+            </div>
+
+
+            <!-- Contact Form -->
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your name">
                 </div>
 
-                <!-- Contact Form -->
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Your name">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Your email">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Google Maps -->
-        <div class="container mt-4">
-            <h3 class="text-center">Find Us</h3>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.45123456789!2d28.8579504!3d47.0622877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbd7c7e7e7e7e7%3A0x7e7e7e7e7e7e7e7e!2sUniversitatea%20Tehnic%C4%83%20a%20Moldovei!5e0!3m2!1sro!2sro!4v1614959876945"
-                            width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-                    </iframe>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Your email">
                 </div>
+
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Google Maps -->
+    <div class="container mt-4">
+        <h3 class="text-center">Find Us</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.45123456789!2d28.8579504!3d47.0622877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbd7c7e7e7e7e7%3A0x7e7e7e7e7e7e7e7e!2sUniversitatea%20Tehnic%C4%83%20a%20Moldovei!5e0!3m2!1sro!2sro!4v1614959876945"
+                        width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
             </div>
         </div>
+    </div>
 
-        <!-- Footer -->
-        <footer class="text-center mt-4 p-3 bg-light">
-            &copy; 2025 SACCHRINE. All rights reserved.
-        </footer>
+    <!-- Footer -->
+    <footer class="text-center mt-4 p-3 bg-light">
+        &copy; 2025 SACCHRINE. All rights reserved.
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="responseMsg"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // When the form is submitted
+            $("form").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission behavior
+
+                // Get the form data
+                var formData = {
+                    Name: $("#name").val(),
+                    Email: $("#email").val(),
+                    Subject: $("#subject").val(),
+                    Message: $("#message").val()
+                };
+
+                // Make the AJAX POST request
+                $.ajax({
+                    url: '/api/contact', // Your POST API endpoint
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData), // Send the form data as JSON
+                    success: function (response) {
+                        // On success, show a message or redirect
+                        alert("Message sent successfully!");
+                        // Optionally, reset the form
+                        $("form")[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                        alert("Error: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
 </html>

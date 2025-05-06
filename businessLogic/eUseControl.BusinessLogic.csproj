@@ -59,6 +59,15 @@
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\ULoginData.cs" />
     <Compile Include="Interfaces\UserLoginResult.cs" />
+    <Compile Include="Migrations\202505060531050_InitialCreate.cs" />
+    <Compile Include="Migrations\202505060531050_InitialCreate.Designer.cs">
+      <DependentUpon>202505060531050_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505061105082_Initial.cs" />
+    <Compile Include="Migrations\202505061105082_Initial.Designer.cs">
+      <DependentUpon>202505061105082_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
     <Compile Include="SessionManager.cs" />
@@ -79,6 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBModel\Seed\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202505060531050_InitialCreate.resx">
+      <DependentUpon>202505060531050_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505061105082_Initial.resx">
+      <DependentUpon>202505061105082_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

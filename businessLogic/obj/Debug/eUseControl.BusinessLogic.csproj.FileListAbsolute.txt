@@ -16,3 +16,6 @@ C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\eUseControl.Busi
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\eUseCont.F912DA32.Up2Date
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.dll
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.pdb
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.InitialCreate.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\eUseControl.BusinessLogic.csproj.GenerateResource.cache
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.Initial.resources
