@@ -24,7 +24,7 @@
                 <!-- Link pentru About Us -->
                 <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("About", "Home")">About Us</a></li>
 
-                <li class="nav-item mx-3"><a class="nav-link" href="#">Shop </a></li>
+                <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("Shop", "Shop")">Shop </a></li>
                 <li class="nav-item mx-3"><a class="nav-link" href="#">New In</a></li>
                 <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("ContactUs", "Home")">Contact Us</a></li>
 
@@ -34,11 +34,17 @@
 
         <!-- Navbar Icons -->
         <div class="navbar-icons ms-auto">
-            <a href="@Url.Action("LoginPage", "Login")"><i class="fas fa-user"></i></a>
+            <a href="@Url.Action("login", "Auth")"><i class="fas fa-user"></i></a>
 
             <a href="#"><i class="fas fa-search "></i></a>
 
             <a href="#"><i class="fas fa-heart"></i></a> <!-- Favorite icon -->
+
+            @if (Session["AdminUsername"] != null)
+            {
+                <a href="@Url.Action("Logout", "Admin")" class="btn btn-outline-danger ms-3">Logout</a>
+            }
+
         </div>
     </div>
 </nav>

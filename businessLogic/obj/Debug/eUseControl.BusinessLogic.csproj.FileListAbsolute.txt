@@ -19,3 +19,7 @@ C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.pd
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.InitialCreate.resources
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\eUseControl.BusinessLogic.csproj.GenerateResource.cache
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.Initial.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.UpdateAdminSchema.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.AddProductTable.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.MakeProductFieldsRequired.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.AddUserTables.resources
