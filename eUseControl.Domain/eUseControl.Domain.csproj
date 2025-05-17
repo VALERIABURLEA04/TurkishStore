@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Admin\AdminData.cs" />
     <Compile Include="Entities\User\UContactData.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

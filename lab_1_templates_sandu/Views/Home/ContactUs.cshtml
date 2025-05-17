@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@model eUseControl.Domain.Entities.User.UContactData
 
 
 @{
@@ -47,10 +48,39 @@
             margin-bottom: 20px;
         }
 
-            .contact-info i {
+        .contact-info i {
                 color: #007bff;
                 margin-right: 10px;
             }
+
+        #responseMsg {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .msg-success {
+            color: green;
+        }
+
+        .msg-error {
+            color: red;
+        }
+
+        .invalid-feedback {
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            color: #f44336; /* Red */
+        }
+        
+        .error-message {
+            color: #f44336; /* Red color for error */
+            font-size: 14px;
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -69,31 +99,35 @@
                 <p><i class="fas fa-map-marker-alt"></i> Address: Strada Studenților 9/7, Chișinău, Moldova</p>
             </div>
 
-
             <!-- Contact Form -->
-            <form>
+            <form class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Your name">
+                    <input type="text" class="form-control" id="name" placeholder="Your name" required>
+                    <div class="invalid-feedback">Please fill out your name!</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Your email">
+                    <input type="email" class="form-control" id="email" placeholder="Your email" required>
+                    <div class="invalid-feedback">Please fill out your email!</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="subject" class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                    <div class="invalid-feedback">Please fill out the subject!</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Your message" required></textarea>
+                    <div class="invalid-feedback">Please fill out your message!</div>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Send Message</button>
             </form>
+
         </div>
     </div>
 
@@ -120,13 +154,24 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // When the form is submitted
-            $("form").submit(function (event) {
-                event.preventDefault(); // Prevent the default form submission behavior
+    @Scripts.Render("~/bundles/jqueryval")
 
-                // Get the form data
+<script>
+
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Enable Bootstrap validation for each field
+            var form = this;
+
+            if (form.checkValidity() === false) {
+                event.stopPropagation(); // Stop form submission if fields are invalid
+            }
+
+            $(form).addClass('was-validated'); // Add 'was-validated' class to show validation styles
+
+            if (form.checkValidity()) {
                 var formData = {
                     Name: $("#name").val(),
                     Email: $("#email").val(),
@@ -134,26 +179,25 @@
                     Message: $("#message").val()
                 };
 
-                // Make the AJAX POST request
                 $.ajax({
                     url: '/api/contact', // Your POST API endpoint
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(formData), // Send the form data as JSON
+                    data: JSON.stringify(formData),
                     success: function (response) {
-                        // On success, show a message or redirect
-                        alert("Message sent successfully!");
-                        // Optionally, reset the form
-                        $("form")[0].reset();
+                        $("form")[0].reset(); // Reset the form fields after submission
+                        $(".was-validated").removeClass("was-validated"); // Reset validation styles
                     },
                     error: function (xhr, status, error) {
-                        // Handle errors
-                        alert("Error: " + xhr.responseText);
+                        // Handle error (optional, but no message will be shown)
                     }
                 });
-            });
+            }
         });
-    </script>
+    });
+
+</script>
+
 
 </body>
 </html>

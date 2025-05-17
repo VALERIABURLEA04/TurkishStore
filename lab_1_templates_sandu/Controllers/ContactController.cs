@@ -3,8 +3,8 @@ using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
 using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.User;
 using System;
+using eUseControl.Domain.Entities.User;
 
 namespace lab_1_templates_sandu.Controllers
 {

@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
@@ -55,6 +58,7 @@
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DBModel\DataContext.cs" />
+    <Compile Include="DBModel\Product.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\ULoginData.cs" />
@@ -66,6 +70,22 @@
     <Compile Include="Migrations\202505061105082_Initial.cs" />
     <Compile Include="Migrations\202505061105082_Initial.Designer.cs">
       <DependentUpon>202505061105082_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505141754186_UpdateAdminSchema.cs" />
+    <Compile Include="Migrations\202505141754186_UpdateAdminSchema.Designer.cs">
+      <DependentUpon>202505141754186_UpdateAdminSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505142140594_AddProductTable.cs" />
+    <Compile Include="Migrations\202505142140594_AddProductTable.Designer.cs">
+      <DependentUpon>202505142140594_AddProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505142359293_MakeProductFieldsRequired.cs" />
+    <Compile Include="Migrations\202505142359293_MakeProductFieldsRequired.Designer.cs">
+      <DependentUpon>202505142359293_MakeProductFieldsRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505171528249_AddUserTables.cs" />
+    <Compile Include="Migrations\202505171528249_AddUserTables.Designer.cs">
+      <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +115,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505061105082_Initial.resx">
       <DependentUpon>202505061105082_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141754186_UpdateAdminSchema.resx">
+      <DependentUpon>202505141754186_UpdateAdminSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505142140594_AddProductTable.resx">
+      <DependentUpon>202505142140594_AddProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505142359293_MakeProductFieldsRequired.resx">
+      <DependentUpon>202505142359293_MakeProductFieldsRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505171528249_AddUserTables.resx">
+      <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

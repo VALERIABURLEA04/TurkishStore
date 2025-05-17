@@ -1,4 +1,6 @@
-﻿namespace businessLogic.Interfaces
+﻿/* using eUseControl.Domain.Entities.User;
+
+namespace businessLogic.Interfaces
 {
     interface ISessionManager
     {
@@ -8,3 +10,4 @@
         UserLoginResult UserLogin(ULoginData data);  // Method signature for user login
     }
 }
+*/
