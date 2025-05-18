@@ -39,6 +39,10 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
+        public ActionResult NewIn()
+        {
+            return View();
+        }
 
         // POST: Home/ContactUs
         [HttpPost]

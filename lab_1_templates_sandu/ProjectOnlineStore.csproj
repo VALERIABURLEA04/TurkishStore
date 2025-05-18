@@ -160,6 +160,9 @@
     <Content Include="Content\images\logo-nav.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\photo_2025-02-24_16-47-55.jpg" />
+    <Content Include="Content\images\dress1.png" />
+    <Content Include="Content\images\dress2.png" />
+    <Content Include="Content\images\dress3.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -205,6 +208,7 @@
     <Compile Include="Controllers\ContController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NewInController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ULoginData.cs" />
     <Compile Include="Controllers\UserLogin.cs" />
@@ -259,6 +263,7 @@
     <Content Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Shop\Shop.cshtml" />
+    <Content Include="Views\Home\NewIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -268,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\NewIn\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">
