@@ -1,1 +1,12 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore user-specific Visual Studio settings
 .vs/
+*.user
+*.suo
+
+# Ignore temporary files
+*.log
+*.tmp
