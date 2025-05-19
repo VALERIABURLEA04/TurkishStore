@@ -51,3 +51,4 @@ C:\Users\admin\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.p
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.CategoryProduct.resources
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.RemovedCategory.resources
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.MadeURLOptional.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.UpdateAdmin.resources

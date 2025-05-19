@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202505190402007_MadeURLOptional.Designer.cs">
       <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505192234238_UpdateAdmin.cs" />
+    <Compile Include="Migrations\202505192234238_UpdateAdmin.Designer.cs">
+      <DependentUpon>202505192234238_UpdateAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
@@ -148,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505190402007_MadeURLOptional.resx">
       <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505192234238_UpdateAdmin.resx">
+      <DependentUpon>202505192234238_UpdateAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
