@@ -1,0 +1,129 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "About";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SACCHARINE</title>
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+/*        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+*/
+        .center-wrapper {
+            min-height: calc(100vh - 100px); /* Scade din înălțime pentru header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+            .form-container h2 {
+                text-align: center;
+                margin-bottom: 25px;
+                font-size: 28px;
+                font-weight: light;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                font-weight: 200px;
+                margin-bottom: 5px;
+                display: block;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+
+        .btn-primary-custom {
+            background-color: #3b50ce !important;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+            .btn-primary-custom:hover {
+                background-color: #3b50ce !important;
+            }
+
+        .form-footer {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+            color: black;
+        }
+    </style>
+
+    @Styles.Render("~/bundles/css")
+</head>
+
+<body>
+    @Html.Partial("_Header")
+
+    <div class="center-wrapper">
+        <div class="form-container">
+            <h2>Create Account</h2>
+
+            <div class="form-group">
+                <label for="first-name">Prenume</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Introduceți prenumele">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Nume</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Introduceți numele">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Introduceți email-ul">
+            </div>
+            <div class="form-group">
+                <label for="password">Parolă</label>
+                <input type="password" id="password" name="password" placeholder="Introduceți parola">
+            </div>
+
+            <button class="btn btn-primary-custom">Crează cont</button>
+
+            <div class="form-footer">
+                <a href="/Account/Login">Ai deja un cont? Autentifică-te</a>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_Footer");
+</body>
+</html>

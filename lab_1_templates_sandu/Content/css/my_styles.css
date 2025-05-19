@@ -174,3 +174,133 @@ textarea {
     .auth-btn:hover {
         background-color: #333;
     }
+
+.overlay-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #000;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    z-index: 10;
+}
+
+    .overlay-layer h1 {
+        font-size: 4rem;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .overlay-layer p {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .overlay-layer hr {
+        width: 50px;
+        border: 1px solid #000;
+        margin: 0.5rem auto;
+    }
+
+
+footer {
+    background-color: #c8102e;
+    color: #fff;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    font-size: 0.9rem; /* Dimensiune uniformă pentru tot textul */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+    .footer-section h3 {
+        font-size: 0.9rem; /* Dimensiune uniformă */
+        margin-bottom: 10px;
+        text-transform: none; /* Elimină MAJUSCULELE */
+        font-weight: normal; /* Elimină bold-ul */
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-section ul li {
+            margin-bottom: 5px;
+        }
+
+            .footer-section ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 0.9rem; /* Dimensiune uniformă */
+            }
+
+                .footer-section ul li a:hover {
+                    text-decoration: underline;
+                }
+
+.social-icons a {
+    color: #fff;
+    font-size: 2.2rem; /* Iconițele au acum aceeași dimensiune ca textul */
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+    .social-icons a:hover {
+        color: #f0f0f0;
+    }
+
+.newsletter p {
+    font-size: 0.9rem; /* Dimensiune uniformă */
+    margin-bottom: 10px;
+}
+
+.newsletter input[type="email"] {
+    padding: 8px;
+    width: 100%;
+    max-width: 250px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Dimensiune uniformă */
+}
+
+    .newsletter input[type="email"]::placeholder {
+        font-size: 0.9rem;
+        color: #999;
+    }
+
+.language-selector select {
+    padding: 8px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Dimensiune uniformă */
+    color: #333;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .footer-bottom p {
+        font-size: 0.9rem; /* Dimensiune uniformă */
+        color: #f0f0f0;
+        margin: 5px 0;
+    }

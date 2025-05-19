@@ -142,9 +142,10 @@
             </div>
         </div>
     </div>
+    @Html.Partial("_Footer")
 
     <!-- Footer -->
-    <footer class="text-center mt-4 p-3 bg-light">
+    <!--<footer class="text-center mt-4 p-3 bg-light">
         &copy; 2025 SACCHRINE. All rights reserved.
     </footer>
 
@@ -152,51 +153,51 @@
 
     <div id="responseMsg"></div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
 
     @Scripts.Render("~/bundles/jqueryval")
 
-<script>
+    <script>
 
-    $(document).ready(function () {
-        $("form").submit(function (event) {
-            event.preventDefault(); // Prevent default form submission
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
 
-            // Enable Bootstrap validation for each field
-            var form = this;
+                // Enable Bootstrap validation for each field
+                var form = this;
 
-            if (form.checkValidity() === false) {
-                event.stopPropagation(); // Stop form submission if fields are invalid
-            }
+                if (form.checkValidity() === false) {
+                    event.stopPropagation(); // Stop form submission if fields are invalid
+                }
 
-            $(form).addClass('was-validated'); // Add 'was-validated' class to show validation styles
+                $(form).addClass('was-validated'); // Add 'was-validated' class to show validation styles
 
-            if (form.checkValidity()) {
-                var formData = {
-                    Name: $("#name").val(),
-                    Email: $("#email").val(),
-                    Subject: $("#subject").val(),
-                    Message: $("#message").val()
-                };
+                if (form.checkValidity()) {
+                    var formData = {
+                        Name: $("#name").val(),
+                        Email: $("#email").val(),
+                        Subject: $("#subject").val(),
+                        Message: $("#message").val()
+                    };
 
-                $.ajax({
-                    url: '/api/contact', // Your POST API endpoint
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function (response) {
-                        $("form")[0].reset(); // Reset the form fields after submission
-                        $(".was-validated").removeClass("was-validated"); // Reset validation styles
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error (optional, but no message will be shown)
-                    }
-                });
-            }
+                    $.ajax({
+                        url: '/api/contact', // Your POST API endpoint
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+                            $("form")[0].reset(); // Reset the form fields after submission
+                            $(".was-validated").removeClass("was-validated"); // Reset validation styles
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle error (optional, but no message will be shown)
+                        }
+                    });
+                }
+            });
         });
-    });
 
-</script>
+    </script>
 
 
 </body>
