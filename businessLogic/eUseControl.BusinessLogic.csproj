@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202505171528249_AddUserTables.Designer.cs">
       <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505191643462_Testing.cs" />
+    <Compile Include="Migrations\202505191643462_Testing.Designer.cs">
+      <DependentUpon>202505191643462_Testing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505171528249_AddUserTables.resx">
       <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505191643462_Testing.resx">
+      <DependentUpon>202505191643462_Testing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
