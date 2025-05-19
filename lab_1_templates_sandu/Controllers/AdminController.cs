@@ -17,7 +17,7 @@ namespace lab_1_templates_sandu.Controllers
             return View();
         }
 
-        [HttpPost]
+        /* [HttpPost]
         public ActionResult AdminLogin(string username, string password)
         {
             using (var db = new DataContext())
@@ -41,6 +41,23 @@ namespace lab_1_templates_sandu.Controllers
                 }
             }
         }
+        */
+
+        [HttpPost]
+        public ActionResult AdminLogin(string username, string password)
+        {
+            if (username == "admin" && password == "admin123")
+            {
+                Session["AdminUsername"] = username;
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            else
+            {
+                ViewBag.Error = "Invalid username or password.";
+                return View();
+            }
+        }
+
 
         // Optional: Logout method
         public ActionResult Logout()
@@ -67,7 +84,7 @@ namespace lab_1_templates_sandu.Controllers
                 StringBuilder builder = new StringBuilder();
                 foreach (var b in bytes)
                 {
-                    builder.Append(b.ToString("x2"));
+                    builder.Append(b.ToString("X2"));
                 }
                 return builder.ToString();
             }

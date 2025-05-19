@@ -49,3 +49,4 @@ C:\Users\admin\Source\Repos\TurkishStore\businessLogic\obj\Debug\eUseCont.F912DA
 C:\Users\admin\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.dll
 C:\Users\admin\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.pdb
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.Testing.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.AHHHHHHHH.resources
