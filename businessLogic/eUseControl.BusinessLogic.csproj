@@ -87,6 +87,18 @@
     <Compile Include="Migrations\202505171528249_AddUserTables.Designer.cs">
       <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505190044219_CategoryProduct.cs" />
+    <Compile Include="Migrations\202505190044219_CategoryProduct.Designer.cs">
+      <DependentUpon>202505190044219_CategoryProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505190257528_RemovedCategory.cs" />
+    <Compile Include="Migrations\202505190257528_RemovedCategory.Designer.cs">
+      <DependentUpon>202505190257528_RemovedCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505190402007_MadeURLOptional.cs" />
+    <Compile Include="Migrations\202505190402007_MadeURLOptional.Designer.cs">
+      <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBL.cs" />
@@ -127,6 +139,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505171528249_AddUserTables.resx">
       <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505190044219_CategoryProduct.resx">
+      <DependentUpon>202505190044219_CategoryProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505190257528_RemovedCategory.resx">
+      <DependentUpon>202505190257528_RemovedCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505190402007_MadeURLOptional.resx">
+      <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

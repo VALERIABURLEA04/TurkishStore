@@ -22,8 +22,7 @@ namespace BusinessLogic.DBModel
 
         [Required(ErrorMessage = "Price is required")]
         public decimal Price { get; set; }
-
-        [Required(ErrorMessage = "ImageURL is required")]
         public string ImageUrl { get; set; } // optional
+
     }
 }

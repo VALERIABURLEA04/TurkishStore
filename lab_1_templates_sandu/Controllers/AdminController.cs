@@ -1,11 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Admin;
+using eUseControl.Domain.Entities.User;
 
 namespace lab_1_templates_sandu.Controllers
 {
@@ -16,6 +20,15 @@ namespace lab_1_templates_sandu.Controllers
         {
             return View();
         }
+
+        public ActionResult Dashboard()
+        {
+            if (Session["AdminUsername"] == null)
+                return RedirectToAction("AdminLogin");
+
+            return View(); // This will look for Views/Admin/Dashboard.cshtml
+        }
+
 
         [HttpPost]
         public ActionResult AdminLogin(string username, string password)
@@ -32,7 +45,7 @@ namespace lab_1_templates_sandu.Controllers
                     Session["AdminUsername"] = admin.Username;
 
                     // Redirect to homepage instead of a dashboard
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "Admin");
                 }
                 else
                 {
@@ -89,8 +102,8 @@ namespace lab_1_templates_sandu.Controllers
             }
         }
 
-        
-    private readonly DataContext _context;
+
+        private readonly DataContext _context;
 
         public AdminController()
         {
@@ -111,16 +124,34 @@ namespace lab_1_templates_sandu.Controllers
 
 
         [HttpPost]
-        public ActionResult Add(Product product)
+        public ActionResult Add(Product product, HttpPostedFileBase ImageUpload)
         {
             if (ModelState.IsValid)
             {
+                // If an image was uploaded
+                if (ImageUpload != null && ImageUpload.ContentLength > 0)
+                {
+                    // Generate a unique file name to prevent conflicts
+                    var fileName = Path.GetFileName(ImageUpload.FileName);
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+
+                    // Save path (change this if needed)
+                    var savePath = Path.Combine(Server.MapPath("~/Content/images"), uniqueFileName);
+                    ImageUpload.SaveAs(savePath);
+
+                    // Set the relative URL
+                    product.ImageUrl = "/Content/images/" + uniqueFileName;
+                }
+
                 _context.Products.Add(product);
                 _context.SaveChanges();
+
                 return RedirectToAction("ProductList");
             }
+
             return View(product);
         }
+
 
         private DataContext db = new DataContext();
 
@@ -143,17 +174,98 @@ namespace lab_1_templates_sandu.Controllers
             return View(product);
         }
 
+
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
         {
-            if (ModelState.IsValid)
+            var existingProduct = _context.Products.Find(product.Id);
+            if (existingProduct == null)
             {
-                _context.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                _context.SaveChanges();
-                return RedirectToAction("ProductList");
+                return HttpNotFound();
             }
-            return View(product);
+
+            // Update basic fields
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Price = product.Price;
+
+            // Handle image removal
+            if (RemoveImage == true && !string.IsNullOrEmpty(existingProduct.ImageUrl))
+            {
+                // Optional: delete the physical file from server
+                var fullPath = Server.MapPath(existingProduct.ImageUrl);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+
+                // Remove reference from DB
+                existingProduct.ImageUrl = null;
+            }
+
+            // Handle image upload
+            if (ImageUpload != null && ImageUpload.ContentLength > 0)
+            {
+                // Generate unique file name and save
+                var fileName = Path.GetFileName(ImageUpload.FileName);
+                var uniqueFileName = Guid.NewGuid() + Path.GetExtension(fileName);
+                var path = Path.Combine(Server.MapPath("~/Uploads"), uniqueFileName);
+                ImageUpload.SaveAs(path);
+
+                // Optional: delete old image before replacing
+                if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
+                {
+                    var oldPath = Server.MapPath(existingProduct.ImageUrl);
+                    if (System.IO.File.Exists(oldPath))
+                    {
+                        System.IO.File.Delete(oldPath);
+                    }
+                }
+
+                existingProduct.ImageUrl = "/Uploads/" + uniqueFileName;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("ProductList");
+
         }
+
+        [HttpPost]
+        public ActionResult DeleteImage(int id)
+        {
+            var product = _context.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                try
+                {
+                    var fullPath = Server.MapPath(product.ImageUrl);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Optional: log the error
+                    System.Diagnostics.Debug.WriteLine("Error deleting image: " + ex.Message);
+                }
+
+                // Clear the image from the DB
+                product.ImageUrl = null;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Edit", new { id = id });
+        }
+
+
+
 
         [HttpPost]
         public ActionResult Delete(int id)
@@ -167,6 +279,37 @@ namespace lab_1_templates_sandu.Controllers
             return RedirectToAction("ProductList");
         }
 
+        public ActionResult ContactMessages()
+        {
+            var messages = _context.Set<UContactData>()
+                .OrderByDescending(m => m.Id) // Assuming higher Id = newer message
+                .ToList();
+
+            return View(messages);
+        }
+
+        public ActionResult Message(int id)
+        {
+            var message = _context.ContactData.Find(id); // Replace with your actual data retrieval
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteMessage(int id)
+        {
+            var msg = db.ContactData.Find(id);
+            if (msg != null)
+            {
+                db.ContactData.Remove(msg);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ContactMessages");
+        }
 
 
     }
