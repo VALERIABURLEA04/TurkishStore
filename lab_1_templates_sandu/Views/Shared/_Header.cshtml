@@ -36,7 +36,8 @@
         <div class="navbar-icons ms-auto">
             <a href="@Url.Action("login", "Auth")"><i class="fas fa-user"></i></a>
 
-            <a href="#"><i class="fas fa-search "></i></a>
+            <a href="javascript:void(0);" id="search-toggle"><i class="fas fa-search"></i></a>
+
 
             <a href="#"><i class="fas fa-heart"></i></a> <!-- Favorite icon -->
 
@@ -46,6 +47,18 @@
             }
 
         </div>
+
+        <!-- Search Form (ascuns inițial) -->
+        <div id="search-form" class="d-none position-absolute end-0 top-100 mt-2 p-3 bg-white border rounded shadow" style="z-index: 1050;">
+            <form action="@Url.Action("Search", "")" method="get" class="d-flex">
+                <input type="text" name="query" class="form-control me-2" placeholder="Caută...">
+                <button type="submit" class="btn btn-primary">Caută</button>
+            </form>
+        </div>
+
     </div>
 </nav>
+
+
+
 

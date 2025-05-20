@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ContController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ULoginData.cs" />
     <Compile Include="Controllers\UserLogin.cs" />
@@ -261,6 +262,10 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Shop\Shop.cshtml" />
     <Content Include="Views\Checkout\CheckoutPage.cshtml" />
+    <Content Include="Views\Shared\ViewPage1.cshtml" />
+    <Content Include="Views\Home\NewIn.cshtml" />
+    <Content Include="Views\Home\RegisterPage.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -270,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">
