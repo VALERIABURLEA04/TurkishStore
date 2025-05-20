@@ -296,3 +296,122 @@ footer {
         color: #f0f0f0;
         margin: 5px 0;
     }
+
+.co-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.co-section {
+    margin-bottom: 20px;
+}
+
+    .co-section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+.co-input-group {
+    margin-bottom: 10px;
+}
+
+    .co-input-group label {
+        display: block;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .co-input-group input[type="text"],
+    .co-input-group input[type="email"],
+    .co-input-group select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+.co-row {
+    display: flex;
+    gap: 10px;
+}
+
+    .co-row .co-input-group {
+        flex: 1;
+    }
+
+.co-checkbox {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.co-shipping-method {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.co-payment-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.co-payment-method {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .co-payment-method img {
+        vertical-align: middle;
+        margin-left: 5px;
+        width: 40px;
+        height: 25px;
+    }
+
+.co-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+    .co-button:hover {
+        background-color: #333;
+    }
+
+.co-radio-group {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.co-links {
+    margin-top: 10px;
+    text-align: center;
+}
+
+    .co-links a {
+        color: #000;
+        margin-right: 10px;
+        text-decoration: underline;
+        font-size: 12px;
+    }
