@@ -43,13 +43,30 @@
                         @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                    <p class="create-account"><a href="@Url.Action("RegisterPage", "Home")">Create account</a></p>
                 }
             </div>
         </div>
     </div>
 
+    <style>
 
 
+        .create-account {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+            .create-account a {
+                color: #666;
+                text-decoration: none;
+            }
+
+                .create-account a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+    @Html.Partial("_Footer");
 
 
 </body>

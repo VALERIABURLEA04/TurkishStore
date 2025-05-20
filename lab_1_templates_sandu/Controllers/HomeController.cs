@@ -44,6 +44,11 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
+        public ActionResult RegisterPage()
+        {
+            return View();
+        }
+
         // POST: Home/ContactUs
         [HttpPost]
         [ValidateAntiForgeryToken]

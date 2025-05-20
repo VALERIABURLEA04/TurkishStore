@@ -6,10 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Admin;
-using eUseControl.Domain.Entities.User;
 
 namespace lab_1_templates_sandu.Controllers
 {
@@ -30,30 +28,69 @@ namespace lab_1_templates_sandu.Controllers
         }
 
 
+        public ActionResult ContactMessages()
+        {
+            if (Session["AdminUsername"] == null)
+                return RedirectToAction("AdminLogin");
+
+            var messages = _context.ContactData.ToList(); // or however you get your messages
+            return View(messages);
+        }
+
+        public ActionResult Message(int id)
+        {
+            if (Session["AdminUsername"] == null)
+                return RedirectToAction("AdminLogin");
+
+            var message = _context.ContactData.FirstOrDefault(m => m.Id == id);
+            if (message == null)
+                return HttpNotFound();
+
+            return View(message); // Make sure you have Message.cshtml
+        }
+
+
+        /* [HttpPost]
+         public ActionResult AdminLogin(string username, string password)
+         {
+             using (var db = new DataContext())
+             {
+                 var hashedPassword = HashPassword(password);
+
+                 var admin = db.AdminData
+                     .FirstOrDefault(a => a.Username == username && a.PasswordHash == hashedPassword);
+
+                 if (admin != null)
+                 {
+                     Session["AdminUsername"] = admin.Username;
+
+                     // Redirect to homepage instead of a dashboard
+                     return RedirectToAction("Dashboard", "Admin");
+                 }
+                 else
+                 {
+                     ViewBag.Error = "Invalid username or password.";
+                     return View();
+                 }
+             }
+         }
+         */
+
         [HttpPost]
         public ActionResult AdminLogin(string username, string password)
         {
-            using (var db = new DataContext())
+            if (username == "admin" && password == "admin123")
             {
-                var hashedPassword = HashPassword(password);
-
-                var admin = db.AdminData
-                    .FirstOrDefault(a => a.Username == username && a.PasswordHash == hashedPassword);
-
-                if (admin != null)
-                {
-                    Session["AdminUsername"] = admin.Username;
-
-                    // Redirect to homepage instead of a dashboard
-                    return RedirectToAction("Dashboard", "Admin");
-                }
-                else
-                {
-                    ViewBag.Error = "Invalid username or password.";
-                    return View();
-                }
+                Session["AdminUsername"] = username;
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            else
+            {
+                ViewBag.Error = "Invalid username or password.";
+                return View();
             }
         }
+        
 
         // Optional: Logout method
         public ActionResult Logout()
@@ -121,7 +158,6 @@ namespace lab_1_templates_sandu.Controllers
             var products = _context.Products.ToList();
             return View(products);
         }
-
 
         [HttpPost]
         public ActionResult Add(Product product, HttpPostedFileBase ImageUpload)
@@ -209,7 +245,7 @@ namespace lab_1_templates_sandu.Controllers
                 // Generate unique file name and save
                 var fileName = Path.GetFileName(ImageUpload.FileName);
                 var uniqueFileName = Guid.NewGuid() + Path.GetExtension(fileName);
-                var path = Path.Combine(Server.MapPath("~/Uploads"), uniqueFileName);
+                var path = Path.Combine(Server.MapPath("~/Content/images"), uniqueFileName);
                 ImageUpload.SaveAs(path);
 
                 // Optional: delete old image before replacing
@@ -222,13 +258,12 @@ namespace lab_1_templates_sandu.Controllers
                     }
                 }
 
-                existingProduct.ImageUrl = "/Uploads/" + uniqueFileName;
+                existingProduct.ImageUrl = "/Content/images" + uniqueFileName;
             }
 
             _context.SaveChanges();
 
-            return RedirectToAction("ProductList");
-
+            return RedirectToAction("Edit", new { id = product.Id }); // show updated version
         }
 
         [HttpPost]
@@ -279,38 +314,72 @@ namespace lab_1_templates_sandu.Controllers
             return RedirectToAction("ProductList");
         }
 
-        public ActionResult ContactMessages()
-        {
-            var messages = _context.Set<UContactData>()
-                .OrderByDescending(m => m.Id) // Assuming higher Id = newer message
-                .ToList();
-
-            return View(messages);
-        }
-
-        public ActionResult Message(int id)
-        {
-            var message = _context.ContactData.Find(id); // Replace with your actual data retrieval
-            if (message == null)
-            {
-                return HttpNotFound();
-            }
-            return View(message);
-        }
-
-
-        [HttpPost]
-        public ActionResult DeleteMessage(int id)
-        {
-            var msg = db.ContactData.Find(id);
-            if (msg != null)
-            {
-                db.ContactData.Remove(msg);
-                db.SaveChanges();
-            }
-            return RedirectToAction("ContactMessages");
-        }
 
 
     }
 }
+
+
+/*
+[HttpPost]
+public ActionResult Add(Product product)
+{
+    if (ModelState.IsValid)
+    {
+        _context.Products.Add(product);
+        _context.SaveChanges();
+        return RedirectToAction("ProductList");
+    }
+    return View(product);
+}
+
+private DataContext db = new DataContext();
+
+[HttpGet]
+public ActionResult Edit(int? id)
+{
+    if (id == null)
+    {
+        // Redirect to Product List (or whatever your main page is)
+        return RedirectToAction("ProductList");
+    }
+
+    var product = db.Products.Find(id.Value);
+    if (product == null)
+    {
+        // Also redirect if product not found
+        return RedirectToAction("ProductList");
+    }
+
+    return View(product);
+}
+
+[HttpPost]
+public ActionResult Edit(Product product)
+{
+    if (ModelState.IsValid)
+    {
+        _context.Entry(product).State = System.Data.Entity.EntityState.Modified;
+        _context.SaveChanges();
+        return RedirectToAction("ProductList");
+    }
+    return View(product);
+}
+
+[HttpPost]
+public ActionResult Delete(int id)
+{
+    var product = _context.Products.Find(id);
+    if (product != null)
+    {
+        _context.Products.Remove(product);
+        _context.SaveChanges();
+    }
+    return RedirectToAction("ProductList");
+}
+
+
+
+}
+}
+*/

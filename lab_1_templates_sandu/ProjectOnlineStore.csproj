@@ -147,11 +147,13 @@
     <Content Include="Content\fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\font-awesome\index.html" />
     <Content Include="Content\fonts\index.html" />
+    <Content Include="Content\images\Alida.png" />
     <Content Include="Content\images\apple-touch-icon-114-precomposed.png" />
     <Content Include="Content\images\apple-touch-icon-144-precomposed.png" />
     <Content Include="Content\images\apple-touch-icon-57-precomposed.png" />
     <Content Include="Content\images\apple-touch-icon-72-precomposed.png" />
     <Content Include="Content\images\bg_1.jpg" />
+    <Content Include="Content\images\black swan.png" />
     <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\index.html" />
     <Content Include="Content\images\login-bg.png" />
@@ -159,10 +161,13 @@
     <Content Include="Content\images\logo-folded.png" />
     <Content Include="Content\images\logo-nav.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\luisa.png" />
     <Content Include="Content\images\photo_2025-02-24_16-47-55.jpg" />
     <Content Include="Content\images\dress1.png" />
     <Content Include="Content\images\dress2.png" />
     <Content Include="Content\images\dress3.png" />
+    <Content Include="Content\images\vanessa.png" />
+    <Content Include="Content\images\yellorw.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -209,6 +214,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewInController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ULoginData.cs" />
     <Compile Include="Controllers\UserLogin.cs" />
@@ -268,6 +274,8 @@
     <Content Include="Views\Shop\Details.cshtml" />
     <Content Include="Views\Admin\ContactMessages.cshtml" />
     <Content Include="Views\Admin\Message.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Home\RegisterPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,6 +286,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\NewIn\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">
