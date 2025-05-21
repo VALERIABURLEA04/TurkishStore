@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -6,8 +7,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using businessLogic.DBModel;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Admin;
+using lab_1_templates_sandu.Models.Admin;
 
 namespace lab_1_templates_sandu.Controllers
 {
@@ -300,8 +303,6 @@ namespace lab_1_templates_sandu.Controllers
         }
 
 
-
-
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -314,10 +315,50 @@ namespace lab_1_templates_sandu.Controllers
             return RedirectToAction("ProductList");
         }
 
+        public ActionResult UserList()
+        {
+            if (Session["AdminUsername"] == null)
+                return RedirectToAction("AdminLogin");
 
+            using (var userDb = new UserContext())
+            {
+                var users = userDb.Users.Select(u => new AdminUserDisplay
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email,
+                    LastLogin = u.LastLogin,
+                    UserIp = u.UserIp,
+                    Role = u.Level.ToString()
+                }).ToList();
+
+                return View(users);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUser(int id)
+        {
+            using (var userDb = new UserContext())
+            {
+                var user = userDb.Users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                userDb.Users.Remove(user);
+                userDb.SaveChanges();
+
+                TempData["SuccessMessage"] = "User deleted successfully.";
+                return RedirectToAction("UserList");
+            }
+        }
 
     }
 }
+
 
 
 /*

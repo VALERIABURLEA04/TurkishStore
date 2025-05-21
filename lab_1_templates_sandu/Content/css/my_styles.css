@@ -415,3 +415,46 @@ footer {
         text-decoration: underline;
         font-size: 12px;
     }
+
+/* Ensure the modal backdrop doesn't interfere with the animation */
+.modal.fade .modal-dialog {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/* Style the modal content to match the screenshot */
+#searchModal .modal-content {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+#searchModal .modal-body {
+    padding: 10px;
+}
+
+#searchInput {
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+#searchButton {
+    height: 40px;
+    border-radius: 0 4px 4px 0;
+    border: 1px solid #ddd;
+    border-left: none;
+}
+
+    #searchButton i {
+        color: #000;
+    }
+
+.btn-link i {
+    color: #000;
+    font-size: 1.2rem;
+}

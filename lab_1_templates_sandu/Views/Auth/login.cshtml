@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model lab_1_templates_sandu.Models.UserModel
+@model lab_1_templates_sandu.Models.Auth.UserDataLogin
 
 @{
     ViewBag.Title = "About";
@@ -26,47 +26,62 @@
         @Html.Partial("_Header");
 
 
-        <div class="auth-container">
+        <div class="container py-5">
+            <div class="background-image"></div>
 
-            <div class="card auth-card">
-                <h2 class="mb-2">Login</h2>
-                @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken() <!-- Protecție CSRF -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow rounded-4 border-0">
+                        <div class="card-body p-5">
+                            <h2 class="mb-4 text-center text-primary fw-bold">Login</h2>
+                            @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-                    <div class="mb-3 text-start">
-                        <label for="username" class="form-label">Username</label>
-                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", placeholder = "Introduceți username-ul", required = "required" })
+                                <div class="form-floating mb-3">
+                                    @Html.TextBoxFor(m => m.NameOrEmail, new { @class = "form-control", placeholder = "Name or Email" })
+                                    @Html.ValidationMessageFor(m => m.NameOrEmail, "", new { @class = "text-danger small" })
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Parolă" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold shadow-sm">Login</button>
+                            }
+
+                            <div class="text-center mt-4">
+                                <small>Don't have an account? <a href="@Url.Action("Register", "Auth")" class="text-decoration-none fw-medium">Register here</a>.</small>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3 text-start">
-                        <label for="password" class="form-label">Parolă</label>
-                        @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Sign In</button>
-                    <p class="create-account"><a href="@Url.Action("RegisterPage", "Home")">Create account</a></p>
-                }
-            </div>
-        </div>
-    </div>
+                </div>
 
-    <style>
+                <style>
 
+                    .card input.form-control {
+                        max-width: 100%;
+                    }
 
-        .create-account {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
+                    .create-account {
+                        margin-top: 15px;
+                        font-size: 0.9rem;
+                    }
 
-            .create-account a {
-                color: #666;
-                text-decoration: none;
-            }
+                        .create-account a {
+                            color: #666;
+                            text-decoration: none;
+                        }
 
-                .create-account a:hover {
-                    text-decoration: underline;
-                }
-    </style>
-    @Html.Partial("_Footer");
+                            .create-account a:hover {
+                                text-decoration: underline;
+                            }
+                </style>
+                @Html.Partial("_Footer");
 
 
 </body>

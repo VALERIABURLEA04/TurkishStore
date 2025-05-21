@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,11 +55,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLStruct\RegisterBL.cs" />
+    <Compile Include="BLStruct\SessionBL.cs" />
+    <Compile Include="BusinesLogic.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DBModel\DataContext.cs" />
     <Compile Include="DBModel\Product.cs" />
+    <Compile Include="DBModel\SessionContext.cs" />
+    <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\ULoginData.cs" />
@@ -107,9 +114,12 @@
     <Compile Include="Migrations\202505192355190_Tests.Designer.cs">
       <DependentUpon>202505192355190_Tests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505210024445_UserRegistrationLogin.cs" />
+    <Compile Include="Migrations\202505210024445_UserRegistrationLogin.Designer.cs">
+      <DependentUpon>202505210024445_UserRegistrationLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionBL.cs" />
     <Compile Include="SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505192355190_Tests.resx">
       <DependentUpon>202505192355190_Tests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505210024445_UserRegistrationLogin.resx">
+      <DependentUpon>202505210024445_UserRegistrationLogin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Admin\AdminData.cs" />
+    <Compile Include="Entities\Session\SessionTable.cs" />
     <Compile Include="Entities\User\UContactData.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
+    <Compile Include="Entities\User\UserActionResponse\UserCookieResp.cs" />
+    <Compile Include="Entities\User\UserActionResponse\UserResp.cs" />
+    <Compile Include="Entities\User\UserLoginData.cs" />
+    <Compile Include="Entities\User\UserRegisterData.cs" />
+    <Compile Include="Entities\User\UserTable.cs" />
+    <Compile Include="Enums\LogInResult.cs" />
+    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +71,7 @@
       <Name>eUseControl.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

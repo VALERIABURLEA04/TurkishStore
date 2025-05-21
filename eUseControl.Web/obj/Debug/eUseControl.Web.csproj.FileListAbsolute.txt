@@ -16,3 +16,6 @@ C:\Users\USER\source\repos\TurkishStore\eUseControl.Web\bin\Debug\EntityFramewor
 C:\Users\USER\source\repos\TurkishStore\eUseControl.Web\obj\Debug\eUseCont.507825D9.Up2Date
 C:\Users\USER\source\repos\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.dll
 C:\Users\USER\source\repos\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.pdb
+C:\Users\USER\Source\Repos\TurkishStore\eUseControl.Web\bin\Debug\eUseControl.Helpers.dll
+C:\Users\USER\Source\Repos\TurkishStore\eUseControl.Web\bin\Debug\eUseControl.Helpers.pdb
+C:\Users\USER\Source\Repos\TurkishStore\eUseControl.Web\bin\Debug\eUseControl.Helpers.dll.config
