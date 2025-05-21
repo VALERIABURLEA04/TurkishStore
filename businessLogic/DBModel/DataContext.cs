@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.Admin;
+using eUseControl.Domain.Entities.Product;
 
 namespace BusinessLogic.DBModel
 {

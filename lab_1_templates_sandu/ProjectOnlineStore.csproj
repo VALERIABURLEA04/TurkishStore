@@ -273,6 +273,7 @@
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Message.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Shop\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

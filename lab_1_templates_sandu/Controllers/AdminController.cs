@@ -11,6 +11,7 @@ using businessLogic.DBModel;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Admin;
 using lab_1_templates_sandu.Models.Admin;
+using eUseControl.Domain.Entities.Product;
 
 namespace lab_1_templates_sandu.Controllers
 {

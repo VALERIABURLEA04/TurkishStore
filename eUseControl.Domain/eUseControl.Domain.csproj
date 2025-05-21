@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Admin\AdminData.cs" />
+    <Compile Include="Entities\Product\Products.cs" />
     <Compile Include="Entities\Session\SessionTable.cs" />
     <Compile Include="Entities\User\UContactData.cs" />
     <Compile Include="Entities\User\UserActionResponse\UserCookieResp.cs" />
