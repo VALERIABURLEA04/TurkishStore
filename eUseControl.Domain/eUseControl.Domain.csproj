@@ -55,7 +55,6 @@
     <Compile Include="Entities\Admin\AdminData.cs" />
     <Compile Include="Entities\Session\SessionTable.cs" />
     <Compile Include="Entities\User\UContactData.cs" />
-    <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Entities\User\UserActionResponse\UserCookieResp.cs" />
     <Compile Include="Entities\User\UserActionResponse\UserResp.cs" />
     <Compile Include="Entities\User\UserLoginData.cs" />

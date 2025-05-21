@@ -17,8 +17,6 @@ namespace BusinessLogic.DBModel
         }
 
         public DbSet<UContactData> ContactData { get; set; }
-
-        public DbSet<UserInfo> TBLUserInfo { get; set; }
         public DbSet<AdminData> AdminData { get; set; }
         public DbSet<Product> Products { get; set; }
 
