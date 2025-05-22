@@ -160,6 +160,7 @@
     <Content Include="Content\images\logo-nav.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\photo_2025-02-24_16-47-55.jpg" />
+<<<<<<< HEAD
     <Content Include="Content\images\dress1.png" />
     <Content Include="Content\images\dress2.png" />
     <Content Include="Content\images\dress4.png" />
@@ -175,6 +176,8 @@
     <Content Include="Content\images\yellorw.png" />
     <Content Include="Content\images\black swan.png" />
     <Content Include="Content\images\Screenshot 2025-05-19 144935.png" />
+=======
+>>>>>>> Daniela
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -216,19 +219,27 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BussinessLogic.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\ContController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewInController.cs" />
     <Compile Include="Controllers\RegisterUserController.cs" />
+=======
+    <Compile Include="Controllers\ListingsController.cs" />
+>>>>>>> Daniela
     <Compile Include="Controllers\ShopController.cs" />
-    <Compile Include="Controllers\ULoginData.cs" />
-    <Compile Include="Controllers\UserLogin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Logic\Attributes\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Logic\Attributes\isAdminAttribute.cs" />
+    <Compile Include="Logic\HttpContextExtensions.cs" />
+    <Compile Include="Models\Admin\AdminUserDisplay.cs" />
+    <Compile Include="Models\Auth\UserDataLogin.cs" />
+    <Compile Include="Models\Auth\UserDataRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -265,20 +276,37 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Cont.cshtml" />
-    <Content Include="Views\Cont\index2.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\Auth\login.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Login\LoginPage.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Shop\Shop.cshtml" />
+    <Content Include="Views\Checkout\CheckoutPage.cshtml" />
     <Content Include="Views\Home\NewIn.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\RegisterPage.cshtml" />
+=======
+    <Content Include="Views\Home\RegisterPage.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Admin\ContactMessages.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\Message.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Shop\Details.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Cart\ShoppingCart.cshtml" />
+    <Content Include="Views\Listings\Create.cshtml" />
+    <Content Include="Views\Listings\Delete.cshtml" />
+    <Content Include="Views\Listings\ListingDetails.cshtml" />
+    <Content Include="Views\Listings\Modify.cshtml" />
+    <Content Include="Views\Listings\Listings.cshtml" />
+>>>>>>> Daniela
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -288,8 +316,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
     <Folder Include="Views\NewIn\" />
     <Folder Include="Views\Register\" />
+=======
+>>>>>>> Daniela
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">
@@ -304,6 +335,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -322,6 +356,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:49932/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
