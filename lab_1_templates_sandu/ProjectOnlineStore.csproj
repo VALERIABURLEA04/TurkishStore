@@ -201,16 +201,16 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BussinessLogic.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\ContController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Logic\Attributes\isAdminAttribute.cs" />
     <Compile Include="Logic\HttpContextExtensions.cs" />
     <Compile Include="Models\Admin\AdminUserDisplay.cs" />
@@ -252,19 +252,16 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Cont.cshtml" />
-    <Content Include="Views\Cont\index2.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Login\LoginPage.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Shop\Shop.cshtml" />
     <Content Include="Views\Checkout\CheckoutPage.cshtml" />
-    <Content Include="Views\Shared\ViewPage1.cshtml" />
     <Content Include="Views\Home\NewIn.cshtml" />
     <Content Include="Views\Home\RegisterPage.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -274,6 +271,13 @@
     <Content Include="Views\Admin\Message.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Shop\Details.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Cart\ShoppingCart.cshtml" />
+    <Content Include="Views\Listings\Create.cshtml" />
+    <Content Include="Views\Listings\Delete.cshtml" />
+    <Content Include="Views\Listings\ListingDetails.cshtml" />
+    <Content Include="Views\Listings\Modify.cshtml" />
+    <Content Include="Views\Listings\Listings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,7 +287,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">

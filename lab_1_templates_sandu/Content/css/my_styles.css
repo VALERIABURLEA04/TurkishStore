@@ -458,3 +458,56 @@ footer {
     color: #000;
     font-size: 1.2rem;
 }
+
+.pagina-search {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 850px;
+    max-width: 80%;
+}
+
+    /* input să ocupe tot spațiul disponibil */
+    .search-box input[type="text"] {
+        flex-grow: 1; /* ocupă tot spațiul */
+        padding: 6px 12px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+        min-width: 0;
+    }
+
+    /* butonul rămâne fix dimensiunea lui și se aliniază la dreapta */
+    .search-box button {
+        background-color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+/* Ensure the button is aligned to the right */
+.search-box {
+    justify-content: space-between;
+}

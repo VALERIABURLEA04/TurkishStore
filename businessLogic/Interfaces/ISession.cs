@@ -12,7 +12,6 @@ namespace eUseControlBussinessLogic.Interfaces
     {
         UserResp LogInLogic(UserLoginData data);
         UserCookieResp GenerateCookieByUser(int id);
-
         UserResp GetUserByCookie(string sessionKey);
     }
 }

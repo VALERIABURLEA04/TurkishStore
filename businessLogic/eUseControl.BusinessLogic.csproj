@@ -55,8 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLStruct\CartBL.cs" />
+    <Compile Include="BLStruct\CartRepositoryBL.cs" />
+    <Compile Include="BLStruct\ListingsBL.cs" />
+    <Compile Include="BLStruct\ProductRepositoryBL.cs" />
     <Compile Include="BLStruct\RegisterBL.cs" />
     <Compile Include="BLStruct\SessionBL.cs" />
+    <Compile Include="BLStruct\UserBL.cs" />
     <Compile Include="BusinesLogic.cs" />
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
@@ -64,9 +69,14 @@
     <Compile Include="DBModel\DataContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\ICart.cs" />
+    <Compile Include="Interfaces\IListings.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Interfaces\Repositories\ICartRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProductRepository.cs" />
     <Compile Include="Interfaces\UserLoginResult.cs" />
     <Compile Include="Migrations\202505060531050_InitialCreate.cs" />
     <Compile Include="Migrations\202505060531050_InitialCreate.Designer.cs">
@@ -119,6 +129,10 @@
     <Compile Include="Migrations\202505210630379_RemovedTable.cs" />
     <Compile Include="Migrations\202505210630379_RemovedTable.Designer.cs">
       <DependentUpon>202505210630379_RemovedTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505220607031_CartSystem.cs" />
+    <Compile Include="Migrations\202505220607031_CartSystem.Designer.cs">
+      <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505210630379_RemovedTable.resx">
       <DependentUpon>202505210630379_RemovedTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505220607031_CartSystem.resx">
+      <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

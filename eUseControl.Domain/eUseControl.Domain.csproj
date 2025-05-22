@@ -53,6 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Admin\AdminData.cs" />
+    <Compile Include="Entities\Cart\CartItems.cs" />
+    <Compile Include="Entities\Listings\Cart.cs" />
+    <Compile Include="Entities\Listings\CreateListingViewModel.cs" />
+    <Compile Include="Entities\Listings\Item.cs" />
+    <Compile Include="Entities\Listings\Listing.cs" />
     <Compile Include="Entities\Product\Products.cs" />
     <Compile Include="Entities\Session\SessionTable.cs" />
     <Compile Include="Entities\User\UContactData.cs" />
