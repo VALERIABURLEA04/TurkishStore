@@ -23,5 +23,20 @@ namespace businessLogic.BLStruct
             return await _context.Products.FindAsync(id);
         }
 
+        public List<Product> GetAllProducts()
+        {
+            using (var db = new DataContext())
+            {
+                return db.Products.ToList();
+            }
+        }
+
+        public Product GetProductById(int id)
+        {
+            using (var db = new DataContext())
+            {
+                return db.Products.Find(id);
+            }
+        }
     }
 }
