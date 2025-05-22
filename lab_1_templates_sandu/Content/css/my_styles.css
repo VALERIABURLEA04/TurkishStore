@@ -1,10 +1,8 @@
-﻿
-body {
-   
+﻿body {
 }
 
 #background_image {
-   /* width: 1000px;
+    /* width: 1000px;
     height: 1000px;*/
     background-image: url("https://www.maisonju.com/cdn/shop/files/Beige_Minimalist_Creative_Promotional_Sale_Banner_1.png?v=1733570799&width=1200");
     background-size: cover; /* Acoperă toată suprafața */
@@ -111,34 +109,28 @@ textarea {
 }
 
 
-#buton_menu{
-
-    background:none;
-    border:none;
+#buton_menu {
+    background: none;
+    border: none;
 }
 
 
-#sidebar{
-
-
-    background-color:black;
-    
-    
+#sidebar {
+    background-color: black;
 }
 
 #close_btn {
     filter: invert(1);
 }
 
-#home_main_text{
-
-    margin-right:870px;
-    color:lightpink;
+#home_main_text {
+    margin-right: 870px;
+    color: lightpink;
 }
 
 
-.hamburgercolor{
-    color:red;
+.hamburgercolor {
+    color: red;
 }
 
 
@@ -304,3 +296,218 @@ footer {
         color: #f0f0f0;
         margin: 5px 0;
     }
+
+.co-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.co-section {
+    margin-bottom: 20px;
+}
+
+    .co-section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+.co-input-group {
+    margin-bottom: 10px;
+}
+
+    .co-input-group label {
+        display: block;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .co-input-group input[type="text"],
+    .co-input-group input[type="email"],
+    .co-input-group select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+.co-row {
+    display: flex;
+    gap: 10px;
+}
+
+    .co-row .co-input-group {
+        flex: 1;
+    }
+
+.co-checkbox {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.co-shipping-method {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.co-payment-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.co-payment-method {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .co-payment-method img {
+        vertical-align: middle;
+        margin-left: 5px;
+        width: 40px;
+        height: 25px;
+    }
+
+.co-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+    .co-button:hover {
+        background-color: #333;
+    }
+
+.co-radio-group {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.co-links {
+    margin-top: 10px;
+    text-align: center;
+}
+
+    .co-links a {
+        color: #000;
+        margin-right: 10px;
+        text-decoration: underline;
+        font-size: 12px;
+    }
+
+/* Ensure the modal backdrop doesn't interfere with the animation */
+.modal.fade .modal-dialog {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/* Style the modal content to match the screenshot */
+#searchModal .modal-content {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+#searchModal .modal-body {
+    padding: 10px;
+}
+
+#searchInput {
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+#searchButton {
+    height: 40px;
+    border-radius: 0 4px 4px 0;
+    border: 1px solid #ddd;
+    border-left: none;
+}
+
+    #searchButton i {
+        color: #000;
+    }
+
+.btn-link i {
+    color: #000;
+    font-size: 1.2rem;
+}
+
+.pagina-search {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 850px;
+    max-width: 80%;
+}
+
+    /* input să ocupe tot spațiul disponibil */
+    .search-box input[type="text"] {
+        flex-grow: 1; /* ocupă tot spațiul */
+        padding: 6px 12px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+        min-width: 0;
+    }
+
+    /* butonul rămâne fix dimensiunea lui și se aliniază la dreapta */
+    .search-box button {
+        background-color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+/* Ensure the button is aligned to the right */
+.search-box {
+    justify-content: space-between;
+}

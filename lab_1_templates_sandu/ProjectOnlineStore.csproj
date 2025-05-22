@@ -160,7 +160,6 @@
     <Content Include="Content\images\logo-nav.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\photo_2025-02-24_16-47-55.jpg" />
-<<<<<<< HEAD
     <Content Include="Content\images\dress1.png" />
     <Content Include="Content\images\dress2.png" />
     <Content Include="Content\images\dress4.png" />
@@ -176,8 +175,6 @@
     <Content Include="Content\images\yellorw.png" />
     <Content Include="Content\images\black swan.png" />
     <Content Include="Content\images\Screenshot 2025-05-19 144935.png" />
-=======
->>>>>>> Daniela
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -223,13 +220,8 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-<<<<<<< HEAD
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewInController.cs" />
-    <Compile Include="Controllers\RegisterUserController.cs" />
-=======
     <Compile Include="Controllers\ListingsController.cs" />
->>>>>>> Daniela
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,26 +279,8 @@
     <Content Include="Views\Shop\Shop.cshtml" />
     <Content Include="Views\Checkout\CheckoutPage.cshtml" />
     <Content Include="Views\Home\NewIn.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\RegisterPage.cshtml" />
-=======
-    <Content Include="Views\Home\RegisterPage.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Auth\Register.cshtml" />
-    <Content Include="Views\Admin\ContactMessages.cshtml" />
-    <Content Include="Views\Admin\Dashboard.cshtml" />
-    <Content Include="Views\Admin\Message.cshtml" />
-    <Content Include="Views\Admin\UserList.cshtml" />
-    <Content Include="Views\Shop\Details.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Cart\ShoppingCart.cshtml" />
-    <Content Include="Views\Listings\Create.cshtml" />
-    <Content Include="Views\Listings\Delete.cshtml" />
-    <Content Include="Views\Listings\ListingDetails.cshtml" />
-    <Content Include="Views\Listings\Modify.cshtml" />
-    <Content Include="Views\Listings\Listings.cshtml" />
->>>>>>> Daniela
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -316,11 +290,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
     <Folder Include="Views\NewIn\" />
     <Folder Include="Views\Register\" />
-=======
->>>>>>> Daniela
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\businessLogic\eUseControl.BusinessLogic.csproj">

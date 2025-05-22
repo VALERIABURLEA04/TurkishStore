@@ -1,4 +1,6 @@
-﻿using eUseControlBussinessLogic.Interfaces;
+﻿/* using businessLogic.BLStruct;
+using businessLogic.Interfaces;
+using eUseControlBussinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,11 @@ namespace eUseControlBussinessLogic
         {
             return new SessionBL();
         }
+
+        public IRegister GetRegisterBL()
+        {
+            return new RegisterBL();
+        }
     }
 }
+*/

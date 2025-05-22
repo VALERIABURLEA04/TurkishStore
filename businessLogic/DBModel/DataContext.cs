@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.Admin;
+using eUseControl.Domain.Entities.Product;
+using eUseControl.Domain.Entities.Cart;
 
 namespace BusinessLogic.DBModel
 {
@@ -17,10 +19,9 @@ namespace BusinessLogic.DBModel
         }
 
         public DbSet<UContactData> ContactData { get; set; }
-
-        public DbSet<UserInfo> TBLUserInfo { get; set; }
         public DbSet<AdminData> AdminData { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
     }
 
