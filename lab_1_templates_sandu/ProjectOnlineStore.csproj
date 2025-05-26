@@ -281,6 +281,7 @@
     <Content Include="Views\Home\NewIn.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\RegisterPage.cshtml" />
+    <Content Include="Views\Home\RefundPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,6 +292,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\NewIn\" />
+    <Folder Include="Views\Refund\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
