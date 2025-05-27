@@ -1,10 +1,4 @@
 ﻿
-
-
-
-
-
-
 using System;
 using System.Web.Mvc;
 using eUseControl.Domain.Entities.Cart;

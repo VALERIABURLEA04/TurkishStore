@@ -278,6 +278,9 @@
     <Content Include="Views\Listings\ListingDetails.cshtml" />
     <Content Include="Views\Listings\Modify.cshtml" />
     <Content Include="Views\Listings\Listings.cshtml" />
+    <Content Include="Views\Shop\Add.cshtml" />
+    <Content Include="Views\Shop\ProductList.cshtml" />
+    <Content Include="Views\Shop\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

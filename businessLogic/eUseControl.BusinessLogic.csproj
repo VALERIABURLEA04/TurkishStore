@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BLStruct\CartBL.cs" />
     <Compile Include="BLStruct\CartRepositoryBL.cs" />
+    <Compile Include="BLStruct\ContactBL.cs" />
     <Compile Include="BLStruct\ListingsBL.cs" />
     <Compile Include="BLStruct\ProductRepositoryBL.cs" />
     <Compile Include="BLStruct\RegisterBL.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\ICart.cs" />
+    <Compile Include="Interfaces\IContact.cs" />
     <Compile Include="Interfaces\IListings.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />

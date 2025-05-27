@@ -82,7 +82,7 @@
             {
                 <div class="message-card">
                     <!-- Delete Button -->
-                    @using (Html.BeginForm("DeleteMessage", "Admin", FormMethod.Post, new { @class = "delete-btn" }))
+                    @using (Html.BeginForm("DeleteContact", "Admin", FormMethod.Post, new { @class = "delete-btn" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.Hidden("id", msg.Id)

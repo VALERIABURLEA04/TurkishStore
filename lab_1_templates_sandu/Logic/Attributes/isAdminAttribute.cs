@@ -28,7 +28,7 @@ namespace lab_1_templates_sandu.Logic.Attributes
                 {
                     filterContext.Result = new RedirectToRouteResult(
                         new RouteValueDictionary(
-                            new { controller = "Home", action = "Index" }));
+                            new { controller = "Admin", action = "Dashboard" }));
                 }
             }
         }

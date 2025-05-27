@@ -1,5 +1,7 @@
 ﻿using businessLogic.BLStruct;
 using businessLogic.Interfaces;
+using businessLogic.Interfaces.Repositories;
+using BusinessLogic.DBModel;
 using eUseControlBussinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,16 @@ namespace eUseControlBussinessLogic
         public IRegister GetRegisterBL()
         {
             return new RegisterBL();
+        }
+
+        public IContact GetContactBL()
+        {
+            return new ContactBL();
+        }
+
+        public IProductRepository GetProductRepository()
+        {
+            return new ProductRepositoryBL();
         }
     }
 }

@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessLogic.DBModel;
+using businessLogic.Interfaces;
 using eUseControl.Domain.Entities.User;
-
+using eUseControlBussinessLogic.Interfaces;
+using eUseControlBussinessLogic;
+using businessLogic.BLStruct;
+using lab_1_templates_sandu.Logic.Attributes;
 
 namespace ProjectOnlineStore.Controllers
 {
     public class HomeController : Controller
     {
-        private DataContext _context; // Declare your database context here
+        private readonly IContact _contactBL;
+        private readonly ISession _sessionBL;
 
+        // Parameterless constructor manually instantiating dependencies
         public HomeController()
         {
-            _context = new DataContext(); // Initialize your context
+            var bl = new BusinesLogic();
+            _contactBL = bl.GetContactBL();
+            _sessionBL = bl.GetSessionBL();
         }
 
         // GET: Home
         public ActionResult Index()
         {
             return View();
-            }
-        
+        }
+
         public ActionResult About()
         {
             return View();
@@ -57,33 +62,33 @@ namespace ProjectOnlineStore.Controllers
         // POST: Home/ContactUs
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ContactUs(UContactData contactData)
+        public async Task<ActionResult> ContactUs(UContactData contactData)
         {
             if (ModelState.IsValid)
             {
-                // Save the contact data to the database
-                _context.ContactData.Add(contactData);
-                _context.SaveChanges();
-
-                // Set the success message in TempData
+                await _contactBL.AddAsync(contactData);
                 TempData["SuccessMessage"] = "Your message has been sent successfully!";
                 return RedirectToAction("ContactUs");
             }
-
-            // Return the view with validation errors if model state is not valid
             return View(contactData);
         }
 
-        // Dispose the context to avoid memory leaks
-        protected override void Dispose(bool disposing)
+        /*
+        [HttpPost]
+        [isAdmin]
+        public async Task<ActionResult> DeleteContact(int id)
         {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-            base.Dispose(disposing);
+            var success = await _contactBL.DeleteAsync(id);
+            if (!success)
+                TempData["ErrorMessage"] = "Could not delete contact data.";
+
+            return RedirectToAction("Dashboard", "Admin");
         }
 
-
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
+        */
     }
 }

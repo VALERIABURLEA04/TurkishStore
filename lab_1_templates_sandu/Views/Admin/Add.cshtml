@@ -27,7 +27,7 @@ Layout = null; // or your layout if you have one
     <div class="container mt-5">
         <h2 class="text-center mb-4">Add New Product</h2>
 
-        @using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Add", "Shop", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
@@ -63,7 +63,7 @@ Layout = null; // or your layout if you have one
 
             <div class="text-center">
                 <button type="submit" class="btn btn-success">Add Product</button>
-                @Html.ActionLink("Back to List", "ProductList", "Admin", null, new { @class = "btn btn-secondary ms-2" })
+                @Html.ActionLink("Back to List", "ProductList", "Shop", null, new { @class = "btn btn-secondary ms-2" })
             </div>
         }
     </div>
