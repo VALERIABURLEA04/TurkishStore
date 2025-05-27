@@ -29,7 +29,7 @@ namespace businessLogic.BLStruct
             {
                 return db.Products.ToList();
             }
-        }
+        }  
 
         public Product GetProductById(int id)
         {

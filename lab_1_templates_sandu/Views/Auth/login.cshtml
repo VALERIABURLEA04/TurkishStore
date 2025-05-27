@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model lab_1_templates_sandu.Models.UserModel
+@model lab_1_templates_sandu.Models.Auth.UserDataLogin
 
 @{
     ViewBag.Title = "About";
@@ -36,11 +36,11 @@
 
                     <div class="mb-3 text-start">
                         <label for="username" class="form-label">Username</label>
-                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", placeholder = "Introduceți username-ul", required = "required" })
+                        @Html.TextBoxFor(model => model.NameOrEmail, new { @class = "form-control", placeholder = "Introduceți username-ul", required = "required" })
                     </div>
                     <div class="mb-3 text-start">
                         <label for="password" class="form-label">Parolă</label>
-                        @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Sign In</button>
                     <p class="create-account"><a href="@Url.Action("RegisterPage", "Home")">Create account</a></p>
