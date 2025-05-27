@@ -117,21 +117,25 @@
                                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
                                    <div class="form-floating mb-3">
+                                        <label for="name" class="form-label">Nume</label>
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "User name" })
                                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger small" })
                                    </div>
 
                                    <div class="form-floating mb-3">
+                                        <label for="email" class="form-label">Email</label>
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "exemplu@email.com" })
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
                                    </div>
 
                                    <div class="form-floating mb-3">
+                                        <label for="password" class="form-label">Parola</label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
                                    </div>
 
                                    <div class="form-floating mb-4">
+                                        <label for="confirmPassword" class="form-label">Confirma Parola</label>
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm password" })
                                         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger small" })
                                    </div>
