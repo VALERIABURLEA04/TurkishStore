@@ -10,6 +10,7 @@ using System.Web;
 using businessLogic.DBModel;
 using eUseControl.Helpers.Session;
 using System.Data.Entity;
+using eUseControl.Domain.Entities.Admin;
 
 namespace businessLogic.BLStruct
 {
@@ -57,6 +58,36 @@ namespace businessLogic.BLStruct
             {
                 return await db.Users
                     .FirstOrDefaultAsync(u => u.Name == identifier || u.Email == identifier);
+            }
+        }
+
+        public List<AdminUserDisplay> GetAllUsers()
+        {
+            using (var userDb = new UserContext())
+            {
+                return userDb.Users.Select(u => new AdminUserDisplay
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email,
+                    LastLogin = u.LastLogin,
+                    UserIp = u.UserIp,
+                    Role = u.Level.ToString()
+                }).ToList();
+            }
+        }
+
+        public bool DeleteUser(int id)
+        {
+            using (var userDb = new UserContext())
+            {
+                var user = userDb.Users.Find(id);
+                if (user == null)
+                    return false;
+
+                userDb.Users.Remove(user);
+                userDb.SaveChanges();
+                return true;
             }
         }
     }
