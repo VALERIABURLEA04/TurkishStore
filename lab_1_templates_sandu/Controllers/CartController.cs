@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-using System;
+﻿using System;
 using System.Web.Mvc;
 using eUseControl.Domain.Entities.Cart;
 using eUseControl.Domain.Entities.User.UserActionResponse;
