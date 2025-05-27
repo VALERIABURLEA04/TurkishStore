@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using lab_1_templates_sandu.Models;
+using eUseControl.Web.Models;
 using eUseControl.Domain.Entities.User;
 using BusinessLogic.DBModel;
 using eUseControlBussinessLogic.Core;
@@ -10,7 +10,7 @@ using eUseControl.Domain.Enums;
 using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using System.Web;
-using lab_1_templates_sandu.Models.Auth;
+using eUseControl.Web.Models.Auth;
 
 namespace ProjectOnlineStore.Controllers
 {

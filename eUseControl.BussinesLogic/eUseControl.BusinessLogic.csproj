@@ -116,25 +116,9 @@
     <Compile Include="Migrations\202505190402007_MadeURLOptional.Designer.cs">
       <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505192234238_UpdateAdmin.cs" />
-    <Compile Include="Migrations\202505192234238_UpdateAdmin.Designer.cs">
-      <DependentUpon>202505192234238_UpdateAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505192355190_Tests.cs" />
-    <Compile Include="Migrations\202505192355190_Tests.Designer.cs">
-      <DependentUpon>202505192355190_Tests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505210024445_UserRegistrationLogin.cs" />
-    <Compile Include="Migrations\202505210024445_UserRegistrationLogin.Designer.cs">
-      <DependentUpon>202505210024445_UserRegistrationLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505210630379_RemovedTable.cs" />
-    <Compile Include="Migrations\202505210630379_RemovedTable.Designer.cs">
-      <DependentUpon>202505210630379_RemovedTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505220607031_CartSystem.cs" />
-    <Compile Include="Migrations\202505220607031_CartSystem.Designer.cs">
-      <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
+    <Compile Include="Migrations\202505271933180_AddCartItemsTable.cs" />
+    <Compile Include="Migrations\202505271933180_AddCartItemsTable.Designer.cs">
+      <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,20 +169,8 @@
     <EmbeddedResource Include="Migrations\202505190402007_MadeURLOptional.resx">
       <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505192234238_UpdateAdmin.resx">
-      <DependentUpon>202505192234238_UpdateAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505192355190_Tests.resx">
-      <DependentUpon>202505192355190_Tests.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505210024445_UserRegistrationLogin.resx">
-      <DependentUpon>202505210024445_UserRegistrationLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505210630379_RemovedTable.resx">
-      <DependentUpon>202505210630379_RemovedTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505220607031_CartSystem.resx">
-      <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202505271933180_AddCartItemsTable.resx">
+      <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

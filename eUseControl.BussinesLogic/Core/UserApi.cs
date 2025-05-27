@@ -53,7 +53,7 @@ namespace eUseControlBussinessLogic.Core
 
                 using (var dbContext = new UserContext())
                 {
-                    user = dbContext.Users.FirstOrDefault(u => u.Email == model.NameOrEmail);
+                    user = dbContext.Users.FirstOrDefault(u => u.Email == model.NameOrEmail || u.Username == model.NameOrEmail);
 
                     if (user == null)
                     {

@@ -1,0 +1,257 @@
+﻿@using System.Web.Optimization
+
+@{
+    ViewBag.Title = "About";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SACCHARINE</title>
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    @Styles.Render("~/bundles/css")
+</head>
+
+<body>
+    <div id="background_image">
+        @Html.Partial("_Header")
+
+
+
+
+        <!-- Sidebar stânga -->
+        <div class="offcanvas offcanvas-start custom-offcanvas" tabindex="-1" id="sidebar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="cart-content-sidebar">
+                    <p>Your cart is currently empty.</p>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-light w-100" id="checkout-btn" style="display: none;">Checkout</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Cart dreapta -->
+        <div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="cartOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="cart-content-cart">
+                    <p style="color: #ffffff;">Your cart is currently empty.</p>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-light w-100" id="checkout-btn" style="display: none;">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="must-haves text-center">
+
+        <h2>Must Haves</h2>
+    </div>
+    <style>
+        .must-haves {
+            padding: 40px 0;
+            background-color: #f8f8f8; /* Light gray background for contrast */
+            margin: 20px 0;
+        }
+
+            .must-haves h2 {
+                font-family: 'Arial', sans-serif; /* Clean, modern font */
+                font-size: 2.5rem; /* Larger heading */
+                font-weight: 700; /* Bold for emphasis */
+                color: #333; /* Dark gray for readability */
+                text-transform: uppercase; /* Uppercase for a bold look */
+                letter-spacing: 2px; /* Slight spacing for elegance */
+                position: relative;
+                display: inline-block;
+                padding-bottom: 10px; /* Space for the underline effect */
+            }
+
+                .must-haves h2::after {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 0;
+                    width: 50px; /* Short underline */
+                    height: 3px; /* Thickness of the underline */
+                    background-color: #ff6347; /* Tomato red for a pop of color */
+                }
+
+        .gallery-container {
+            width: 100%;
+            max-width: 960px; /* Limits to show ~4 items (4 * 240px) */
+            margin: 0 auto; /* Centers the container */
+            overflow-x: auto; /* Enables horizontal scrolling */
+            white-space: nowrap; /* Prevents items from wrapping */
+            padding: 10px 0;
+            background-color: #f8f8f8; /* Light background for contrast */
+        }
+
+        .gallery {
+            display: inline-flex;
+            gap: 20px; /* Space between items */
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 220px; /* Each item width */
+            text-align: center;
+        }
+
+            .gallery-item img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover; /* Ensures images scale nicely */
+                border-radius: 5px; /* Slight rounding */
+            }
+
+            .gallery-item p {
+                margin: 10px 0 5px;
+                font-family: Arial, sans-serif;
+                font-size: 1rem;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .gallery-item span {
+                font-family: Arial, sans-serif;
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+        /* Custom scrollbar styling */
+        .gallery-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        .gallery-container::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+    </style>
+
+    <div class="gallery-container">
+        <div class="gallery">
+            <!-- Item 1 -->
+            <div class="gallery-item">
+                <img src="~/Content/images/luisa.png" alt="River Maxi">
+                <p>RIVER MAXI</p>
+                <span>30,964 MDL</span>
+            </div>
+            <!-- Item 2 -->
+            <div class="gallery-item">
+                <img src="~/Content/images/Alida.png" alt="Alida">
+                <p>ALIDA</p>
+                <span>21,989 MDL</span>
+            </div>
+            <!-- Item 3 -->
+            <div class="gallery-item">
+                <img src="~/Content/images/black swan.png" alt="Luisa">
+                <p>LUISA</p>
+                <span>29,126 MDL</span>
+            </div>
+            <!-- Item 4 -->
+            <div class="gallery-item">
+                <img src="~/Content/images/yellorw.png" alt="Nova">
+                <p>NOVA</p>
+                <span>29,169 MDL</span>
+            </div>
+            <!-- Additional items for scrolling -->
+            <div class="gallery-item">
+                <img src="~/Content/images/river.png" alt="Item 5">
+                <p>RIVER</p>
+                <span>25,000 MDL</span>
+            </div>
+            <div class="gallery-item">
+                <img src="~/Content/images/vanessa.png" alt="Item 6">
+                <p>VANESSA</p>
+                <span>22,000 MDL</span>
+            </div>
+        </div>
+    </div>
+
+        
+        <footer>
+            <div class="footer-container">
+                <!-- Logo and Social Icons -->
+                <div class="footer-section">
+                    <h3>SACCHARINE</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links 1 -->
+                <div class="footer-section">
+                    <h3>SACCHARINE</h3>
+                  
+                   
+                    <ul>
+                        <li><a href="@Url.Action("RefundPage", "home")">Cancellation and Refund Conditions</a></li>
+                        <li><a href="#">Distance Selling Agreement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Links 2 -->
+                <div class="footer-section">
+                   
+                    <ul>
+                        <li><a href="@Url.Action("NewIn", "Home")">New Arrivals</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Collections</a></li>
+
+
+                        <li><a href="@Url.Action("About", "Home")">About the brand</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="footer-section newsletter">
+                    <p>Be informed about our new season products and campaigns.</p>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+
+                <!-- Language Selector -->
+                <div class="footer-section language-selector">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="fr">French</option>
+                        <option value="es">Spanish</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>PRIVACY POLICY | TERMS OF SERVICE</p>
+                <p>Powered by Shopify</p>
+            </div>
+        </footer>
+        <!-- Script Bootstrap JS necesar pentru funcționalitatea offcanvas -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

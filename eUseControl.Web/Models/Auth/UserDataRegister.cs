@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace lab_1_templates_sandu.Models.Auth
+namespace eUseControl.Web.Models.Auth
 {
 	public class UserDataRegister
 	{

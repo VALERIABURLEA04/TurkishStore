@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using eUseControl.Domain.Entities.User.UserActionResponse;
 
-namespace lab_1_templates_sandu.Logic
+namespace eUseControl.Web.Logic
 {
 	public static class HttpContextExtensions
 	{

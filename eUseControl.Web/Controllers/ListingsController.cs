@@ -14,7 +14,7 @@ using eUseControl.Domain.Entities.User.UserActionResponse;
 using eUseControlBussinessLogic.Interfaces;
 
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ListingsController : Controller
     {

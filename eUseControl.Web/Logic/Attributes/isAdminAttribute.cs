@@ -6,7 +6,7 @@ using eUseControlBussinessLogic.Interfaces;
 using eUseControl.Domain.Enums;
 using businessLogic;
 
-namespace lab_1_templates_sandu.Logic.Attributes
+namespace eUseControl.Web.Logic.Attributes
 {
 	public class isAdminAttribute : ActionFilterAttribute
 	{

@@ -6,7 +6,7 @@ using eUseControl.Domain.Entities.User;
 using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
-using lab_1_templates_sandu.Logic.Attributes;
+using eUseControl.Web.Logic.Attributes;
 
 namespace ProjectOnlineStore.Controllers
 {

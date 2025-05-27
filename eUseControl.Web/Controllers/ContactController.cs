@@ -7,7 +7,7 @@ using BusinessLogic.DBModel;
 using System;
 using eUseControl.Domain.Entities.User;
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ContactController : ApiController
     {

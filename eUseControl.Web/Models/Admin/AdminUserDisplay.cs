@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace lab_1_templates_sandu.Models.Admin
+namespace eUseControl.Web.Models.Admin
 {
 	public class AdminUserDisplay
 	{

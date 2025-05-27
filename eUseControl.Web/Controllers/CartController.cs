@@ -3,7 +3,7 @@ using System;
 using System.Web.Mvc;
 using eUseControl.Domain.Entities.Cart;
 using eUseControl.Domain.Entities.User.UserActionResponse;
-using lab_1_templates_sandu.Logic.Attributes;
+using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
 using eUseControl.Domain.Entities.Listings;
 

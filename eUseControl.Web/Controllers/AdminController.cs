@@ -10,14 +10,14 @@ using System.Web.Mvc;
 using businessLogic.DBModel;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Admin;
-using lab_1_templates_sandu.Models.Admin;
+using eUseControl.Web.Models.Admin;
 using eUseControl.Domain.Entities.Product;
 using businessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using System.Threading.Tasks;
-using lab_1_templates_sandu.Logic.Attributes;
+using eUseControl.Web.Logic.Attributes;
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class AdminController : Controller
     {

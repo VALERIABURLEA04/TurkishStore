@@ -8,7 +8,7 @@ using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Product;
 using eUseControlBussinessLogic;
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ShopController : Controller
     {
