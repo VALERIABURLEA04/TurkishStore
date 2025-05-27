@@ -1,0 +1,40 @@
+﻿﻿@using System.Web.Optimization
+
+@{
+     ViewBag.Title = "Search";
+     Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>@ViewBag.Title - SACCHARINE</title>
+
+     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+     @Styles.Render("~/bundles/css")
+</head>
+
+<body>
+     @Html.Partial("_Header");
+
+
+
+
+     <!-- HTML -->
+     <div class="pagina-search">
+          <div class="search-container">
+               <div class="search-title">Search</div>
+
+               <form class="search-box" method="get" action="@Url.Action("NewIn", "Home")">
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+               </form>
+          </div>
+     </div>
+</body>
+</html>
