@@ -47,29 +47,51 @@
     </style>
 </head>
 <body>
-    @Html.Partial("_Header")
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-4">
+        <span class="navbar-brand mb-0 h1"><i class="fas fa-user-shield me-2"></i>Admin Panel</span>
+        <a href="@Url.Action("Logout", "Admin")" class="btn btn-outline-light">Logout</a>
+    </nav>
 
-    <div class="container content-wrapper">
-        <a href="@Url.Action("ContactMessages", "Admin")" class="btn btn-secondary back-btn">
-            <i class="fas fa-arrow-left"></i> Back to Messages
-        </a>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light vh-100 p-3">
+                <h5 class="mb-4">Menu</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("UserList", "Admin")"><i class="fas fa-users me-2"></i>View Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ProductList", "Shop")"><i class="fas fa-box-open me-2"></i>View Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Add", "Shop")"><i class="fas fa-plus me-2"></i>Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ContactMessages", "Admin")"><i class="fas fa-envelope me-2"></i>Check Messages</a>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="card p-4">
-            <h4 class="mb-3">@Model.Subject</h4>
-            <p><strong>From:</strong> @Model.Name (@Model.Email)</p>
-            <hr />
-            <p><strong>Message:</strong></p>
-            <div class="message-body">
-                @Model.Message
+            <!-- Main Content -->
+            <div class="col-md-10 content-wrapper">
+                <a href="@Url.Action("ContactMessages", "Admin")" class="btn btn-secondary back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Messages
+                </a>
+
+                <div class="card p-4">
+                    <h4 class="mb-3">@Model.Subject</h4>
+                    <p><strong>From:</strong> @Model.Name (@Model.Email)</p>
+                    <hr />
+                    <p><strong>Message:</strong></p>
+                    <div class="message-body">
+                        @Model.Message
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer class="text-center mt-4 p-3 bg-light">
-        &copy; 2025 SACCHARINE. All rights reserved.
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @Html.Partial("_Footer");
 </body>
 </html>

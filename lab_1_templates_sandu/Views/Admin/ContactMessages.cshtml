@@ -30,7 +30,7 @@
 
         .message-card {
             background: #fff;
-            padding: 25px 60px 25px 25px; /* extra right padding to avoid overlap */
+            padding: 25px 60px 25px 25px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
@@ -55,63 +55,90 @@
         .delete-btn {
             position: absolute;
             top: 20px;
-            right: -1039px;
+            right: -1400px;
             z-index: 2;
+        }
+
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
         }
     </style>
 </head>
 
 <body>
-    @Html.Partial("_Header")
 
-    <div class="container content-wrapper">
-        <h2 class="text-center mb-4">Contact Messages</h2>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-4">
+        <span class="navbar-brand mb-0 h1"><i class="fas fa-user-shield me-2"></i>Admin Panel</span>
+        <a href="@Url.Action("Logout", "Admin")" class="btn btn-outline-light">Logout</a>
+    </nav>
 
-        <a href="@Url.Action("Dashboard", "Admin")" class="btn btn-secondary mb-4">
-            <i class="fas fa-arrow-left"></i> Back to Dashboard
-        </a>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light p-3 sidebar">
+                <h5 class="mb-4">Menu</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("UserList", "Admin")"><i class="fas fa-users me-2"></i>View Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ProductList", "Shop")"><i class="fas fa-box-open me-2"></i>View Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Add", "Shop")"><i class="fas fa-plus me-2"></i>Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ContactMessages", "Admin")"><i class="fas fa-envelope me-2"></i>Check Messages</a>
+                    </li>
+                </ul>
+            </div>
 
+            <!-- Main Content -->
+            <div class="col-md-10 content-wrapper">
+                <h2 class="text-center mb-4">Contact Messages</h2>
 
-        @if (!Model.Any())
-        {
-            <div class="alert alert-info text-center">No contact messages available.</div>
-        }
-        else
-        {
-            foreach (var msg in Model)
-            {
-                <div class="message-card">
-                    <!-- Delete Button -->
-                    @using (Html.BeginForm("DeleteContact", "Admin", FormMethod.Post, new { @class = "delete-btn" }))
+                <a href="@Url.Action("Dashboard", "Admin")" class="btn btn-secondary mb-4">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+
+                @if (!Model.Any())
+                {
+                    <div class="alert alert-info text-center">No contact messages available.</div>
+                }
+                else
+                {
+                    foreach (var msg in Model)
                     {
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden("id", msg.Id)
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <div class="message-card">
+                            <!-- Delete Button -->
+                            @using (Html.BeginForm("DeleteContact", "Admin", FormMethod.Post, new { @class = "delete-btn" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("id", msg.Id)
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this message?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            }
+
+                            <!-- Only Subject is Clickable -->
+                            <h5>
+                                <a href="@Url.Action("Message", "Admin", new { id = msg.Id })">@msg.Subject</a>
+                            </h5>
+
+                            <div class="message-meta">
+                                <strong>From:</strong> @msg.Name (@msg.Email)
+                            </div>
+                            <div class="message-content">
+                                @((msg.Message.Length > 100) ? msg.Message.Substring(0, 100) + "..." : msg.Message)
+                            </div>
+                        </div>
                     }
-
-                    <!-- Only Subject is Clickable -->
-                    <h5>
-                        <a href="@Url.Action("Message", "Admin", new { id = msg.Id })">@msg.Subject</a>
-                    </h5>
-
-                    <div class="message-meta">
-                        <strong>From:</strong> @msg.Name (@msg.Email)
-                    </div>
-                    <div class="message-content">
-                        @((msg.Message.Length > 100) ? msg.Message.Substring(0, 100) + "..." : msg.Message)
-                    </div>
-                </div>
-            }
-        }
+                }
+            </div>
+        </div>
     </div>
 
-    <footer class="text-center mt-4 p-3 bg-light">
-        &copy; 2025 SACCHARINE. All rights reserved.
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @Html.Partial("_Footer");
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 @{
     ViewBag.Title = "Product List";
-    Layout = null; // or use your shared layout if you want
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -19,56 +19,82 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     @Styles.Render("~/bundles/css")
 </head>
+
 <body>
-    @Html.Partial("_Header")
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-4">
+        <span class="navbar-brand mb-0 h1"><i class="fas fa-user-shield me-2"></i>Admin Panel</span>
+        <a href="@Url.Action("Logout", "Admin")" class="btn btn-outline-light">Logout</a>
+    </nav>
 
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Product List</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light vh-100 p-3">
+                <h5 class="mb-4">Menu</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("UserList", "Admin")"><i class="fas fa-users me-2"></i>View Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ProductList", "Shop")"><i class="fas fa-box-open me-2"></i>View Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Add", "Shop")"><i class="fas fa-plus me-2"></i>Add Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ContactMessages", "Admin")"><i class="fas fa-envelope me-2"></i>Check Messages</a>
+                    </li>
+                </ul>
+            </div>
 
-        <p class="text-center">
-            @Html.ActionLink("Add New Product", "Add", "Shop", null, new { @class = "btn btn-primary mb-3" })
-        </p>
+            <!-- Main Content -->
+            <div class="col-md-10 p-5">
+                <h2 class="text-center mb-4">Product List</h2>
 
-        @if (Model != null && Model.Any())
-        {
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(m => m.First().Id)</th>
-                        <th>@Html.DisplayNameFor(m => m.First().Name)</th>
-                        <th>@Html.DisplayNameFor(m => m.First().Price)</th>
-                        <th>@Html.DisplayNameFor(m => m.First().Description)</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in Model)
-                    {
-                        <tr>
-                            <td>@product.Id</td>
-                            <td>@product.Name</td>
-                            <td>@product.Price.ToString("C")</td>
-                            <td>@product.Description</td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", "Shop", new { id = product.Id }, new { @class = "btn btn-sm btn-warning me-1" })
-                                @using (Html.BeginForm("Delete", "Shop", new { id = product.Id }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this product?');", style = "display:inline;" }))
-                                {
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p class="text-center">No products available.</p>
-        }
+                <p class="text-center">
+                    @Html.ActionLink("Add New Product", "Add", "Shop", null, new { @class = "btn btn-primary mb-3" })
+                </p>
+
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.First().Id)</th>
+                                <th>@Html.DisplayNameFor(m => m.First().Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.First().Price)</th>
+                                <th>@Html.DisplayNameFor(m => m.First().Description)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>@product.Name</td>
+                                    <td>@product.Price.ToString("C")</td>
+                                    <td>@product.Description</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", "Shop", new { id = product.Id }, new { @class = "btn btn-sm btn-warning me-1" })
+                                        @using (Html.BeginForm("Delete", "Shop", new { id = product.Id }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this product?');", style = "display:inline;" }))
+                                        {
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center">No products available.</p>
+                }
+            </div>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @Html.Partial("_Footer");
 </body>
 </html>
