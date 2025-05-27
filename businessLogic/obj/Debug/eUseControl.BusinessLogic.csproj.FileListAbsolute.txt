@@ -61,3 +61,4 @@ C:\Users\admin\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.M
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.UserRegistrationLogin.resources
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.RemovedTable.resources
 C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.CartSystem.resources
+C:\Users\USER\Source\Repos\TurkishStore\businessLogic\obj\Debug\businessLogic.Migrations.AdminTableUpdate.resources

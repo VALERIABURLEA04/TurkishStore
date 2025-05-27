@@ -37,5 +37,10 @@ namespace eUseControlBussinessLogic
         {
             return new UserBL();
         }
+
+        public IAdmin GetAdminBL()
+        {
+            return new AdminBL();
+        }
     }
 }

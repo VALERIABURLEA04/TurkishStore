@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using businessLogic.DBModel;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Admin;
-using lab_1_templates_sandu.Models.Admin;
-using eUseControl.Domain.Entities.Product;
 using businessLogic.Interfaces;
 using eUseControlBussinessLogic;
-using System.Threading.Tasks;
+using eUseControl.Domain.Entities.Admin;
 using lab_1_templates_sandu.Logic.Attributes;
 
 namespace lab_1_templates_sandu.Controllers
@@ -22,25 +12,53 @@ namespace lab_1_templates_sandu.Controllers
     public class AdminController : Controller
     {
         private readonly IContact _contactBL;
+        private readonly IAdmin _adminBL;
 
         public AdminController()
         {
             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
+            _adminBL = bl.GetAdminBL();
         }
 
         // GET: Admin/Login
         public ActionResult AdminLogin()
         {
+            if (Session["AdminUsername"] != null)
+                return RedirectToAction("Dashboard");
+
             return View();
         }
+
+        // POST: Admin/Login
+        [HttpPost]
+        public ActionResult AdminLogin(string username, string password)
+        {
+            System.Diagnostics.Debug.WriteLine($"[DEBUG] Login attempt: username = {username}, password = {password}");
+
+            var admin = _adminBL.AdminLogin(username, password);
+
+            if (admin != null)
+            {
+                Console.WriteLine($"[DEBUG] Login successful for user: {admin.Username}");
+                Session["AdminUsername"] = admin.Username;
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                Console.WriteLine("[DEBUG] Login failed: invalid username or password.");
+                ViewBag.Error = "Invalid username or password.";
+                return View();
+            }
+        }
+
 
         // GET: Admin/Dashboard
         [isAdmin]
         public ActionResult Dashboard()
         {
             if (Session["AdminUsername"] == null)
-                return RedirectToAction("AdminLogin"); 
+                return RedirectToAction("AdminLogin");
 
             return View();
         }
@@ -83,23 +101,7 @@ namespace lab_1_templates_sandu.Controllers
             return RedirectToAction("ContactMessages");
         }
 
-        [HttpPost]
-        public ActionResult AdminLogin(string username, string password)
-        {
-            if (username == "admin" && password == "admin123")
-            {
-                Session["AdminUsername"] = username;
-                return RedirectToAction("Dashboard", "Admin");
-            }
-            else
-            {
-                ViewBag.Error = "Invalid username or password.";
-                return View();
-            }
-        }
-
-
-        // Optional: Logout method
+        // GET: Admin/Logout
         public ActionResult Logout()
         {
             Session.Clear();
@@ -114,7 +116,5 @@ namespace lab_1_templates_sandu.Controllers
 
             return View();
         }
-
     }
-
 }

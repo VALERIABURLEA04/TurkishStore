@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLStruct\AdminBL.cs" />
     <Compile Include="BLStruct\CartBL.cs" />
     <Compile Include="BLStruct\CartRepositoryBL.cs" />
     <Compile Include="BLStruct\ContactBL.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DBModel\DataContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\ICart.cs" />
     <Compile Include="Interfaces\IContact.cs" />
     <Compile Include="Interfaces\IListings.cs" />
@@ -136,6 +138,10 @@
     <Compile Include="Migrations\202505220607031_CartSystem.Designer.cs">
       <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505272327100_AdminTableUpdate.cs" />
+    <Compile Include="Migrations\202505272327100_AdminTableUpdate.Designer.cs">
+      <DependentUpon>202505272327100_AdminTableUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionManager.cs" />
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505220607031_CartSystem.resx">
       <DependentUpon>202505220607031_CartSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505272327100_AdminTableUpdate.resx">
+      <DependentUpon>202505272327100_AdminTableUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
