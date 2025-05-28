@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectOnlineStore", "lab_1_templates_sandu\ProjectOnlineStore.csproj", "{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseControl.Domain\eUseControl.Domain.csproj", "{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Helpers", "eUseControl.Helpers\eUseControl.Helpers.csproj", "{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU

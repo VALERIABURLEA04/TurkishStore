@@ -17,5 +17,7 @@ namespace businessLogic.Interfaces.Repositories
         void UpdateProduct(Product product, HttpPostedFileBase image, bool? removeImage);
         void DeleteProduct(int id);
         void DeleteImage(int id);
+
+        IEnumerable<Product> Search(string query);
     }
 }

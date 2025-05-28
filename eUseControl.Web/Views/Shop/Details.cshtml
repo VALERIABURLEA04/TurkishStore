@@ -4,54 +4,54 @@
 @model Product
 
 @{
-     ViewBag.Title = Model?.Name ?? "Product Details";
-     Layout = null; // keep it null or replace with your layout path if you want
+    ViewBag.Title = Model?.Name ?? "Product Details";
+    Layout = null; // keep it null or replace with your layout path if you want
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1" />
-     <title>@ViewBag.Title - SACCHARINE</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - SACCHARINE</title>
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-     @Styles.Render("~/bundles/css")
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/css")
 </head>
 <body>
-     @Html.Partial("_Header")
+    @Html.Partial("_Header")
 
-     <div class="container mt-5">
-          <h2 class="text-center mb-4 custom-header">@Model.Name</h2>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4 custom-header">@Model.Name</h2>
 
-          <div class="row">
-               <div class="col-md-6">
-                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-                    {
-                         <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" style="width: 100%; max-height: 100%; object-fit: cover;" />
-                    }
-                    else
-                    {
-                         <img src="https://via.placeholder.com/400x300" alt="No image available" class="img-fluid rounded" />
-                    }
-               </div>
+        <div class="row">
+            <div class="col-md-6">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" style="width: 100%; max-height: 100%; object-fit: cover;" />
+                }
+                else
+                {
+                    <img src="https://via.placeholder.com/400x300" alt="No image available" class="img-fluid rounded" />
+                }
+            </div>
 
-               <div class="col-md-6">
-                    <h4>Description</h4>
-                    <p>@Model.Description</p>
+            <div class="col-md-6">
+                <h4>Description</h4>
+                <p>@Model.Description</p>
 
-                    <h4>Price</h4>
-                    <p class="fs-4 fw-bold">@Model.Price.ToString("C")</p>
+                <h4>Price</h4>
+                <p class="fs-4 fw-bold">@Model.Price.ToString("C")</p>
 
-                    <a href="@Url.Action("Shop", "Shop")" class="btn btn-primary mt-3">
-                         <i class="fas fa-arrow-left"></i> Back to Shop
-                    </a>
-               </div>
-          </div>
-     </div>
+                <a href="@Url.Action("Shop", "Shop")" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-left"></i> Back to Shop
+                </a>
+            </div>
+        </div>
+    </div>
 
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

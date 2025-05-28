@@ -217,12 +217,10 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BussinessLogic.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NewInController.cs" />
     <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,20 +271,14 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
-    <Content Include="Views\Admin\ProductList.cshtml" />
-    <Content Include="Views\Admin\Add.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Shop\Shop.cshtml" />
-    <Content Include="Views\Checkout\CheckoutPage.cshtml" />
     <Content Include="Views\Home\NewIn.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Home\RegisterPage.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Admin\ContactMessages.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\Message.cshtml" />
-    <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Shop\Details.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
@@ -298,6 +290,8 @@
     <Content Include="Views\Shop\Add.cshtml" />
     <Content Include="Views\Shop\ProductList.cshtml" />
     <Content Include="Views\Shop\Edit.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\Cart\CheckoutPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -307,9 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\NewIn\" />
     <Folder Include="Views\Refund\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eUseControl.BussinesLogic\eUseControl.BusinessLogic.csproj">

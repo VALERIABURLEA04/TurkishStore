@@ -32,5 +32,21 @@ namespace eUseControlBussinessLogic
         {
             return new ProductRepositoryBL();
         }
+
+        public IUser GetUserBL()
+        {
+            return new UserBL();
+        }
+
+        public IAdmin GetAdminBL()
+        {
+            return new AdminBL();
+        }
+
+        public IListings GetListingsBL()
+        {
+            return new ListingsBL();
+
+        }
     }
 }

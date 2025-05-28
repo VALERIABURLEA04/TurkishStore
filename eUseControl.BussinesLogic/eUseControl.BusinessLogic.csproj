@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLStruct\AdminBL.cs" />
     <Compile Include="BLStruct\CartBL.cs" />
     <Compile Include="BLStruct\CartRepositoryBL.cs" />
     <Compile Include="BLStruct\ContactBL.cs" />
@@ -64,23 +65,21 @@
     <Compile Include="BLStruct\SessionBL.cs" />
     <Compile Include="BLStruct\UserBL.cs" />
     <Compile Include="BusinesLogic.cs" />
-    <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="DBModel\DataContext.cs" />
     <Compile Include="DBModel\Seed\DbInitializer.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\ICart.cs" />
     <Compile Include="Interfaces\IContact.cs" />
     <Compile Include="Interfaces\IListings.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Interfaces\Repositories\ICartRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProductRepository.cs" />
-    <Compile Include="Interfaces\UserLoginResult.cs" />
     <Compile Include="Migrations\202505060531050_InitialCreate.cs" />
     <Compile Include="Migrations\202505060531050_InitialCreate.Designer.cs">
       <DependentUpon>202505060531050_InitialCreate.cs</DependentUpon>
@@ -120,6 +119,10 @@
     <Compile Include="Migrations\202505271933180_AddCartItemsTable.cs" />
     <Compile Include="Migrations\202505271933180_AddCartItemsTable.Designer.cs">
       <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505281817562_AdminDataUpdate.cs" />
+    <Compile Include="Migrations\202505281817562_AdminDataUpdate.Designer.cs">
+      <DependentUpon>202505281817562_AdminDataUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -170,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505271933180_AddCartItemsTable.resx">
       <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505281817562_AdminDataUpdate.resx">
+      <DependentUpon>202505281817562_AdminDataUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

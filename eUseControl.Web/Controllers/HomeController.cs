@@ -6,7 +6,7 @@ using eUseControl.Domain.Entities.User;
 using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
-using eUseControl.Web.Logic.Attributes;
+using businessLogic.Interfaces.Repositories;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -14,6 +14,7 @@ namespace ProjectOnlineStore.Controllers
     {
         private readonly IContact _contactBL;
         private readonly ISession _sessionBL;
+        private readonly IProductRepository _productRepositoryBL;
 
         // Parameterless constructor manually instantiating dependencies
         public HomeController()
@@ -21,6 +22,7 @@ namespace ProjectOnlineStore.Controllers
             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
             _sessionBL = bl.GetSessionBL();
+            _productRepositoryBL = bl.GetProductRepository();
         }
 
         // GET: Home
@@ -49,19 +51,11 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
-        public ActionResult RegisterPage()
+        [HttpGet]
+        public ActionResult Search(string query)
         {
-            return View();
-        }
-
-        public ActionResult Search()
-        {
-            return View();
-        }
-
-        public ActionResult RefundPage()
-        {
-            return View();
+            var products = _productRepositoryBL.Search(query);
+            return View(products);
         }
 
         // POST: Home/ContactUs
@@ -78,22 +72,5 @@ namespace ProjectOnlineStore.Controllers
             return View(contactData);
         }
 
-        /*
-        [HttpPost]
-        [isAdmin]
-        public async Task<ActionResult> DeleteContact(int id)
-        {
-            var success = await _contactBL.DeleteAsync(id);
-            if (!success)
-                TempData["ErrorMessage"] = "Could not delete contact data.";
-
-            return RedirectToAction("Dashboard", "Admin");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-        */
     }
 }

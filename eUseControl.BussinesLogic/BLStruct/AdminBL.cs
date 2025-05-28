@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.Admin;
 using eUseControlBussinessLogic.Core;
 
 namespace businessLogic.BLStruct
 {
-    public class RegisterBL : UserApi, IRegister
+    public class AdminBL : AdminApi, IAdmin
     {
-        public string SignUpLogic(UserRegisterData data)
+        public AdminData AdminLogin(string username, string password)
         {
-            return RegisterUser(data);
-
+            return ValidateAdminLogin(username, password);
         }
     }
-
 }
