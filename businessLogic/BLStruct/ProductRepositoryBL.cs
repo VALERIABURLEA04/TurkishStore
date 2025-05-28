@@ -127,5 +127,15 @@ namespace businessLogic.BLStruct
             _context.Products.Remove(product);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Product> Search(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+                return new List<Product>();
+
+            return _context.Products
+                .Where(p => p.Name.Contains(query) || p.Description.Contains(query))
+                .ToList();
+        }
     }
 }

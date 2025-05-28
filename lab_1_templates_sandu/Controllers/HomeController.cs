@@ -7,6 +7,7 @@ using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
 using lab_1_templates_sandu.Logic.Attributes;
+using businessLogic.Interfaces.Repositories;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -14,6 +15,7 @@ namespace ProjectOnlineStore.Controllers
     {
         private readonly IContact _contactBL;
         private readonly ISession _sessionBL;
+        private readonly IProductRepository _productRepositoryBL;
 
         // Parameterless constructor manually instantiating dependencies
         public HomeController()
@@ -21,6 +23,7 @@ namespace ProjectOnlineStore.Controllers
             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
             _sessionBL = bl.GetSessionBL();
+            _productRepositoryBL = bl.GetProductRepository();
         }
 
         // GET: Home
@@ -54,9 +57,11 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
-        public ActionResult Search()
+        [HttpGet]
+        public ActionResult Search(string query)
         {
-            return View();
+            var products = _productRepositoryBL.Search(query);
+            return View(products);
         }
 
         // POST: Home/ContactUs
