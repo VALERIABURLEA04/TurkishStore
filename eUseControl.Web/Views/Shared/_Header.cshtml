@@ -28,24 +28,39 @@
                 <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("NewIn", "Home")">New In</a></li>
                 <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("ContactUs", "Home")">Contact Us</a></li>
 
+                @if (Session["Role"]?.ToString() == "Admin")
+                {
+                    <li class="nav-item mx-3"><a class="nav-link" href="@Url.Action("ProductList", "Admin")">Manage Products</a></li>
+                }
+
             </ul>
 
         </div>
 
         <!-- Navbar Icons -->
-        <div class="navbar-icons ms-auto">
-            <a href="@Url.Action("login", "Auth")"><i class="fas fa-user"></i></a>
+        <div class="navbar-icons d-flex align-items-center gap-3 ms-auto">
 
-            <a href="#"><i class="fas fa-search "></i></a>
+            <a href="@Url.Action("Login", "Auth")" class="nav-link text-dark">
+                <i class="fas fa-user"></i>
+                @Session["UserFirstName"]
+            </a>
 
-            <a href="#"><i class="fas fa-heart"></i></a> <!-- Favorite icon -->
+            <a href="#" class="nav-link text-dark" title="Search">
+                <i class="fas fa-search"></i>
+            </a>
+
+            <a href="#" class="nav-link text-dark" title="Favorites">
+                <i class="fas fa-heart"></i>
+            </a>
 
             @if (Session["AdminUsername"] != null)
             {
-                <a href="@Url.Action("Logout", "Admin")" class="btn btn-outline-danger ms-3">Logout</a>
+                <a href="@Url.Action("Logout", "Admin")" class="btn btn-sm btn-outline-danger ms-2">
+                    <i class="fas fa-sign-out-alt me-1"></i> Logout
+                </a>
             }
-
         </div>
+
     </div>
 </nav>
 
