@@ -14,7 +14,7 @@ namespace businessLogic.BLStruct
     public class ProductRepositoryBL : IProductRepository
     {
         private readonly DataContext _context;
-
+        
         public ProductRepositoryBL()
         {
             _context = new DataContext();
@@ -73,7 +73,7 @@ namespace businessLogic.BLStruct
                 existing.ImageUrl = null;
             }
 
-            // Upload new image
+            // Upload new image in project
             if (image != null && image.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);
