@@ -42,5 +42,11 @@ namespace eUseControlBussinessLogic
         {
             return new AdminBL();
         }
+
+        public IListings GetListingsBL()
+        {
+            return new ListingsBL();
+
+        }
     }
 }
