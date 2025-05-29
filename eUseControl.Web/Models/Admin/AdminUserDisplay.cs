@@ -5,7 +5,7 @@ using System.Web;
 
 namespace eUseControl.Web.Models.Admin
 {
-	public class AdminUserDisplay
+	public class AdminUserDisplayModel
 	{
         public int Id { get; set; }
         public string Name { get; set; }

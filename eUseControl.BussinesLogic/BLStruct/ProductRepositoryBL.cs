@@ -25,38 +25,76 @@ namespace businessLogic.BLStruct
             return await _context.Products.FindAsync(id);
         }
 
-        public List<Product> GetAllProducts()
+        public List<ProductDataEntities> GetAllProducts()
         {
             using (var db = new DataContext())
             {
-                return db.Products.ToList();
+                // Check if there are any products
+                if (db.Products.Any())
+                {
+                    
+                    return db.Products.Select(p => new ProductDataEntities
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Description = p.Description,
+                        Price = p.Price,
+                        ImageUrl = p.ImageUrl
+
+                    }).ToList();
+                }
+                else
+                {
+                    // Return an empty list if there are no products
+                    return new List<ProductDataEntities>();
+                }
             }
         }
 
-        public Product GetProductById(int id)
+
+        public ProductDataEntities GetProductById(int id)
         {
             using (var db = new DataContext())
             {
-                return db.Products.Find(id);
+                var product = db.Products.Find(id);
+                if (product == null) return null;
+
+                // Manual mapping to business entity
+                return new ProductDataEntities
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    ImageUrl = product.ImageUrl
+                };
             }
         }
 
-        public void AddProduct(Product product, HttpPostedFileBase image)
+        public void AddProduct(ProductDataEntities product, HttpPostedFileBase image)
         {
+            var dbProduct = new Product
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price
+            };
+
             if (image != null && image.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);
                 var uniqueFileName = Guid.NewGuid() + "_" + fileName;
                 var path = HttpContext.Current.Server.MapPath("~/Content/images/" + uniqueFileName);
                 image.SaveAs(path);
-                product.ImageUrl = "/Content/images/" + uniqueFileName;
+                dbProduct.ImageUrl = "/Content/images/" + uniqueFileName;
             }
 
-            _context.Products.Add(product);
+            _context.Products.Add(dbProduct);
             _context.SaveChanges();
         }
 
-        public void UpdateProduct(Product product, HttpPostedFileBase image, bool? removeImage)
+
+        public void UpdateProduct(ProductDataEntities product, HttpPostedFileBase image, bool? removeImage)
         {
             var existing = _context.Products.Find(product.Id);
             if (existing == null) return;
@@ -65,7 +103,6 @@ namespace businessLogic.BLStruct
             existing.Description = product.Description;
             existing.Price = product.Price;
 
-            // Remove existing image
             if (removeImage == true && !string.IsNullOrEmpty(existing.ImageUrl))
             {
                 var oldPath = HttpContext.Current.Server.MapPath(existing.ImageUrl);
@@ -73,7 +110,6 @@ namespace businessLogic.BLStruct
                 existing.ImageUrl = null;
             }
 
-            // Upload new image
             if (image != null && image.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(image.FileName);
@@ -81,7 +117,6 @@ namespace businessLogic.BLStruct
                 var path = HttpContext.Current.Server.MapPath("~/Content/images/" + uniqueFileName);
                 image.SaveAs(path);
 
-                // Delete old image if needed
                 if (!string.IsNullOrEmpty(existing.ImageUrl))
                 {
                     var oldImagePath = HttpContext.Current.Server.MapPath(existing.ImageUrl);
@@ -93,6 +128,7 @@ namespace businessLogic.BLStruct
 
             _context.SaveChanges();
         }
+
 
         public void DeleteImage(int id)
         {
@@ -128,14 +164,27 @@ namespace businessLogic.BLStruct
             _context.SaveChanges();
         }
 
-        public IEnumerable<Product> Search(string query)
+        public IEnumerable<ProductDataEntities> Search(string query)
         {
-            if (string.IsNullOrEmpty(query))
-                return new List<Product>();
+            using (var db = new DataContext())
+            {
+                if (string.IsNullOrEmpty(query))
+                    return new List<ProductDataEntities>();
 
-            return _context.Products
-                .Where(p => p.Name.Contains(query) || p.Description.Contains(query))
-                .ToList();
+                return db.Products
+                    .Where(p => p.Name.Contains(query) || p.Description.Contains(query))
+                    .Select(p => new ProductDataEntities
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Description = p.Description,
+                        Price = p.Price,
+                        ImageUrl = p.ImageUrl
+                    })
+                    .ToList();
+            }
         }
+
+
     }
 }

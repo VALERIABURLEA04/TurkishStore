@@ -11,13 +11,13 @@ namespace businessLogic.Interfaces.Repositories
     public interface IProductRepository
     {
         Task<Product> GetByIdAsync(int id);
-        List<Product> GetAllProducts();
-        Product GetProductById(int id);
-        void AddProduct(Product product, HttpPostedFileBase image);
-        void UpdateProduct(Product product, HttpPostedFileBase image, bool? removeImage);
+        List<ProductDataEntities> GetAllProducts();
+        ProductDataEntities GetProductById(int id);
+        void AddProduct(ProductDataEntities product, HttpPostedFileBase image);
+        void UpdateProduct(ProductDataEntities product, HttpPostedFileBase image, bool? removeImage);
         void DeleteProduct(int id);
         void DeleteImage(int id);
 
-        IEnumerable<Product> Search(string query);
+        IEnumerable<ProductDataEntities> Search(string query);
     }
 }

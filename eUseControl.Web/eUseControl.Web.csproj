@@ -215,7 +215,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\BussinessLogic.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListingsController.cs" />
@@ -227,9 +226,11 @@
     <Compile Include="Logic\Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Logic\Attributes\isAdminAttribute.cs" />
     <Compile Include="Logic\HttpContextExtensions.cs" />
+    <Compile Include="Logic\ProductMapper.cs" />
     <Compile Include="Models\Admin\AdminUserDisplay.cs" />
     <Compile Include="Models\Auth\UserDataLogin.cs" />
     <Compile Include="Models\Auth\UserDataRegister.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

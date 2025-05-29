@@ -7,6 +7,7 @@ using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
 using businessLogic.Interfaces.Repositories;
+using eUseControl.Domain.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -54,9 +55,11 @@ namespace ProjectOnlineStore.Controllers
         [HttpGet]
         public ActionResult Search(string query)
         {
-            var products = _productRepositoryBL.Search(query);
-            return View(products);
+            var businessProducts = _productRepositoryBL.Search(query); // returns IEnumerable<ProductDataEntities>
+            var viewModels = ProductMapper.ToViewModelList(businessProducts);
+            return View(viewModels);
         }
+
 
         // POST: Home/ContactUs
         [HttpPost]
