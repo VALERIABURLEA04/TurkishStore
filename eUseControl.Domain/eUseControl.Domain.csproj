@@ -55,6 +55,7 @@
     <Compile Include="Entities\Admin\AdminData.cs" />
     <Compile Include="Entities\Admin\AdminUserDisplay.cs" />
     <Compile Include="Entities\Cart\CartItems.cs" />
+    <Compile Include="Entities\Contact\ContactMessageEntity.cs" />
     <Compile Include="Entities\Listings\Cart.cs" />
     <Compile Include="Entities\Listings\CreateListingViewModel.cs" />
     <Compile Include="Entities\Listings\Item.cs" />

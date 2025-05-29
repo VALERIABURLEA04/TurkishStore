@@ -118,7 +118,7 @@ namespace lab_1_templates_sandu.Controllers
         public ActionResult Delete(int id)
         {
             _productRepository.DeleteProduct(id);
-            return RedirectToAction("Shop");
+            return RedirectToAction("ProductList");
         }
     }
 

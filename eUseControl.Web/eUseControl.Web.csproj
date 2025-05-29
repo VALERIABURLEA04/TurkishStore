@@ -226,11 +226,13 @@
     <Compile Include="Logic\Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Logic\Attributes\isAdminAttribute.cs" />
     <Compile Include="Logic\HttpContextExtensions.cs" />
+    <Compile Include="Logic\Mappers\ContactMapper.cs" />
     <Compile Include="Logic\Mappers\ProductMapper.cs" />
     <Compile Include="Logic\Mappers\UserDataMapper.cs" />
     <Compile Include="Models\Admin\AdminUserDisplay.cs" />
     <Compile Include="Models\Auth\UserDataLogin.cs" />
     <Compile Include="Models\Auth\UserDataRegister.cs" />
+    <Compile Include="Models\Contact\ContactMessageModel.cs" />
     <Compile Include="Models\Product\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

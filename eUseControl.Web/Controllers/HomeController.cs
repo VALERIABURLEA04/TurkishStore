@@ -8,6 +8,7 @@ using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
 using businessLogic.Interfaces.Repositories;
 using eUseControl.Domain.Mappers;
+using eUseControl.Web.Logic.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -60,7 +61,6 @@ namespace ProjectOnlineStore.Controllers
             return View(viewModels);
         }
 
-
         // POST: Home/ContactUs
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,7 +68,8 @@ namespace ProjectOnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _contactBL.AddAsync(contactData);
+                var entity = ContactMapper.ToEntity(contactData);  // Map UContactData -> ContactMessageEntity
+                await _contactBL.AddAsync(entity);
                 TempData["SuccessMessage"] = "Your message has been sent successfully!";
                 return RedirectToAction("ContactUs");
             }

@@ -6,6 +6,7 @@ using businessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using eUseControl.Domain.Entities.Admin;
 using eUseControl.Web.Logic.Attributes;
+using eUseControl.Web.Logic.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -69,8 +70,10 @@ namespace ProjectOnlineStore.Controllers
             if (Session["AdminUsername"] == null)
                 return RedirectToAction("AdminLogin");
 
-            var messages = await _contactBL.GetAllAsync();
-            return View(messages);
+            var entities = await _contactBL.GetAllAsync();
+            var models = entities.Select(ContactMapper.ToModel).ToList();
+
+            return View(models);
         }
 
         // GET: Admin/Message/5
@@ -79,11 +82,12 @@ namespace ProjectOnlineStore.Controllers
             if (Session["AdminUsername"] == null)
                 return RedirectToAction("AdminLogin");
 
-            var message = await _contactBL.GetByIdAsync(id);
-            if (message == null)
+            var entity = await _contactBL.GetByIdAsync(id);
+            if (entity == null)
                 return HttpNotFound();
 
-            return View(message);
+            var model = ContactMapper.ToModel(entity);
+            return View(model);
         }
 
         // POST: Admin/DeleteContact/5
@@ -100,6 +104,7 @@ namespace ProjectOnlineStore.Controllers
 
             return RedirectToAction("ContactMessages");
         }
+
 
         // GET: Admin/Logout
         public ActionResult Logout()
