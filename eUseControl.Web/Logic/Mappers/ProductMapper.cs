@@ -8,7 +8,7 @@ namespace eUseControl.Domain.Mappers
     public static class ProductMapper
     {
         // DB Entity -> Business Entity
-        public static ProductEn ToBusinessEntity(Product product) => new ProductEn
+        public static ProductDataEntities ToBusinessEntity(Product product) => new ProductDataEntities
         {
             Id = product.Id,
             Name = product.Name,
@@ -18,7 +18,7 @@ namespace eUseControl.Domain.Mappers
         };
 
         // Business Entity -> DB Entity
-        public static Product ToDbEntity(ProductEn productEn) => new Product
+        public static Product ToDbEntity(ProductDataEntities productEn) => new Product
         {
             Id = productEn.Id,
             Name = productEn.Name,
@@ -28,7 +28,7 @@ namespace eUseControl.Domain.Mappers
         };
 
         // Business Entity -> View Model
-        public static ProductModel ToViewModel(ProductEn productEn) => new ProductModel
+        public static ProductModel ToViewModel(ProductDataEntities productEn) => new ProductModel
         {
             Id = productEn.Id,
             Name = productEn.Name,
@@ -38,7 +38,7 @@ namespace eUseControl.Domain.Mappers
         };
 
         // View Model -> Business Entity
-        public static ProductEn ToBusinessEntity(ProductModel productModel) => new ProductEn
+        public static ProductDataEntities ToBusinessEntity(ProductModel productModel) => new ProductDataEntities
         {
             Id = productModel.Id,
             Name = productModel.Name,
@@ -48,10 +48,10 @@ namespace eUseControl.Domain.Mappers
         };
 
         // List helpers for convenience
-        public static List<ProductEn> ToBusinessEntityList(IEnumerable<Product> products) =>
+        public static List<ProductDataEntities> ToBusinessEntityList(IEnumerable<Product> products) =>
             products.Select(ToBusinessEntity).ToList();
 
-        public static List<ProductModel> ToViewModelList(IEnumerable<ProductEn> productEns) =>
+        public static List<ProductModel> ToViewModelList(IEnumerable<ProductDataEntities> productEns) =>
             productEns.Select(ToViewModel).ToList();
     }
 }

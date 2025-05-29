@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
 using businessLogic.Interfaces;
 using eUseControlBussinessLogic;
-using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.Admin;
+using eUseControl.Web.Models.Admin;
+using eUseControl.Web.Logic.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -20,8 +22,9 @@ namespace ProjectOnlineStore.Controllers
             if (Session["AdminUsername"] == null)
                 return RedirectToAction("AdminLogin", "Admin");
 
-            var users = _userBL.GetAllUsers();
-            return View(users);
+            var users = _userBL.GetAllUsers(); // List<AdminUserDisplay>
+            var viewModels = UserDataMapper.ToViewModelList(users); // List<AdminUserDisplayModel>
+            return View(viewModels); // Pass mapped model to View
         }
 
         [HttpPost]
