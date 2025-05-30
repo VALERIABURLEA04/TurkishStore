@@ -11,11 +11,10 @@ using businessLogic.Interfaces;
 using eUseControl.Domain.Entities.Listings;
 using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.User.UserActionResponse;
-using eUseControlBussinessLogic;
 using eUseControlBussinessLogic.Interfaces;
 
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ListingsController : Controller
     {
@@ -23,11 +22,10 @@ namespace lab_1_templates_sandu.Controllers
         private readonly IListings _listingsBL;
 
         // Constructor injection of business logic layers
-        public ListingsController()
+        public ListingsController(IUser userBL, IListings listingsBL)
         {
-            var bl = new BusinesLogic();
-            _userBL = bl.GetUserBL();
-            _listingsBL = bl.GetListingsBL();
+            _userBL = userBL;
+            _listingsBL = listingsBL;
         }
 
         // GET: Listings

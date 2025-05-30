@@ -6,9 +6,7 @@ using eUseControl.Domain.Entities.User;
 using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
 using businessLogic.BLStruct;
-using businessLogic.Interfaces.Repositories;
-using eUseControl.Domain.Mappers;
-using eUseControl.Web.Logic.Mappers;
+using eUseControl.Web.Logic.Attributes;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -16,7 +14,6 @@ namespace ProjectOnlineStore.Controllers
     {
         private readonly IContact _contactBL;
         private readonly ISession _sessionBL;
-        private readonly IProductRepository _productRepositoryBL;
 
         // Parameterless constructor manually instantiating dependencies
         public HomeController()
@@ -24,7 +21,6 @@ namespace ProjectOnlineStore.Controllers
             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
             _sessionBL = bl.GetSessionBL();
-            _productRepositoryBL = bl.GetProductRepository();
         }
 
         // GET: Home
@@ -53,12 +49,19 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Search(string query)
+        public ActionResult RegisterPage()
         {
-            var businessProducts = _productRepositoryBL.Search(query); // returns IEnumerable<ProductDataEntities>
-            var viewModels = ProductMapper.ToViewModelList(businessProducts);
-            return View(viewModels);
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        public ActionResult RefundPage()
+        {
+            return View();
         }
 
         // POST: Home/ContactUs
@@ -68,13 +71,29 @@ namespace ProjectOnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entity = ContactMapper.ToEntity(contactData);  // Map UContactData -> ContactMessageEntity
-                await _contactBL.AddAsync(entity);
+                await _contactBL.AddAsync(contactData);
                 TempData["SuccessMessage"] = "Your message has been sent successfully!";
                 return RedirectToAction("ContactUs");
             }
             return View(contactData);
         }
 
+        /*
+        [HttpPost]
+        [isAdmin]
+        public async Task<ActionResult> DeleteContact(int id)
+        {
+            var success = await _contactBL.DeleteAsync(id);
+            if (!success)
+                TempData["ErrorMessage"] = "Could not delete contact data.";
+
+            return RedirectToAction("Dashboard", "Admin");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
+        */
     }
 }

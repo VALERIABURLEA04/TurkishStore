@@ -1,7 +1,5 @@
-﻿using businessLogic.BLStruct;
+﻿/* using businessLogic.BLStruct;
 using businessLogic.Interfaces;
-using businessLogic.Interfaces.Repositories;
-using BusinessLogic.DBModel;
 using eUseControlBussinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eUseControlBussinessLogic
 {
-    public class BusinesLogic
+    public class BusinessLogic
     {
         public ISession GetSessionBL()
         {
@@ -22,15 +20,6 @@ namespace eUseControlBussinessLogic
         {
             return new RegisterBL();
         }
-
-        public IContact GetContactBL()
-        {
-            return new ContactBL();
-        }
-
-        public IProductRepository GetProductRepository()
-        {
-            return new ProductRepositoryBL();
-        }
     }
 }
+*/

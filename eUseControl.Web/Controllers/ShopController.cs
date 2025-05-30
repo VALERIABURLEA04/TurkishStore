@@ -6,11 +6,9 @@ using businessLogic.BLStruct;
 using businessLogic.Interfaces.Repositories;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Product;
-using eUseControl.Domain.Mappers;
-using eUseControl.Web.Models.Product;
 using eUseControlBussinessLogic;
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ShopController : Controller
     {
@@ -25,35 +23,30 @@ namespace lab_1_templates_sandu.Controllers
         // GET: Shop
         public ActionResult Shop()
         {
-            var businessProducts = _productRepository.GetAllProducts(); // returns List<ProductDataEntities>
-            var viewModels = ProductMapper.ToViewModelList(businessProducts); // map to view models
+            var products = _productRepository.GetAllProducts();
             ViewBag.IsAdmin = User.IsInRole("Admin");
-            return View(viewModels);
+            return View(products);
         }
 
         public ActionResult ProductList()
         {
-            var businessProducts = _productRepository.GetAllProducts();
-            var viewModels = ProductMapper.ToViewModelList(businessProducts);
+            var products = _productRepository.GetAllProducts();
             ViewBag.IsAdmin = User.IsInRole("Admin");
-            return View(viewModels);
+            return View(products);
         }
 
-   
         // GET: Shop/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return RedirectToAction("Shop");
 
-            var productEntity = _productRepository.GetProductById(id.Value);  // business entity
-            if (productEntity == null)
+            var product = _productRepository.GetProductById(id.Value);
+            if (product == null)
                 return RedirectToAction("Shop");
 
-            var productViewModel = ProductMapper.ToViewModel(productEntity);  // map to view model
-            return View(productViewModel);
+            return View(product);
         }
-
 
         [HttpGet]
         public ActionResult Add()
@@ -62,7 +55,7 @@ namespace lab_1_templates_sandu.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(ProductDataEntities product, HttpPostedFileBase ImageUpload)
+        public ActionResult Add(Product product, HttpPostedFileBase ImageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -73,39 +66,23 @@ namespace lab_1_templates_sandu.Controllers
             return View(product);
         }
 
-
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-                return RedirectToAction("Shop");
+            if (id == null) return RedirectToAction("Shop");
 
             var product = _productRepository.GetProductById(id.Value);
-            if (product == null)
-                return RedirectToAction("Shop");
+            if (product == null) return RedirectToAction("Shop");
 
-            var model = ProductMapper.ToViewModel(product);
-            return View(model);
+            return View(product);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductModel productModel, HttpPostedFileBase ImageUpload, bool? RemoveImage)
+        public ActionResult Edit(Product product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
         {
-            if (!ModelState.IsValid)
-            {
-                // If model validation fails, return the view with the current model so user can fix errors
-                return View(productModel);
-            }
-
-            var productEntity = ProductMapper.ToBusinessEntity(productModel);
-            _productRepository.UpdateProduct(productEntity, ImageUpload, RemoveImage);
-
-            // Redirect back to Edit page with updated data
-            return RedirectToAction("Edit", new { id = productModel.Id });
+            _productRepository.UpdateProduct(product, ImageUpload, RemoveImage);
+            return RedirectToAction("Edit", new { id = product.Id });
         }
-
-
 
         [HttpPost]
         public ActionResult DeleteImage(int id)
@@ -118,7 +95,7 @@ namespace lab_1_templates_sandu.Controllers
         public ActionResult Delete(int id)
         {
             _productRepository.DeleteProduct(id);
-            return RedirectToAction("ProductList");
+            return RedirectToAction("Shop");
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Web.Mvc;
 using eUseControl.Domain.Entities.Cart;
 using eUseControl.Domain.Entities.User.UserActionResponse;
@@ -6,7 +7,7 @@ using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
 using eUseControl.Domain.Entities.Listings;
 
-namespace ProjectOnlineStore.Controllers
+namespace WatchZone.Web.Controllers
 {
     [CustomAuthorize] // Ensure only logged-in users with valid cookie access cart functions
     public class CartController : Controller
@@ -67,26 +68,26 @@ namespace ProjectOnlineStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveFromCart(int clothId)
+        public ActionResult RemoveFromCart(int watchId)
         {
             var cart = GetCart();
             if (cart == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
-            cart.RemoveItem(clothId);
+            cart.RemoveItem(watchId);
             return RedirectToAction("ShoppingCart");
         }
 
         [HttpPost]
-        public ActionResult UpdateQuantity(int clothId, int quantity)
+        public ActionResult UpdateQuantity(int watchId, int quantity)
         {
             var cart = GetCart();
             if (cart == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
-            cart.UpdateQuantity(clothId, quantity);
+            cart.UpdateQuantity(watchId, quantity);
             return RedirectToAction("ShoppingCart");
         }
 
@@ -100,61 +101,8 @@ namespace ProjectOnlineStore.Controllers
             cart.Clear();
             return RedirectToAction("ShoppingCart");
         }
-
-        // GET: Checkout
-        public ActionResult CheckoutPage()
-        {
-            return View();
-        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

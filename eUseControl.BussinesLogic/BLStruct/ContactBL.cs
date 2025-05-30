@@ -6,64 +6,35 @@ using System.Text;
 using System.Threading.Tasks;
 using businessLogic.Interfaces;
 using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Contact.eUseControl.Domain.Entities.Contact;
 using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.BLStruct
 {
     public class ContactBL : IContact
     {
-        public async Task<IEnumerable<ContactMessageEntity>> GetAllAsync()
+        public async Task<IEnumerable<UContactData>> GetAllAsync()
         {
             using (var context = new DataContext())
             {
-                return await context.ContactData
-                    .Select(c => new ContactMessageEntity
-                    {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Email = c.Email,
-                        Subject = c.Subject,
-                        Message = c.Message
-                    })
-                    .ToListAsync();
+                return await context.ContactData.ToListAsync();
             }
         }
 
-        public async Task<ContactMessageEntity> GetByIdAsync(int id)
+        public async Task<UContactData> GetByIdAsync(int id)
         {
             using (var context = new DataContext())
             {
-                var c = await context.ContactData.FindAsync(id);
-                if (c == null) return null;
-
-                return new ContactMessageEntity
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Email = c.Email,
-                    Subject = c.Subject,
-                    Message = c.Message
-                };
+                return await context.ContactData.FindAsync(id);
             }
         }
 
-        public async Task<bool> AddAsync(ContactMessageEntity entity)
+        public async Task<UContactData> AddAsync(UContactData contactData)
         {
             using (var context = new DataContext())
             {
-                var contactData = new UContactData
-                {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Email = entity.Email,
-                    Subject = entity.Subject,
-                    Message = entity.Message
-                };
-
                 context.ContactData.Add(contactData);
                 await context.SaveChangesAsync();
-                return true;
+                return contactData;
             }
         }
 
@@ -100,3 +71,4 @@ namespace businessLogic.BLStruct
         }
     }
 }
+

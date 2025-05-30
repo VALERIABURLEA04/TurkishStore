@@ -22,6 +22,7 @@
                     })
                 .PrimaryKey(t => t.Id);
             
+            DropTable("dbo.TBLUserInfo");
         }
         
         public override void Down()

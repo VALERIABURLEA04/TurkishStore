@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using eUseControl.Domain.Entities.Contact;
-using eUseControl.Domain.Entities.Contact.eUseControl.Domain.Entities.Contact;
+using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.Interfaces
 {
     public interface IContact
     {
-        Task<IEnumerable<ContactMessageEntity>> GetAllAsync();
-        Task<ContactMessageEntity> GetByIdAsync(int id);
-        Task<bool> AddAsync(ContactMessageEntity contactData);
-
-        // Task<ContactMessageEntity> UpdateAsync(int id, ContactMessageEntity contactData);
+        Task<IEnumerable<UContactData>> GetAllAsync();
+        Task<UContactData> GetByIdAsync(int id);
+        Task<UContactData> AddAsync(UContactData contactData);
+        /* Task<UContactData> UpdateAsync(int id, UContactData contactData); */
         Task<bool> DeleteAsync(int id);
     }
 }

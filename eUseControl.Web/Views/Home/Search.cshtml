@@ -1,139 +1,40 @@
-﻿@model IEnumerable<eUseControl.Web.Models.Product.ProductModel>
-@using System.Web.Optimization
-@using eUseControl.Domain.Entities.Product
+﻿﻿@using System.Web.Optimization
 
 @{
-    ViewBag.Title = "Search";
-    Layout = null;
+     ViewBag.Title = "Search";
+     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title - SACCHARINE</title>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>@ViewBag.Title - SACCHARINE</title>
 
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    @Styles.Render("~/bundles/css")
-
-    <style>
-        /* Center the search box horizontally */
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto 30px auto;
-            display: flex;
-            gap: 10px;
-        }
-
-            /* Input styling */
-            .search-box input[type="text"] {
-                flex: 1;
-                padding: 12px 20px;
-                font-size: 1.1rem;
-                border-radius: 30px;
-                border: 1px solid #ccc;
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                outline: none;
-            }
-
-                /* Focus style for input */
-                .search-box input[type="text"]:focus {
-                    border-color: #007bff;
-                    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-                }
-
-            /* Button styling */
-            .search-box button {
-                background-color: #007bff;
-                border: none;
-                color: white;
-                padding: 12px 25px;
-                font-size: 1.1rem;
-                border-radius: 30px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-                /* Button hover */
-                .search-box button:hover {
-                    background-color: #0056b3;
-                }
-
-        /* Hover effect for search results cards */
-        .search-result-card {
-            border: none;
-            margin-bottom: 40px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            border-radius: 10px;
-            cursor: pointer;
-            color: inherit;
-            text-decoration: none;
-            display: block;
-        }
-
-            .search-result-card:hover {
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-                transform: scale(1.02);
-                text-decoration: none;
-                color: inherit;
-            }
-
-            /* Ensure images have rounded top corners like shop */
-            .search-result-card img {
-                border-radius: 10px 10px 0 0;
-                height: 200px;
-                width: 100%;
-                object-fit: cover;
-            }
-    </style>
+     @Styles.Render("~/bundles/css")
 </head>
 
 <body>
-    @Html.Partial("_Header")
+     @Html.Partial("_Header");
 
-    <div class="container mt-5">
-        <h2 class="text-center mb-4 custom-header">Search Products</h2>
 
-        <form class="search-box mb-4" method="get" action="@Url.Action("Search", "Home")">
-            <input type="text" name="query" placeholder="Search..." value="@Request.QueryString["query"]" />
-            <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-search"></i> Search</button>
-        </form>
 
-        @if (Model != null && Model.Any())
-        {
-            <div class="row">
-                @foreach (var product in Model)
-                {
-                    <div class="col-md-4">
-                        <a href="@Url.Action("Details", "Shop", new { id = product.Id })" class="search-result-card card shadow-sm">
-                            @if (!string.IsNullOrEmpty(product.ImageUrl))
-                            {
-                                <img src="@product.ImageUrl" alt="@product.Name" />
-                            }
-                            else
-                            {
-                                <img src="https://via.placeholder.com/150" alt="Placeholder Image" />
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">@product.Name</h5>
-                                <p class="card-text"><strong>Price:</strong> @product.Price.ToString("C")</p>
-                            </div>
-                        </a>
-                    </div>
-                }
-            </div>
-        }
-        else if (Request.QueryString["query"] != null)
-        {
-            <p class="no-results">No results found for "@Request.QueryString["query"]"</p>
-        }
-    </div>
+
+     <!-- HTML -->
+     <div class="pagina-search">
+          <div class="search-container">
+               <div class="search-title">Search</div>
+
+               <form class="search-box" method="get" action="@Url.Action("NewIn", "Home")">
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+               </form>
+          </div>
+     </div>
 </body>
 </html>
