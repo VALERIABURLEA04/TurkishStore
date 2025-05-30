@@ -21,11 +21,12 @@ namespace ProjectOnlineStore.Controllers
         private readonly IProductRepository _productBL;
 
           public AdminController()
-        {
-            var bl = new BusinesLogic();
+          {
+             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
             _adminBL = bl.GetAdminBL();
-        }
+            _productBL = bl.GetProductRepository();
+          }
 
         // GET: Admin/Login
         public ActionResult AdminLogin()
