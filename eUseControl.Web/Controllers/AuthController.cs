@@ -1,16 +1,13 @@
-﻿using System;
-using System.Web.Mvc;
-using eUseControl.Web.Models;
+﻿using businessLogic.Interfaces;
 using eUseControl.Domain.Entities.User;
-using BusinessLogic.DBModel;
-using eUseControlBussinessLogic.Core;
-using businessLogic.Interfaces;
 using eUseControl.Domain.Entities.User.UserActionResponse;
 using eUseControl.Domain.Enums;
-using eUseControlBussinessLogic.Interfaces;
-using eUseControlBussinessLogic;
-using System.Web;
 using eUseControl.Web.Models.Auth;
+using eUseControlBussinessLogic;
+using eUseControlBussinessLogic.Interfaces;
+using System;
+using System.Web;
+using System.Web.Mvc;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -62,7 +59,6 @@ namespace ProjectOnlineStore.Controllers
                     return View(registerModel);
                 }
                 return RedirectToAction("Login");
-
             }
 
             return View(registerModel);
@@ -102,10 +98,10 @@ namespace ProjectOnlineStore.Controllers
 
                         Session["LoginStatus"] = "login";
                         Session["UserFirstName"] = userResp.Name ?? "User";
+                        Session["Role"] = userResp.Role;
 
                         return RedirectToAction("Index", "Home");
                     }
-
                     else //false
                     {
                         switch (userResp.Result)
@@ -113,9 +109,11 @@ namespace ProjectOnlineStore.Controllers
                             case LogInResult.EmailNotFound:
                                 TempData["ErrorMessage"] = "This user does not exist.";
                                 break;
+
                             case LogInResult.WrongPassword:
                                 TempData["ErrorMessage"] = "Incorrect password.";
                                 break;
+
                             default:
                                 TempData["ErrorMessage"] = "Try again.";
                                 break;
@@ -123,7 +121,6 @@ namespace ProjectOnlineStore.Controllers
                         return View(loginModel);
                     }
                 }
-
                 catch (Exception ex)
                 {
                     // Eroare la procesarea cererii
@@ -132,7 +129,6 @@ namespace ProjectOnlineStore.Controllers
                     System.Diagnostics.Debug.WriteLine($"Error in SignUp: {ex.Message}");
                 }
             }
-
             else
             {
                 // Eroare pentru validarea mesajului

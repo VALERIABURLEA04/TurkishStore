@@ -1,32 +1,25 @@
-﻿using System;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using businessLogic.DBModel;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Admin;
-using eUseControl.Web.Models.Admin;
+﻿using businessLogic.Interfaces;
+using businessLogic.Interfaces.Repositories;
 using eUseControl.Domain.Entities.Product;
-using businessLogic.Interfaces;
-using eUseControlBussinessLogic;
-using System.Threading.Tasks;
 using eUseControl.Web.Logic.Attributes;
+using eUseControlBussinessLogic;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace eUseControl.Web.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IContact _contactBL;
+        private readonly IProductRepository _productBL;
 
         public AdminController()
         {
             var bl = new BusinesLogic();
+
             _contactBL = bl.GetContactBL();
+            _productBL = bl.GetProductRepository();
         }
 
         // GET: Admin/Login
@@ -35,12 +28,18 @@ namespace eUseControl.Web.Controllers
             return View();
         }
 
+        public ActionResult ProductList()
+        {
+            List<Product> products = _productBL.GetAllProducts();
+            return View(products);
+        }
+
         // GET: Admin/Dashboard
         [isAdmin]
         public ActionResult Dashboard()
         {
             if (Session["AdminUsername"] == null)
-                return RedirectToAction("AdminLogin"); 
+                return RedirectToAction("AdminLogin");
 
             return View();
         }
@@ -98,7 +97,6 @@ namespace eUseControl.Web.Controllers
             }
         }
 
-
         // Optional: Logout method
         public ActionResult Logout()
         {
@@ -115,59 +113,14 @@ namespace eUseControl.Web.Controllers
             return View();
         }
 
-    }
-
-}
-
-        /*
-        private readonly DataContext _context;
-
-        public AdminController()
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            _context = new DataContext();
-        }
-
-        public ActionResult UserList()
-        {
-            if (Session["AdminUsername"] == null)
-                return RedirectToAction("AdminLogin");
-
-            using (var userDb = new UserContext())
+            if (Session["Role"] == null || Session["Role"]?.ToString() != "Admin")
             {
-                var users = userDb.Users.Select(u => new AdminUserDisplay
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Email = u.Email,
-                    LastLogin = u.LastLogin,
-                    UserIp = u.UserIp,
-                    Role = u.Level.ToString()
-                }).ToList();
-
-                return View(users);
+                filterContext.Result = new RedirectResult("~/Auth/Login");
             }
+
+            base.OnActionExecuting(filterContext);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteUser(int id)
-        {
-            using (var userDb = new UserContext())
-            {
-                var user = userDb.Users.Find(id);
-                if (user == null)
-                {
-                    return HttpNotFound();
-                }
-
-                userDb.Users.Remove(user);
-                userDb.SaveChanges();
-
-                TempData["SuccessMessage"] = "User deleted successfully.";
-                return RedirectToAction("UserList");
-            }
-        }
-
     }
 }
-        */
