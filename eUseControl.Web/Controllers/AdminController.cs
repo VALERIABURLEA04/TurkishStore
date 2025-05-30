@@ -7,6 +7,10 @@ using eUseControlBussinessLogic;
 using eUseControl.Domain.Entities.Admin;
 using eUseControl.Web.Logic.Attributes;
 using eUseControl.Web.Logic.Mappers;
+using eUseControl.Domain.Entities.Product;
+using System.Collections.Generic;
+using businessLogic.Interfaces.Repositories;
+using eUseControl.Domain.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -14,8 +18,9 @@ namespace ProjectOnlineStore.Controllers
     {
         private readonly IContact _contactBL;
         private readonly IAdmin _adminBL;
+        private readonly IProductRepository _productBL;
 
-        public AdminController()
+          public AdminController()
         {
             var bl = new BusinesLogic();
             _contactBL = bl.GetContactBL();
@@ -113,8 +118,15 @@ namespace ProjectOnlineStore.Controllers
             return RedirectToAction("AdminLogin");
         }
 
-        // Optional: Example of a restricted admin page
-        public ActionResult AdminOnlyPage()
+          public ActionResult ProductList()
+          {
+               List<ProductDataEntities> products = _productBL.GetAllProducts();
+               var viewProducts = ProductMapper.ToViewModelList(products);
+               return View(viewProducts);
+          }
+
+          // Optional: Example of a restricted admin page
+          public ActionResult AdminOnlyPage()
         {
             if (Session["AdminUsername"] == null)
                 return RedirectToAction("AdminLogin");
