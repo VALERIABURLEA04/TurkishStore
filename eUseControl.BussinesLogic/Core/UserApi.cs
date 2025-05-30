@@ -84,7 +84,8 @@ namespace eUseControlBussinessLogic.Core
                     Status = true,
                     Result = LogInResult.Success,
                     UserId = user.Id,
-                    Role = user.Level
+                    Role = user.Level,
+                    Name = user.Name
                 };
             }
             catch (Exception ex)
