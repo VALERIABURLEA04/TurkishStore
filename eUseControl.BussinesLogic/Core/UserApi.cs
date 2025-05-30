@@ -1,14 +1,18 @@
 ﻿using businessLogic.DBModel;
+using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.Session;
 using eUseControl.Domain.Entities.User;
 using eUseControl.Domain.Entities.User.UserActionResponse;
 using eUseControl.Domain.Enums;
-using eUseControl.Helpers.AccessFlow;
-using eUseControl.Helpers.Session;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using eUseControl.Helpers.AccessFlow;
+using eUseControl.Helpers.Session;
 
 namespace eUseControlBussinessLogic.Core
 {
@@ -70,6 +74,7 @@ namespace eUseControlBussinessLogic.Core
                     }
                 }
 
+
                 user.LastLogin = model.LoginDataTime;
                 user.UserIp = HttpContext.Current?.Request.UserHostAddress;
 
@@ -84,8 +89,6 @@ namespace eUseControlBussinessLogic.Core
                     Status = true,
                     Result = LogInResult.Success,
                     UserId = user.Id,
-                    Role = user.Level,
-                    Name = user.Name
                 };
             }
             catch (Exception ex)
@@ -105,6 +108,7 @@ namespace eUseControlBussinessLogic.Core
             {
                 Value = CookieGenerator.Create(userId + HttpContext.Current?.Request.UserHostAddress)
             };
+
 
             SessionTable sessionDb;
 
@@ -126,6 +130,7 @@ namespace eUseControlBussinessLogic.Core
                     db.SaveChanges();
                 }
             }
+
             else
             {
                 sessionDb = new SessionTable()
@@ -185,4 +190,5 @@ namespace eUseControlBussinessLogic.Core
             };
         }
     }
+
 }
