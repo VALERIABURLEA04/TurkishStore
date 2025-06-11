@@ -1,16 +1,14 @@
-﻿using System.Linq;
+﻿using businessLogic.Dtos.ProductDtos;
+using businessLogic.Interfaces.Repositories;
+using eUseControlBussinessLogic;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using businessLogic.BLStruct;
-using businessLogic.Interfaces.Repositories;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Product;
-using eUseControl.Domain.Mappers;
-using eUseControl.Web.Models.Product;
-using eUseControlBussinessLogic;
 
-namespace lab_1_templates_sandu.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class ShopController : Controller
     {
@@ -25,35 +23,35 @@ namespace lab_1_templates_sandu.Controllers
         // GET: Shop
         public ActionResult Shop()
         {
-            var businessProducts = _productRepository.GetAllProducts(); // returns List<ProductDataEntities>
-            var viewModels = ProductMapper.ToViewModelList(businessProducts); // map to view models
+            int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+            var products = _productRepository.GetAllProducts(userId);
             ViewBag.IsAdmin = User.IsInRole("Admin");
-            return View(viewModels);
+
+            return View(products);
         }
 
         public ActionResult ProductList()
         {
-            var businessProducts = _productRepository.GetAllProducts();
-            var viewModels = ProductMapper.ToViewModelList(businessProducts);
+            int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+
+            List<ProductDto> products = _productRepository.GetAllProducts(userId);
             ViewBag.IsAdmin = User.IsInRole("Admin");
-            return View(viewModels);
+
+            return View(products);
         }
 
-   
         // GET: Shop/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return RedirectToAction("Shop");
 
-            var productEntity = _productRepository.GetProductById(id.Value);  // business entity
-            if (productEntity == null)
+            var product = _productRepository.GetProductById(id.Value);
+            if (product == null)
                 return RedirectToAction("Shop");
 
-            var productViewModel = ProductMapper.ToViewModel(productEntity);  // map to view model
-            return View(productViewModel);
+            return View(product);
         }
-
 
         [HttpGet]
         public ActionResult Add()
@@ -62,7 +60,7 @@ namespace lab_1_templates_sandu.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(ProductDataEntities product, HttpPostedFileBase ImageUpload)
+        public ActionResult Add(ProductDto product, HttpPostedFileBase ImageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -73,39 +71,23 @@ namespace lab_1_templates_sandu.Controllers
             return View(product);
         }
 
-
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-                return RedirectToAction("Shop");
+            if (id == null) return RedirectToAction("Shop");
 
             var product = _productRepository.GetProductById(id.Value);
-            if (product == null)
-                return RedirectToAction("Shop");
+            if (product == null) return RedirectToAction("Shop");
 
-            var model = ProductMapper.ToViewModel(product);
-            return View(model);
+            return View(product);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductModel productModel, HttpPostedFileBase ImageUpload, bool? RemoveImage)
+        public ActionResult Edit(ProductDto product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
         {
-            if (!ModelState.IsValid)
-            {
-                // If model validation fails, return the view with the current model so user can fix errors
-                return View(productModel);
-            }
-
-            var productEntity = ProductMapper.ToBusinessEntity(productModel);
-            _productRepository.UpdateProduct(productEntity, ImageUpload, RemoveImage);
-
-            // Redirect back to Edit page with updated data
-            return RedirectToAction("Edit", new { id = productModel.Id });
+            _productRepository.UpdateProduct(product, ImageUpload, RemoveImage);
+            return RedirectToAction("Edit", new { id = product.Id });
         }
-
-
 
         [HttpPost]
         public ActionResult DeleteImage(int id)
@@ -118,8 +100,89 @@ namespace lab_1_templates_sandu.Controllers
         public ActionResult Delete(int id)
         {
             _productRepository.DeleteProduct(id);
-            return RedirectToAction("ProductList");
+            return RedirectToAction("Shop");
+        }
+
+        [HttpPost]
+        public ActionResult ToggleFavorite(int id)
+        {
+            string userId = Session["UserId"]?.ToString();
+            if (userId == null)
+                return View("Auth/Register");
+
+            var result = _productRepository.UpdateProductToFavorite(int.Parse(userId), id);
+
+            return Json(new { isFavorite = result });
+        }
+
+        [HttpGet]
+        public ActionResult Favorites()
+        {
+            var favoriteIds = new List<int>();
+
+            if (Session["LoginStatus"]?.ToString() == "login")
+            {
+                var userId = Session["UserId"]?.ToString();
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    var dbFavs = _productRepository.GetFavoriteProductIds(int.Parse(userId));
+                    favoriteIds.AddRange(dbFavs);
+
+                    HttpCookie cookie = Request.Cookies["favorites"];
+                    if (cookie != null)
+                    {
+                        List<int> cookieFavs;
+                        try
+                        {
+                            cookieFavs = JsonConvert.DeserializeObject<List<int>>(cookie.Value) ?? new List<int>();
+                        }
+                        catch
+                        {
+                            cookieFavs = new List<int>();
+                        }
+
+                        foreach (int pid in cookieFavs)
+                        {
+                            if (!favoriteIds.Contains(pid))
+                            {
+                                _productRepository.UpdateProductToFavorite(int.Parse(userId), pid);
+                                favoriteIds.Add(pid);
+                            }
+                        }
+
+                        var expiredCookie = new HttpCookie("favorites")
+                        {
+                            Expires = DateTime.Now.AddDays(-1),
+                            Path = "/"
+                        };
+
+                        Response.Cookies.Add(expiredCookie);
+                    }
+                }
+            }
+            else
+            {
+                HttpCookie cookie = Request.Cookies["favorites"];
+                if (cookie != null)
+                {
+                    try
+                    {
+                        favoriteIds = JsonConvert.DeserializeObject<List<int>>(cookie.Value) ?? new List<int>();
+                    }
+                    catch
+                    {
+                        favoriteIds = new List<int>();
+                    }
+                }
+            }
+
+            List<ProductDto> favoritesList = new List<ProductDto>();
+            if (favoriteIds.Any())
+            {
+                favoritesList = _productRepository.GetProductsByIds(favoriteIds);
+            }
+
+            return View(favoritesList);
         }
     }
-
 }

@@ -1,8 +1,6 @@
-﻿using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Domain.Entities.User.UserActionResponse;
+﻿using businessLogic.Dtos.UserDtos;
+using businessLogic.Interfaces;
 using eUseControl.Domain.Enums;
-using eUseControl.Web.Models.Auth;
 using eUseControlBussinessLogic;
 using eUseControlBussinessLogic.Interfaces;
 using System;
@@ -23,7 +21,7 @@ namespace ProjectOnlineStore.Controllers
             _register = bl.GetRegisterBL();
         }
 
-        // GET: Account/Register
+        // GET: Auth/Register
         public ActionResult Register()
         {
             ViewBag.HideFooter = true;
@@ -31,11 +29,11 @@ namespace ProjectOnlineStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(UserDataRegister registerModel)
+        public ActionResult Register(UserRegisterDto registerModel)
         {
             if (ModelState.IsValid)
             {
-                var data = new UserRegisterData
+                var data = new UserRegisterDto
                 {
                     Name = registerModel.Name,
                     Email = registerModel.Email,
@@ -72,11 +70,11 @@ namespace ProjectOnlineStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserDataLogin loginModel)
+        public ActionResult Login(UserLoginDto loginModel)
         {
             if (ModelState.IsValid)
             {
-                var data = new UserLoginData
+                var data = new UserLoginDto
                 {
                     NameOrEmail = loginModel.NameOrEmail,
                     Password = loginModel.Password,
@@ -91,11 +89,12 @@ namespace ProjectOnlineStore.Controllers
                     if (userResp.Status) //true
                     {
                         //Generarea unui cookie
-                        UserCookieResp userCookieResp = _session.GenerateCookieByUser(userResp.UserId);
+                        UserCookieRespDto userCookieResp = _session.GenerateCookieByUser(userResp.UserId);
 
                         HttpCookie cookie = userCookieResp.Cookie;
                         Response.Cookies.Add(cookie);
 
+                        Session["UserId"] = userResp.UserId;
                         Session["LoginStatus"] = "login";
                         Session["UserFirstName"] = userResp.Name ?? "User";
                         Session["Role"] = userResp.Role;

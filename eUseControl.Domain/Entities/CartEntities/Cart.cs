@@ -1,10 +1,9 @@
-﻿using System;
+﻿using eUseControl.Domain.Entities.Listings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eUseControl.Domain.Entities.Listings
+namespace eUseControl.Domain.Entities.CartEntities
 {
     public class Cart
     {

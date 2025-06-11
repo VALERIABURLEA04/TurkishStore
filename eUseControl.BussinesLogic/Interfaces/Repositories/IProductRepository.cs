@@ -1,23 +1,30 @@
-﻿using System;
+﻿using businessLogic.Dtos.ProductDtos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using eUseControl.Domain.Entities.Product;
 
 namespace businessLogic.Interfaces.Repositories
 {
     public interface IProductRepository
     {
-        Task<Product> GetByIdAsync(int id);
-        List<ProductDataEntities> GetAllProducts();
-        ProductDataEntities GetProductById(int id);
-        void AddProduct(ProductDataEntities product, HttpPostedFileBase image);
-        void UpdateProduct(ProductDataEntities product, HttpPostedFileBase image, bool? removeImage);
+        Task<ProductDto> GetByIdAsync(int id);
+
+        List<ProductDto> GetAllProducts(int userId);
+
+        ProductDto GetProductById(int id);
+
+        void AddProduct(ProductDto product, HttpPostedFileBase image);
+
+        void UpdateProduct(ProductDto product, HttpPostedFileBase image, bool? removeImage);
+
         void DeleteProduct(int id);
+
         void DeleteImage(int id);
 
-        IEnumerable<ProductDataEntities> Search(string query);
+        bool UpdateProductToFavorite(int userId, int productId);
+
+        List<int> GetFavoriteProductIds(int userId);
+
+        List<ProductDto> GetProductsByIds(List<int> productIds);
     }
 }

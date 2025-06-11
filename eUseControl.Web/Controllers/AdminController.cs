@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using businessLogic.Dtos.ProductDtos;
 using businessLogic.Interfaces;
+using businessLogic.Interfaces.Repositories;
+using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
 using eUseControl.Domain.Entities.Admin;
 using eUseControl.Web.Logic.Attributes;
@@ -37,26 +36,12 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
-        // POST: Admin/Login
-        [HttpPost]
-        public ActionResult AdminLogin(string username, string password)
+        public ActionResult ProductList()
         {
-            System.Diagnostics.Debug.WriteLine($"[DEBUG] Login attempt: username = {username}, password = {password}");
+            int userId = int.Parse(Session["UserId"]?.ToString());
+            List<ProductDto> products = _productBL.GetAllProducts(userId);
 
-            var admin = _adminBL.AdminLogin(username, password);
-
-            if (admin != null)
-            {
-                Console.WriteLine($"[DEBUG] Login successful for user: {admin.Username}");
-                Session["AdminUsername"] = admin.Username;
-                return RedirectToAction("Dashboard");
-            }
-            else
-            {
-                Console.WriteLine("[DEBUG] Login failed: invalid username or password.");
-                ViewBag.Error = "Invalid username or password.";
-                return View();
-            }
+            return View(products);
         }
 
 

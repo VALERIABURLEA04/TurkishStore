@@ -1,10 +1,8 @@
-﻿using System;
-using System.Web.Mvc;
-using eUseControl.Domain.Entities.Cart;
-using eUseControl.Domain.Entities.User.UserActionResponse;
+﻿using eUseControl.Domain.Entities.CartEntities;
+using eUseControl.Domain.Entities.Listings;
 using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
-using eUseControl.Domain.Entities.Listings;
+using System.Web.Mvc;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -100,124 +98,5 @@ namespace ProjectOnlineStore.Controllers
             cart.Clear();
             return RedirectToAction("ShoppingCart");
         }
-
-        // GET: Checkout
-        public ActionResult CheckoutPage()
-        {
-            return View();
-        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

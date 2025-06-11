@@ -1,69 +1,66 @@
-﻿using System;
+﻿using businessLogic.Dtos.ContactDtos;
+using businessLogic.Interfaces;
+using BusinessLogic.DBModel;
+using eUseControl.Domain.Entities.UserEntities;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using businessLogic.Interfaces;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Contact.eUseControl.Domain.Entities.Contact;
-using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.BLStruct
 {
     public class ContactBL : IContact
     {
-        public async Task<IEnumerable<ContactMessageEntity>> GetAllAsync()
+        public async Task<IEnumerable<ContactDto>> GetAllAsync()
         {
             using (var context = new DataContext())
             {
-                return await context.ContactData
-                    .Select(c => new ContactMessageEntity
+                return await context.Contacts
+                    .Select(x => new ContactDto
                     {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Email = c.Email,
-                        Subject = c.Subject,
-                        Message = c.Message
+                        Id = x.Id,
+                        Name = x.Name,
+                        Email = x.Email,
+                        Message = x.Message,
+                        Subject = x.Subject,
                     })
                     .ToListAsync();
             }
         }
 
-        public async Task<ContactMessageEntity> GetByIdAsync(int id)
+        public async Task<ContactDto> GetByIdAsync(int id)
         {
             using (var context = new DataContext())
             {
-                var c = await context.ContactData.FindAsync(id);
-                if (c == null) return null;
-
-                return new ContactMessageEntity
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Email = c.Email,
-                    Subject = c.Subject,
-                    Message = c.Message
-                };
+                return await context.Contacts
+                    .Select(x => new ContactDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Email = x.Email,
+                        Message = x.Message,
+                        Subject = x.Subject,
+                    })
+                    .FirstOrDefaultAsync(x => x.Id == id);
             }
         }
 
-        public async Task<bool> AddAsync(ContactMessageEntity entity)
+        public async Task<ContactDto> AddAsync(ContactDto model)
         {
             using (var context = new DataContext())
             {
-                var contactData = new UContactData
+                Contact contact = new Contact
                 {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Email = entity.Email,
-                    Subject = entity.Subject,
-                    Message = entity.Message
+                    Name = model.Name,
+                    Email = model.Email,
+                    Message = model.Message,
+                    Subject = model.Subject
                 };
 
-                context.ContactData.Add(contactData);
+                context.Contacts.Add(contact);
                 await context.SaveChangesAsync();
-                return true;
+
+                return model;
             }
         }
 
@@ -90,10 +87,10 @@ namespace businessLogic.BLStruct
         {
             using (var context = new DataContext())
             {
-                var contact = await context.ContactData.FindAsync(id);
+                var contact = await context.Contacts.FindAsync(id);
                 if (contact == null) return false;
 
-                context.ContactData.Remove(contact);
+                context.Contacts.Remove(contact);
                 await context.SaveChangesAsync();
                 return true;
             }

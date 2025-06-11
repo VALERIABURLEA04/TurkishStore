@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Entities\Admin\AdminData.cs" />
     <Compile Include="Entities\Admin\AdminUserDisplay.cs" />
     <Compile Include="Entities\Cart\CartItems.cs" />
@@ -69,6 +70,21 @@
     <Compile Include="Entities\User\UserLoginData.cs" />
     <Compile Include="Entities\User\UserRegisterData.cs" />
     <Compile Include="Entities\User\UserTable.cs" />
+=======
+    <Compile Include="Entities\CartEntities\CartItem.cs" />
+    <Compile Include="Entities\CartEntities\Cart.cs" />
+    <Compile Include="Entities\ListingEntities\Item.cs" />
+    <Compile Include="Entities\ListingEntities\Listing.cs" />
+    <Compile Include="Entities\ProductEntities\ProductToUser.cs" />
+    <Compile Include="Entities\ProductEntities\Products.cs" />
+    <Compile Include="Entities\SessionEntities\Session.cs" />
+    <Compile Include="Entities\UserEntities\Contact.cs" />
+    <Compile Include="Entities\UserEntities\UserActionResponse\UserCookieResp.cs" />
+    <Compile Include="Entities\UserEntities\UserActionResponse\UserResp.cs" />
+    <Compile Include="Entities\UserEntities\UserLogin.cs" />
+    <Compile Include="Entities\UserEntities\UserRegister.cs" />
+    <Compile Include="Entities\UserEntities\User.cs" />
+>>>>>>> origin/hotfix/project-fix
     <Compile Include="Enums\LogInResult.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,74 +1,63 @@
-﻿@using System.Web.Optimization
-@model eUseControl.Web.Models.Auth.UserDataLogin
+﻿﻿@using System.Web.Optimization
+@model businessLogic.Dtos.UserDtos.UserLoginDto
 
 @{
     ViewBag.Title = "About";
     Layout = null;
 }
-
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title -SACCHARINE</title>
-
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
     @Styles.Render("~/bundles/css")
+    <style>
+        .create-account {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+            .create-account a {
+                color: #666;
+                text-decoration: none;
+            }
+
+                .create-account a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
-
 <body>
-
-    <div id="background_image_log">
-
-
-        @Html.Partial("_Header");
-
+    <div class="container py-5">
+        <div class="background-image"></div>
 
         <div class="auth-container">
-
             <div class="card auth-card">
                 <h2 class="mb-2">Login</h2>
                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
-                 {
+                {
                     @Html.AntiForgeryToken() <!-- Protecție CSRF -->
 
-            <div class="mb-3 text-start">
-                 <label for="nameOrEmail" class="form-label">Username</label>
-                 @Html.TextBoxFor(model => model.NameOrEmail, new { @class = "form-control", placeholder = "Introduceți username-ul", required = "required" })
-                 @Html.ValidationMessageFor(m => m.NameOrEmail, "", new { @class = "text-danger small" })
-            </div>
-            <div class="mb-3 text-start">
-                 <label for="password" class="form-label">Parolă</label>
-                 @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
-                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
-            </div>
+                    <div class="mb-3 text-start">
+                        <label for="nameOrEmail" class="form-label">Username</label>
+                        @Html.TextBoxFor(model => model.NameOrEmail, new { @class = "form-control", placeholder = "Introduceți username-ul", required = "required" })
+                        @Html.ValidationMessageFor(m => m.NameOrEmail, "", new { @class = "text-danger small" })
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="password" class="form-label">Parolă</label>
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Introduceți parola", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                    </div>
                     <button type="submit" class="btn btn-primary w-100">Sign In</button>
                     <p class="create-account"><a href="@Url.Action("Register", "Auth")">Create account</a></p>
-                 }
+                }
             </div>
         </div>
     </div>
-
-    <style>
-
-        
-    .create-account {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    }
-
-    .create-account a {
-    color: #666;
-    text-decoration: none;
-    }
-
-    .create-account a:hover {
-    text-decoration: underline;
-    }
-    </style>
-    @Html.Partial("_Footer");
-
-
+    @Html.Partial("_Footer")
 </body>
+</html>

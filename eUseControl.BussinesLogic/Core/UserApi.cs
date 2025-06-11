@@ -1,7 +1,7 @@
 ﻿using businessLogic.DBModel;
-using eUseControl.Domain.Entities.Session;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Domain.Entities.User.UserActionResponse;
+using businessLogic.Dtos.UserDtos;
+using eUseControl.Domain.Entities.SessionEntities;
+using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
 using eUseControl.Helpers.AccessFlow;
 using eUseControl.Helpers.Session;
@@ -14,14 +14,14 @@ namespace eUseControlBussinessLogic.Core
 {
     public class UserApi
     {
-        public string RegisterUser(UserRegisterData model)
+        public string RegisterUser(UserRegisterDto model)
         {
             using (var db = new UserContext())
             {
                 if (db.Users.Any(u => u.Name == model.Name || u.Email == model.Email))
                     return null;
 
-                var user = new UserTable
+                var user = new User
                 {
                     Name = model.Name,
                     Email = model.Email,
@@ -40,12 +40,12 @@ namespace eUseControlBussinessLogic.Core
             }
         }
 
-        public UserResp LogInUser(UserLoginData model)
+        public UserRespDto LogInUser(UserLoginDto model)
         {
             try
             {
                 string hashedPassword = AccessHelper.HashPassword(model.Password);
-                UserTable user;
+                User user;
 
                 using (var dbContext = new UserContext())
                 {
@@ -53,7 +53,7 @@ namespace eUseControlBussinessLogic.Core
 
                     if (user == null)
                     {
-                        return new UserResp
+                        return new UserRespDto
                         {
                             Status = false,
                             Result = LogInResult.EmailNotFound
@@ -62,7 +62,7 @@ namespace eUseControlBussinessLogic.Core
 
                     if (user.Password != hashedPassword)
                     {
-                        return new UserResp
+                        return new UserRespDto
                         {
                             Status = false,
                             Result = LogInResult.WrongPassword
@@ -79,7 +79,7 @@ namespace eUseControlBussinessLogic.Core
                     db.SaveChanges();
                 }
 
-                return new UserResp
+                return new UserRespDto
                 {
                     Status = true,
                     Result = LogInResult.Success,
@@ -91,7 +91,7 @@ namespace eUseControlBussinessLogic.Core
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in UserLogInLogic: {ex.Message}");
-                return new UserResp
+                return new UserRespDto
                 {
                     Status = false,
                     Result = LogInResult.UnknownError,
@@ -99,14 +99,14 @@ namespace eUseControlBussinessLogic.Core
             }
         }
 
-        public UserCookieResp GenerateCookieByUserAction(int userId)
+        public UserCookieRespDto GenerateCookieByUserAction(int userId)
         {
             var cookieString = new HttpCookie("X-KEY")
             {
                 Value = CookieGenerator.Create(userId + HttpContext.Current?.Request.UserHostAddress)
             };
 
-            SessionTable sessionDb;
+            Session sessionDb;
 
             using (var db = new SessionContext())
             {
@@ -128,7 +128,7 @@ namespace eUseControlBussinessLogic.Core
             }
             else
             {
-                sessionDb = new SessionTable()
+                sessionDb = new Session()
                 {
                     UserId = userId,
                     Cookie = cookieString.Value,
@@ -142,7 +142,7 @@ namespace eUseControlBussinessLogic.Core
                 }
             }
 
-            return new UserCookieResp()
+            return new UserCookieRespDto()
             {
                 UserId = userId,
                 Cookie = cookieString,
@@ -150,10 +150,10 @@ namespace eUseControlBussinessLogic.Core
             };
         }
 
-        public UserResp GetUserByCookieAction(string cookieKey)
+        public UserRespDto GetUserByCookieAction(string cookieKey)
         {
-            SessionTable session;
-            UserTable user;
+            Session session;
+            User user;
 
             using (var db = new SessionContext())
             {
@@ -169,7 +169,7 @@ namespace eUseControlBussinessLogic.Core
 
                 if (user != null)
                 {
-                    return new UserResp()
+                    return new UserRespDto()
                     {
                         UserId = user.Id,
                         Status = true,
@@ -179,7 +179,7 @@ namespace eUseControlBussinessLogic.Core
                 }
             }
 
-            return new UserResp()
+            return new UserRespDto()
             {
                 Status = false,
             };

@@ -1,7 +1,5 @@
 ﻿using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Admin;
-using eUseControl.Domain.Entities.Product;
-using System;
+using eUseControl.Domain.Entities.ProductEntities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;

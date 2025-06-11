@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using businessLogic.Dtos.ProductDtos;
 using businessLogic.Interfaces.Repositories;
 using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Product;
+using eUseControl.Domain.Entities.ProductEntities;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace businessLogic.BLStruct
 {
@@ -20,84 +21,78 @@ namespace businessLogic.BLStruct
                _context = new DataContext();
           }
 
-          public async Task<Product> GetByIdAsync(int id)
-          {
-               return await _context.Products.FindAsync(id);
-          }
+        public async Task<ProductDto> GetByIdAsync(int id)
+        {
+            return await _context.Products
+                .Select(x => new ProductDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsFavorite = x.ProductsToUsers.FirstOrDefault(s => s.UserId == id).IsFavorite,
+                    Price = x.Price
+                })
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
 
-          public List<ProductDataEntities> GetAllProducts()
-          {
-               using (var db = new DataContext())
-               {
-                    // Check if there are any products
-                    if (db.Products.Any())
-                    {
+        public List<ProductDto> GetAllProducts(int userId)
+        {
+            return _context.Products
+                .Select(x => new ProductDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsFavorite = x.ProductsToUsers.FirstOrDefault(s => s.UserId == userId).IsFavorite,
+                    Price = x.Price
+                })
+                .ToList();
+        }
 
-                         return db.Products.Select(p => new ProductDataEntities
-                         {
-                              Id = p.Id,
-                              Name = p.Name,
-                              Description = p.Description,
-                              Price = p.Price,
-                              ImageUrl = p.ImageUrl
+        public ProductDto GetProductById(int id)
+        {
+            return _context.Products
+                .Select(x => new ProductDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsFavorite = x.ProductsToUsers.FirstOrDefault(s => s.UserId == id).IsFavorite,
+                    Price = x.Price
+                })
+                .FirstOrDefault(x => x.Id == id);
+        }
 
-                         }).ToList();
-                    }
-                    else
-                    {
-                         // Return an empty list if there are no products
-                         return new List<ProductDataEntities>();
-                    }
-               }
-          }
+        public void AddProduct(ProductDto model, HttpPostedFileBase image)
+        {
+            if (image != null && image.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var uniqueFileName = Guid.NewGuid() + "_" + fileName;
+                var path = HttpContext.Current.Server.MapPath("~/Content/images/" + uniqueFileName);
+                image.SaveAs(path);
+                model.ImageUrl = "/Content/images/" + uniqueFileName;
+            }
 
+            Product product = new Product
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Price = model.Price
+            };
 
-          public ProductDataEntities GetProductById(int id)
-          {
-               using (var db = new DataContext())
-               {
-                    var product = db.Products.Find(id);
-                    if (product == null) return null;
+            _context.Products.Add(product);
+            _context.SaveChanges();
+        }
 
-                    // Manual mapping to business entity
-                    return new ProductDataEntities
-                    {
-                         Id = product.Id,
-                         Name = product.Name,
-                         Description = product.Description,
-                         Price = product.Price,
-                         ImageUrl = product.ImageUrl
-                    };
-               }
-          }
-
-          public void AddProduct(ProductDataEntities product, HttpPostedFileBase image)
-          {
-               var dbProduct = new Product
-               {
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price
-               };
-
-               if (image != null && image.ContentLength > 0)
-               {
-                    var fileName = Path.GetFileName(image.FileName);
-                    var uniqueFileName = Guid.NewGuid() + "_" + fileName;
-                    var path = HttpContext.Current.Server.MapPath("~/Content/images/" + uniqueFileName);
-                    image.SaveAs(path);
-                    dbProduct.ImageUrl = "/Content/images/" + uniqueFileName;
-               }
-
-               _context.Products.Add(dbProduct);
-               _context.SaveChanges();
-          }
-
-
-          public void UpdateProduct(ProductDataEntities product, HttpPostedFileBase image, bool? removeImage)
-          {
-               var existing = _context.Products.Find(product.Id);
-               if (existing == null) return;
+        public void UpdateProduct(ProductDto product, HttpPostedFileBase image, bool? removeImage)
+        {
+            var existing = _context.Products.Find(product.Id);
+            if (existing == null) return;
 
                existing.Name = product.Name;
                existing.Description = product.Description;
@@ -160,31 +155,68 @@ namespace businessLogic.BLStruct
                     if (File.Exists(path)) File.Delete(path);
                }
 
-               _context.Products.Remove(product);
-               _context.SaveChanges();
-          }
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+        }
 
-          public IEnumerable<ProductDataEntities> Search(string query)
-          {
-               using (var db = new DataContext())
-               {
-                    if (string.IsNullOrEmpty(query))
-                         return new List<ProductDataEntities>();
+        public bool UpdateProductToFavorite(int userId, int productId)
+        {
+            var entry = _context.ProductsToUsers
+                .SingleOrDefault(x => x.ProductId == productId && x.UserId == userId);
 
-                    return db.Products
-                        .Where(p => p.Name.Contains(query) || p.Description.Contains(query))
-                        .Select(p => new ProductDataEntities
-                        {
-                             Id = p.Id,
-                             Name = p.Name,
-                             Description = p.Description,
-                             Price = p.Price,
-                             ImageUrl = p.ImageUrl
-                        })
-                        .ToList();
-               }
-          }
+            if (entry != null)
+            {
+                entry.IsFavorite = !entry.IsFavorite;
+            }
+            else
+            {
+                entry = new ProductToUser
+                {
+                    ProductId = productId,
+                    UserId = userId,
+                    IsFavorite = true
+                };
 
+                _context.ProductsToUsers.Add(entry);
+            }
 
-     }
+            _context.SaveChanges();
+
+            return entry.IsFavorite;
+        }
+
+        public List<int> GetFavoriteProductIds(int userId)
+        {
+            if (userId == 0)
+                return new List<int>();
+
+            var result = _context.ProductsToUsers
+                .Where(x => x.UserId == userId)
+                .Select(x => x.ProductId)
+                .ToList();
+
+            return result;
+        }
+
+        public List<ProductDto> GetProductsByIds(List<int> productIds)
+        {
+            if (productIds == null || !productIds.Any())
+                return new List<ProductDto>();
+
+            var products = _context.Products
+                .Where(x => productIds.Contains(x.Id))
+                .Select(x => new ProductDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsFavorite = true,
+                    Price = x.Price
+                })
+                .ToList();
+
+            return products;
+        }
+    }
 }

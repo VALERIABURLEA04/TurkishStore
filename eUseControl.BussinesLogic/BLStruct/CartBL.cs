@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using businessLogic.Interfaces;
+﻿using businessLogic.Interfaces;
 using businessLogic.Interfaces.Repositories;
-using eUseControl.Domain.Entities.Cart;
-using static businessLogic.BLStruct.CartBL;
+using eUseControl.Domain.Entities.ListingEntities;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace businessLogic.BLStruct
 {
@@ -104,8 +101,6 @@ namespace businessLogic.BLStruct
             {
                 return await _cartRepository.DeleteAllByUserIdAsync(userId);
             }
-
         }
-
     }
 }

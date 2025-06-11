@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eUseControl.Domain.Entities.Listings
 {
-    public class CreateListingViewModel
+    public class CreateListingDto
     {
         [Required]
         [StringLength(100)]

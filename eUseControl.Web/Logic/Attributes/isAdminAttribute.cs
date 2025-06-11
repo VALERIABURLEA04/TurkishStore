@@ -1,28 +1,29 @@
-﻿using System.Web;
+﻿using businessLogic.Dtos.UserDtos;
+using eUseControl.Domain.Enums;
+using eUseControlBussinessLogic.Interfaces;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using eUseControl.Domain.Entities.User.UserActionResponse;
-using eUseControlBussinessLogic.Interfaces;
-using eUseControl.Domain.Enums;
-using businessLogic;
 
 namespace eUseControl.Web.Logic.Attributes
 {
-	public class isAdminAttribute : ActionFilterAttribute
-	{
+    public class isAdminAttribute : ActionFilterAttribute
+    {
         private readonly ISession _session;
+
         public isAdminAttribute()
         {
             var bl = new eUseControlBussinessLogic.BusinesLogic();
             _session = bl.GetSessionBL();
         }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var sessionKey = HttpContext.Current.Request.Cookies["X-KEY"];
 
             if (sessionKey != null)
             {
-                UserResp profile = _session.GetUserByCookie(sessionKey.Value);
+                UserRespDto profile = _session.GetUserByCookie(sessionKey.Value);
 
                 if (profile != null && profile.Role != UserRole.Admin)
                 {

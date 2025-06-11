@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using eUseControl.Domain.Entities.UserEntities;
 using System.Threading.Tasks;
 using System.Web;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Domain.Entities.Admin;
 
 
 namespace businessLogic.Interfaces
 {
     public interface IUser
     {
-        Task<UserTable> GetUserFromCookieAsync(HttpRequestBase request);
-        bool IsUserAdmin(UserTable user);
-        bool IsOwnerOrAdmin(UserTable user, int ownerId);
+        Task<User> GetUserFromCookieAsync(HttpRequestBase request);
 
-        Task<UserTable> GetUserByUsernameOrEmailAsync(string identifier);
+        bool IsUserAdmin(User user);
 
-        List<AdminUserDisplay> GetAllUsers();
-        bool DeleteUser(int id);
+        bool IsOwnerOrAdmin(User user, int ownerId);
+
+        Task<User> GetUserByUsernameOrEmailAsync(string identifier);
     }
 }

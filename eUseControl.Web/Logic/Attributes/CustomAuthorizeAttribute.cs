@@ -1,10 +1,8 @@
-﻿using System.Web;
+﻿using businessLogic.Dtos.UserDtos;
+using eUseControlBussinessLogic.Interfaces;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using eUseControl.Domain.Entities.User.UserActionResponse;
-using eUseControlBussinessLogic.Interfaces;
-using eUseControl.Domain.Enums;
-using businessLogic;
 
 namespace eUseControl.Web.Logic.Attributes
 {
@@ -31,7 +29,7 @@ namespace eUseControl.Web.Logic.Attributes
                 return;
             }
 
-            UserResp profile = _session.GetUserByCookie(sessionKey.Value);
+            UserRespDto profile = _session.GetUserByCookie(sessionKey.Value);
 
             if (profile == null || !profile.Status)
             {
