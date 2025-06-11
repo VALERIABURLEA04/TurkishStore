@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace eUseControl.Domain.Entities.Cart
+namespace eUseControl.Domain.Entities.ListingEntities
 {
     [Table("CartItems")]
     public class CartItem

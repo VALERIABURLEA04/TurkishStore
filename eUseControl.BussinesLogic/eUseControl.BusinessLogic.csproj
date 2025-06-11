@@ -71,6 +71,14 @@
     <Compile Include="DBModel\Seed\DbInitializer.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Dtos\ContactDtos\ContactDto.cs" />
+    <Compile Include="Dtos\CreateListingDto.cs" />
+    <Compile Include="Dtos\ProductDtos\CreateProductDto.cs" />
+    <Compile Include="Dtos\ProductDtos\ProductDto.cs" />
+    <Compile Include="Dtos\UserDtos\UserCookieRespDto.cs" />
+    <Compile Include="Dtos\UserDtos\UserLoginDto.cs" />
+    <Compile Include="Dtos\UserDtos\UserRegisterDto.cs" />
+    <Compile Include="Dtos\UserDtos\UserRespDto.cs" />
     <Compile Include="Interfaces\ICart.cs" />
     <Compile Include="Interfaces\IContact.cs" />
     <Compile Include="Interfaces\IListings.cs" />
@@ -121,6 +129,10 @@
     <Compile Include="Migrations\202505271933180_AddCartItemsTable.Designer.cs">
       <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506041427243_AddedProductToUserTable.cs" />
+    <Compile Include="Migrations\202506041427243_AddedProductToUserTable.designer.cs">
+      <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionManager.cs" />
@@ -170,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505271933180_AddCartItemsTable.resx">
       <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506041427243_AddedProductToUserTable.resx">
+      <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

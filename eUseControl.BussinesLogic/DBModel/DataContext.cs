@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using eUseControl.Domain.Entities.ListingEntities;
+using eUseControl.Domain.Entities.ProductEntities;
+using eUseControl.Domain.Entities.UserEntities;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Domain.Entities.Admin;
-using eUseControl.Domain.Entities.Product;
-using eUseControl.Domain.Entities.Cart;
 
 namespace BusinessLogic.DBModel
 {
@@ -18,11 +12,9 @@ namespace BusinessLogic.DBModel
         {
         }
 
-        public DbSet<UContactData> ContactData { get; set; }
-        public DbSet<AdminData> AdminData { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-
+        public DbSet<ProductToUser> ProductsToUsers { get; set; }
     }
-
 }

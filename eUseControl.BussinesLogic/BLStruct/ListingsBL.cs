@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using businessLogic.Interfaces;
+using eUseControl.Domain.Entities.Listings;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using businessLogic.DBModel;
-using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.Listings;
-using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.BLStruct
 {
@@ -13,6 +10,7 @@ namespace businessLogic.BLStruct
     {
         // Simple in-memory store to simulate database
         private readonly List<Item> _items = new List<Item>();
+
         private int _nextId = 1;
 
         public async Task<List<Item>> GetAllListingsAsync()
@@ -27,7 +25,7 @@ namespace businessLogic.BLStruct
             return await Task.FromResult(item);
         }
 
-        public async Task CreateListingAsync(CreateListingViewModel model)
+        public async Task CreateListingAsync(CreateListingDto model)
         {
             var newItem = new Item
             {
@@ -44,7 +42,7 @@ namespace businessLogic.BLStruct
             await Task.CompletedTask;
         }
 
-        public async Task UpdateListingAsync(int id, CreateListingViewModel model)
+        public async Task UpdateListingAsync(int id, CreateListingDto model)
         {
             var item = _items.FirstOrDefault(i => i.UserId == id);
             if (item != null)

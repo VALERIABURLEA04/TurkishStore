@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace eUseControl.Domain.Entities.Product
+namespace eUseControl.Domain.Entities.ProductEntities
 {
-
     [Table("Products")]
     public class Product
     {
@@ -22,7 +17,11 @@ namespace eUseControl.Domain.Entities.Product
 
         [Required(ErrorMessage = "Price is required")]
         public decimal Price { get; set; }
-        public string ImageUrl { get; set; } // optional
 
+        public string ImageUrl { get; set; }
+        public int Stock { get; set; }
+
+        [InverseProperty("Product")]
+        public virtual ICollection<ProductToUser> ProductsToUsers { get; set; } = new HashSet<ProductToUser>();
     }
 }

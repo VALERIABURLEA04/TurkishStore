@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eUseControl.Domain.Entities.ProductEntities;
 using eUseControl.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace eUseControl.Domain.Entities.User
+namespace eUseControl.Domain.Entities.UserEntities
 {
-    public class UserTable
+    public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -25,7 +23,6 @@ namespace eUseControl.Domain.Entities.User
         [StringLength(255, MinimumLength = 6, ErrorMessage = "Password must be between 6 characters and 50 charachers.")]
         public string Password { get; set; }
 
-
         [Required]
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
@@ -36,6 +33,10 @@ namespace eUseControl.Domain.Entities.User
 
         [StringLength(30)]
         public string UserIp { get; set; }
+
         public UserRole Level { get; set; }
+
+        [InverseProperty("User")]
+        public ICollection<ProductToUser> ProductsToUsers { get; set; } = new HashSet<ProductToUser>();
     }
 }

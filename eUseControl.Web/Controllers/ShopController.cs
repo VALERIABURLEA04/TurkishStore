@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using businessLogic.Dtos.ProductDtos;
+using businessLogic.Interfaces.Repositories;
+using eUseControlBussinessLogic;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using businessLogic.BLStruct;
-using businessLogic.Interfaces.Repositories;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.Product;
-using eUseControlBussinessLogic;
 
 namespace eUseControl.Web.Controllers
 {
@@ -23,15 +23,20 @@ namespace eUseControl.Web.Controllers
         // GET: Shop
         public ActionResult Shop()
         {
-            var products = _productRepository.GetAllProducts();
+            int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+            var products = _productRepository.GetAllProducts(userId);
             ViewBag.IsAdmin = User.IsInRole("Admin");
+
             return View(products);
         }
 
         public ActionResult ProductList()
         {
-            var products = _productRepository.GetAllProducts();
+            int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+
+            List<ProductDto> products = _productRepository.GetAllProducts(userId);
             ViewBag.IsAdmin = User.IsInRole("Admin");
+
             return View(products);
         }
 
@@ -55,7 +60,7 @@ namespace eUseControl.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Product product, HttpPostedFileBase ImageUpload)
+        public ActionResult Add(ProductDto product, HttpPostedFileBase ImageUpload)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +83,7 @@ namespace eUseControl.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
+        public ActionResult Edit(ProductDto product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
         {
             _productRepository.UpdateProduct(product, ImageUpload, RemoveImage);
             return RedirectToAction("Edit", new { id = product.Id });
@@ -97,6 +102,87 @@ namespace eUseControl.Web.Controllers
             _productRepository.DeleteProduct(id);
             return RedirectToAction("Shop");
         }
-    }
 
+        [HttpPost]
+        public ActionResult ToggleFavorite(int id)
+        {
+            string userId = Session["UserId"]?.ToString();
+            if (userId == null)
+                return View("Auth/Register");
+
+            var result = _productRepository.UpdateProductToFavorite(int.Parse(userId), id);
+
+            return Json(new { isFavorite = result });
+        }
+
+        [HttpGet]
+        public ActionResult Favorites()
+        {
+            var favoriteIds = new List<int>();
+
+            if (Session["LoginStatus"]?.ToString() == "login")
+            {
+                var userId = Session["UserId"]?.ToString();
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    var dbFavs = _productRepository.GetFavoriteProductIds(int.Parse(userId));
+                    favoriteIds.AddRange(dbFavs);
+
+                    HttpCookie cookie = Request.Cookies["favorites"];
+                    if (cookie != null)
+                    {
+                        List<int> cookieFavs;
+                        try
+                        {
+                            cookieFavs = JsonConvert.DeserializeObject<List<int>>(cookie.Value) ?? new List<int>();
+                        }
+                        catch
+                        {
+                            cookieFavs = new List<int>();
+                        }
+
+                        foreach (int pid in cookieFavs)
+                        {
+                            if (!favoriteIds.Contains(pid))
+                            {
+                                _productRepository.UpdateProductToFavorite(int.Parse(userId), pid);
+                                favoriteIds.Add(pid);
+                            }
+                        }
+
+                        var expiredCookie = new HttpCookie("favorites")
+                        {
+                            Expires = DateTime.Now.AddDays(-1),
+                            Path = "/"
+                        };
+
+                        Response.Cookies.Add(expiredCookie);
+                    }
+                }
+            }
+            else
+            {
+                HttpCookie cookie = Request.Cookies["favorites"];
+                if (cookie != null)
+                {
+                    try
+                    {
+                        favoriteIds = JsonConvert.DeserializeObject<List<int>>(cookie.Value) ?? new List<int>();
+                    }
+                    catch
+                    {
+                        favoriteIds = new List<int>();
+                    }
+                }
+            }
+
+            List<ProductDto> favoritesList = new List<ProductDto>();
+            if (favoriteIds.Any())
+            {
+                favoritesList = _productRepository.GetProductsByIds(favoriteIds);
+            }
+
+            return View(favoritesList);
+        }
+    }
 }

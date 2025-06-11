@@ -298,6 +298,7 @@
     <Content Include="Views\Shop\Add.cshtml" />
     <Content Include="Views\Shop\ProductList.cshtml" />
     <Content Include="Views\Shop\Edit.cshtml" />
+    <Content Include="Views\Shop\Favorites.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -307,9 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\NewIn\" />
-    <Folder Include="Views\Refund\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eUseControl.BussinesLogic\eUseControl.BusinessLogic.csproj">
@@ -317,7 +315,7 @@
       <Name>eUseControl.BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
-      <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>
+      <Project>{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}</Project>
       <Name>eUseControl.Domain</Name>
     </ProjectReference>
   </ItemGroup>

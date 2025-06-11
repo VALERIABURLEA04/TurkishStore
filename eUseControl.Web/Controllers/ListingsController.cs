@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using businessLogic.Interfaces;
+using eUseControl.Domain.Entities.Listings;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
-using businessLogic.BLStruct;
-using businessLogic.DBModel;
-using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.Listings;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Domain.Entities.User.UserActionResponse;
-using eUseControlBussinessLogic.Interfaces;
-
 
 namespace eUseControl.Web.Controllers
 {
@@ -66,7 +57,7 @@ namespace eUseControl.Web.Controllers
         // POST: Listings/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateListingViewModel model)
+        public async Task<ActionResult> Create(CreateListingDto model)
         {
             if (Request.Cookies["X-KEY"] == null)
             {
@@ -88,7 +79,7 @@ namespace eUseControl.Web.Controllers
                 // **Adapt this to your domain:** Here I use your CreateListingViewModel and create a new Item or Listing entity
                 var listing = new Item // or Listing, if you have Listing entity
                 {
-                    // Match properties - 
+                    // Match properties -
                     // You'll need to add or map 'Title', 'Description' etc. if they exist on Item or Listing
                     ClothName = model.Title,               // CHANGE: model.Title => Item property ClothName (example)
                     // Assuming Description maps to some other property on Item, you might need to add it or ignore
@@ -98,9 +89,7 @@ namespace eUseControl.Web.Controllers
                     // UserId? You might need to add UserId property to Item or handle separately
                 };
 
-
                 await _listingsBL.CreateListingAsync(model);
-
 
                 return RedirectToAction("Index");
             }
@@ -140,7 +129,7 @@ namespace eUseControl.Web.Controllers
             }
 
             // Map Item or Listing back to CreateListingViewModel for editing
-            var model = new CreateListingViewModel
+            var model = new CreateListingDto
             {
                 Title = listing.ClothName,        // CHANGE: adapt property names accordingly
                 // Description: if you have it, map it here, otherwise ignore or add
@@ -153,7 +142,7 @@ namespace eUseControl.Web.Controllers
         // POST: Listings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CreateListingViewModel model)
+        public async Task<ActionResult> Edit(int id, CreateListingDto model)
         {
             if (Request.Cookies["X-KEY"] == null)
             {

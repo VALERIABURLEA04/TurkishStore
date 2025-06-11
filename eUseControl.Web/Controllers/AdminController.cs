@@ -1,6 +1,6 @@
-﻿using businessLogic.Interfaces;
+﻿using businessLogic.Dtos.ProductDtos;
+using businessLogic.Interfaces;
 using businessLogic.Interfaces.Repositories;
-using eUseControl.Domain.Entities.Product;
 using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
 using System.Collections.Generic;
@@ -30,7 +30,9 @@ namespace eUseControl.Web.Controllers
 
         public ActionResult ProductList()
         {
-            List<Product> products = _productBL.GetAllProducts();
+            int userId = int.Parse(Session["UserId"]?.ToString());
+            List<ProductDto> products = _productBL.GetAllProducts(userId);
+
             return View(products);
         }
 

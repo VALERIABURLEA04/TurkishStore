@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using eUseControl.Domain.Entities.SessionEntities;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eUseControl.Domain.Entities.Session;
 
 namespace businessLogic.DBModel
 {
@@ -14,7 +9,7 @@ namespace businessLogic.DBModel
             base("name=DefaultConnection")
         {
         }
-        public virtual DbSet<SessionTable> Sessions { get; set; }
 
+        public virtual DbSet<Session> Sessions { get; set; }
     }
 }

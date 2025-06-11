@@ -1,12 +1,12 @@
-﻿using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
+﻿using businessLogic.Dtos.UserDtos;
+using businessLogic.Interfaces;
 using eUseControlBussinessLogic.Core;
 
 namespace businessLogic.BLStruct
 {
     public class RegisterBL : UserApi, IRegister
     {
-        public string SignUpLogic(UserRegisterData data)
+        public string SignUpLogic(UserRegisterDto data)
         {
             return RegisterUser(data);
         }

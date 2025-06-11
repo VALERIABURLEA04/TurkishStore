@@ -1,10 +1,9 @@
 ﻿@using System.Web.Optimization
-@using BusinessLogic.DBModel
-@model List<eUseControl.Domain.Entities.Product.Product>
+@model List<businessLogic.Dtos.ProductDtos.ProductDto>
 
 @{
     ViewBag.Title = "Product List";
-    Layout = null; // or use your shared layout if you want
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -41,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var product in Model)
+                    @foreach (var product in Model.ToList())
                     {
                         <tr>
                             <td>@product.Id</td>

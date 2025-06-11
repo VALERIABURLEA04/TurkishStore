@@ -1,5 +1,5 @@
 ﻿using businessLogic.DBModel;
-using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Helpers.AccessFlow;
 using System;
 using System.Linq;
@@ -12,7 +12,7 @@ public class DbInitializer
         {
             if (!context.Users.Any(u => u.Email == "admin@example.com"))
             {
-                var adminUser = new UserTable
+                var adminUser = new User
                 {
                     Name = "administrator",
                     Email = "admin@example.com",

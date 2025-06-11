@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using businessLogic.Interfaces.Repositories;
+using BusinessLogic.DBModel;
+using eUseControl.Domain.Entities.ListingEntities;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using businessLogic.Interfaces.Repositories;
-using eUseControl.Domain.Entities.Cart;
-using BusinessLogic.DBModel;
 
 namespace businessLogic.BLStruct
 {

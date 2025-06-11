@@ -7,13 +7,13 @@ namespace businessLogic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class AddUserTables : IMigrationMetadata
+    public sealed partial class AddUsers : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUsers));
         
         string IMigrationMetadata.Id
         {
-            get { return "202505171528249_AddUserTables"; }
+            get { return "202505171528249_AddUsers"; }
         }
         
         string IMigrationMetadata.Source

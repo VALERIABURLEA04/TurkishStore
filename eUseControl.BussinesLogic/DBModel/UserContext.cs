@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using eUseControl.Domain.Entities.UserEntities;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.DBModel
 {
@@ -15,7 +10,6 @@ namespace businessLogic.DBModel
         {
         }
 
-        public virtual DbSet<UserTable> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
-

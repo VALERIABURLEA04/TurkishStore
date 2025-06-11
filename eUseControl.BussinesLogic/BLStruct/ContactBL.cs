@@ -1,40 +1,66 @@
-﻿using System;
+﻿using businessLogic.Dtos.ContactDtos;
+using businessLogic.Interfaces;
+using BusinessLogic.DBModel;
+using eUseControl.Domain.Entities.UserEntities;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using businessLogic.Interfaces;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.User;
 
 namespace businessLogic.BLStruct
 {
     public class ContactBL : IContact
     {
-        public async Task<IEnumerable<UContactData>> GetAllAsync()
+        public async Task<IEnumerable<ContactDto>> GetAllAsync()
         {
             using (var context = new DataContext())
             {
-                return await context.ContactData.ToListAsync();
+                return await context.Contacts
+                    .Select(x => new ContactDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Email = x.Email,
+                        Message = x.Message,
+                        Subject = x.Subject,
+                    })
+                    .ToListAsync();
             }
         }
 
-        public async Task<UContactData> GetByIdAsync(int id)
+        public async Task<ContactDto> GetByIdAsync(int id)
         {
             using (var context = new DataContext())
             {
-                return await context.ContactData.FindAsync(id);
+                return await context.Contacts
+                    .Select(x => new ContactDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Email = x.Email,
+                        Message = x.Message,
+                        Subject = x.Subject,
+                    })
+                    .FirstOrDefaultAsync(x => x.Id == id);
             }
         }
 
-        public async Task<UContactData> AddAsync(UContactData contactData)
+        public async Task<ContactDto> AddAsync(ContactDto model)
         {
             using (var context = new DataContext())
             {
-                context.ContactData.Add(contactData);
+                Contact contact = new Contact
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Message = model.Message,
+                    Subject = model.Subject
+                };
+
+                context.Contacts.Add(contact);
                 await context.SaveChangesAsync();
-                return contactData;
+
+                return model;
             }
         }
 
@@ -61,14 +87,13 @@ namespace businessLogic.BLStruct
         {
             using (var context = new DataContext())
             {
-                var contact = await context.ContactData.FindAsync(id);
+                var contact = await context.Contacts.FindAsync(id);
                 if (contact == null) return false;
 
-                context.ContactData.Remove(contact);
+                context.Contacts.Remove(contact);
                 await context.SaveChangesAsync();
                 return true;
             }
         }
     }
 }
-

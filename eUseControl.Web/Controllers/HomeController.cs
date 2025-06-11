@@ -1,12 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
-using BusinessLogic.DBModel;
+﻿using businessLogic.Dtos.ContactDtos;
 using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
-using eUseControlBussinessLogic.Interfaces;
 using eUseControlBussinessLogic;
-using businessLogic.BLStruct;
-using eUseControl.Web.Logic.Attributes;
+using eUseControlBussinessLogic.Interfaces;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace ProjectOnlineStore.Controllers
 {
@@ -67,7 +64,7 @@ namespace ProjectOnlineStore.Controllers
         // POST: Home/ContactUs
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ContactUs(UContactData contactData)
+        public async Task<ActionResult> ContactUs(ContactDto contactData)
         {
             if (ModelState.IsValid)
             {

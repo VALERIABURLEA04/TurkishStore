@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using businessLogic.DBModel;
 using businessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
+using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
-using System.Web;
-using businessLogic.DBModel;
 using eUseControl.Helpers.Session;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace businessLogic.BLStruct
 {
     public class UserBL : IUser
     {
-        public async Task<UserTable> GetUserFromCookieAsync(HttpRequestBase request)
+        public async Task<User> GetUserFromCookieAsync(HttpRequestBase request)
         {
             if (request.Cookies["X-KEY"] == null)
                 return null;
@@ -35,7 +32,7 @@ namespace businessLogic.BLStruct
             });
         }
 
-        public bool IsUserAdmin(UserTable user)
+        public bool IsUserAdmin(User user)
         {
             if (user == null)
                 return false;
@@ -43,7 +40,7 @@ namespace businessLogic.BLStruct
             return user.Level == UserRole.Admin;
         }
 
-        public bool IsOwnerOrAdmin(UserTable user, int ownerId)
+        public bool IsOwnerOrAdmin(User user, int ownerId)
         {
             if (user == null)
                 return false;
@@ -51,7 +48,7 @@ namespace businessLogic.BLStruct
             return user.Id == ownerId || IsUserAdmin(user);
         }
 
-        public async Task<UserTable> GetUserByUsernameOrEmailAsync(string identifier)
+        public async Task<User> GetUserByUsernameOrEmailAsync(string identifier)
         {
             using (var db = new UserContext())
             {
