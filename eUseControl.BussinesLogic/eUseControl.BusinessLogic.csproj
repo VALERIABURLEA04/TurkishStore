@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLStruct\BlogPostRepository.cs" />
     <Compile Include="BLStruct\CartBL.cs" />
     <Compile Include="BLStruct\CartRepositoryBL.cs" />
     <Compile Include="BLStruct\ContactBL.cs" />
@@ -67,13 +68,13 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
-    <Compile Include="DBModel\DataContext.cs" />
-    <Compile Include="DBModel\Seed\DbInitializer.cs" />
-    <Compile Include="DBModel\SessionContext.cs" />
-    <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Data\EUseControlDbContext.cs" />
+    <Compile Include="Data\Seed\DbInitializer.cs" />
+    <Compile Include="Dtos\BlogDtos\BlogPostDto.cs" />
     <Compile Include="Dtos\ContactDtos\ContactDto.cs" />
     <Compile Include="Dtos\CreateListingDto.cs" />
     <Compile Include="Dtos\ProductDtos\CreateProductDto.cs" />
+    <Compile Include="Dtos\ProductDtos\ProductDetailsDto.cs" />
     <Compile Include="Dtos\ProductDtos\ProductDto.cs" />
     <Compile Include="Dtos\UserDtos\UserCookieRespDto.cs" />
     <Compile Include="Dtos\UserDtos\UserLoginDto.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Interfaces\Repositories\IBlogPostRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICartRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProductRepository.cs" />
     <Compile Include="Interfaces\UserLoginResult.cs" />
@@ -132,6 +134,30 @@
     <Compile Include="Migrations\202506041427243_AddedProductToUserTable.cs" />
     <Compile Include="Migrations\202506041427243_AddedProductToUserTable.designer.cs">
       <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506120849308_AddedTypeFieldToProductTable.cs" />
+    <Compile Include="Migrations\202506120849308_AddedTypeFieldToProductTable.designer.cs">
+      <DependentUpon>202506120849308_AddedTypeFieldToProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.cs" />
+    <Compile Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.designer.cs">
+      <DependentUpon>202506120913463_UpdateTypeFieldToEnumFromProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.cs" />
+    <Compile Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.designer.cs">
+      <DependentUpon>202506121227294_AddedBlogPostAndBlogCommentTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506121456295_RenameBlogPostsTable.cs" />
+    <Compile Include="Migrations\202506121456295_RenameBlogPostsTable.designer.cs">
+      <DependentUpon>202506121456295_RenameBlogPostsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506130056497_AddedProductImagesToProductTable.cs" />
+    <Compile Include="Migrations\202506130056497_AddedProductImagesToProductTable.designer.cs">
+      <DependentUpon>202506130056497_AddedProductImagesToProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506130907310_AddColorAndSizeToProductTable.cs" />
+    <Compile Include="Migrations\202506130907310_AddColorAndSizeToProductTable.designer.cs">
+      <DependentUpon>202506130907310_AddColorAndSizeToProductTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,6 +211,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506041427243_AddedProductToUserTable.resx">
       <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506120849308_AddedTypeFieldToProductTable.resx">
+      <DependentUpon>202506120849308_AddedTypeFieldToProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.resx">
+      <DependentUpon>202506120913463_UpdateTypeFieldToEnumFromProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.resx">
+      <DependentUpon>202506121227294_AddedBlogPostAndBlogCommentTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506121456295_RenameBlogPostsTable.resx">
+      <DependentUpon>202506121456295_RenameBlogPostsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506130056497_AddedProductImagesToProductTable.resx">
+      <DependentUpon>202506130056497_AddedProductImagesToProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506130907310_AddColorAndSizeToProductTable.resx">
+      <DependentUpon>202506130907310_AddColorAndSizeToProductTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

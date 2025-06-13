@@ -96,8 +96,6 @@ C:\Users\uzunp\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.Web.dll
 C:\Users\uzunp\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.Web.pdb
 C:\Users\uzunp\source\repos\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.dll
 C:\Users\uzunp\source\repos\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.pdb
-C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.csproj.AssemblyReference.cache
-C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.csproj.CoreCompileInputs.cache
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\eUseControl.Web.dll.config
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\eUseControl.Web.dll
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\eUseControl.Web.pdb
@@ -191,6 +189,8 @@ C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\System.Web.Http
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\eUseControl.Helpers.pdb
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\bin\eUseControl.Helpers.dll.config
+C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.csproj.AssemblyReference.cache
+C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.csproj.CoreCompileInputs.cache
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.csproj.CopyComplete
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.dll
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Web\obj\Debug\eUseControl.Web.pdb

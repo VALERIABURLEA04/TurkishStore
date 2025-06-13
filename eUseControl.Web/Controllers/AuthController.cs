@@ -21,13 +21,14 @@ namespace ProjectOnlineStore.Controllers
             _register = bl.GetRegisterBL();
         }
 
-        // GET: Auth/Register
+        // GET: /Auth/Register
         public ActionResult Register()
         {
             ViewBag.HideFooter = true;
             return View();
         }
 
+        // POST: /Auth/Register
         [HttpPost]
         public ActionResult Register(UserRegisterDto registerModel)
         {
@@ -44,15 +45,10 @@ namespace ProjectOnlineStore.Controllers
 
                 try
                 {
-                    // call BL for token
                     string token = _register.SignUpLogic(data);
-
-                    //if succes, else...
                 }
-                catch
-                (Exception ex)
+                catch (Exception)
                 {
-                    // Handle exception (e.g., log it)
                     ModelState.AddModelError("", "An error occurred while registering. Please try again.");
                     return View(registerModel);
                 }
@@ -62,13 +58,14 @@ namespace ProjectOnlineStore.Controllers
             return View(registerModel);
         }
 
-        // GET: /Account/Login
+        // GET: /Auth/Login
         public ActionResult Login()
         {
             ViewBag.HideFooter = true;
             return View();
         }
 
+        // POST: /Auth/Login
         [HttpPost]
         public ActionResult Login(UserLoginDto loginModel)
         {
@@ -83,12 +80,10 @@ namespace ProjectOnlineStore.Controllers
 
                 try
                 {
-                    // call BL for token
                     var userResp = _session.LogInLogic(data);
 
-                    if (userResp.Status) //true
+                    if (userResp.Status)
                     {
-                        //Generarea unui cookie
                         UserCookieRespDto userCookieResp = _session.GenerateCookieByUser(userResp.UserId);
 
                         HttpCookie cookie = userCookieResp.Cookie;
@@ -96,12 +91,12 @@ namespace ProjectOnlineStore.Controllers
 
                         Session["UserId"] = userResp.UserId;
                         Session["LoginStatus"] = "login";
-                        Session["UserFirstName"] = userResp.Name ?? "User";
+                        Session["UserFullName"] = userResp.Name ?? "Guest";
                         Session["Role"] = userResp.Role;
 
                         return RedirectToAction("Index", "Home");
                     }
-                    else //false
+                    else
                     {
                         switch (userResp.Result)
                         {
@@ -122,23 +117,20 @@ namespace ProjectOnlineStore.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Eroare la procesarea cererii
                     TempData["ErrorMessage"] = "System error. Please try again later.";
-                    // Loghează excepția pentru depanare
-                    System.Diagnostics.Debug.WriteLine($"Error in SignUp: {ex.Message}");
                 }
             }
             else
             {
-                // Eroare pentru validarea mesajului
                 TempData["ErrorMessage"] = "Invalid data. Try again.";
             }
             return View(loginModel);
         }
 
+        // POST: /Auth/Logout
+        [HttpPost]
         public ActionResult Logout()
         {
-            // Sterge cookie-ul de autentificare
             if (Request.Cookies["X-KEY"] != null)
             {
                 var cookie = new HttpCookie("X-KEY");
@@ -146,9 +138,22 @@ namespace ProjectOnlineStore.Controllers
                 Response.Cookies.Add(cookie);
             }
 
-            // Sterge sesiunea
             Session.Clear();
             Session.Abandon();
+
+            return RedirectToAction("Login");
+        }
+
+        // GET: /Auth/MyAccount
+        [HttpGet]
+        public ActionResult MyAccount()
+        {
+            if (Session["LoginStatus"] != null && Session["LoginStatus"].ToString() == "login")
+            {
+                var fullName = Session["UserFullName"]?.ToString() ?? "User";
+                ViewBag.FullName = fullName;
+                return View();
+            }
 
             return RedirectToAction("Login");
         }

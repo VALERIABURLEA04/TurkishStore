@@ -52,10 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Attributes\EnumToStringAttribute.cs" />
+    <Compile Include="Entities\BlogEntities\BlogComment.cs" />
+    <Compile Include="Entities\BlogEntities\BlogPost.cs" />
     <Compile Include="Entities\CartEntities\CartItem.cs" />
     <Compile Include="Entities\CartEntities\Cart.cs" />
     <Compile Include="Entities\ListingEntities\Item.cs" />
     <Compile Include="Entities\ListingEntities\Listing.cs" />
+    <Compile Include="Entities\ProductEntities\ProductColor.cs" />
+    <Compile Include="Entities\ProductEntities\ProductImages.cs" />
+    <Compile Include="Entities\ProductEntities\ProductSize.cs" />
     <Compile Include="Entities\ProductEntities\ProductToUser.cs" />
     <Compile Include="Entities\ProductEntities\Products.cs" />
     <Compile Include="Entities\SessionEntities\Session.cs" />
@@ -66,6 +72,9 @@
     <Compile Include="Entities\UserEntities\UserRegister.cs" />
     <Compile Include="Entities\UserEntities\User.cs" />
     <Compile Include="Enums\LogInResult.cs" />
+    <Compile Include="Enums\ProductCategory.cs" />
+    <Compile Include="Enums\ProductColors.cs" />
+    <Compile Include="Enums\ProductSize.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

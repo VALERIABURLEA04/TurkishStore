@@ -1,13 +1,7 @@
 ﻿using businessLogic.BLStruct;
 using businessLogic.Interfaces;
 using businessLogic.Interfaces.Repositories;
-using BusinessLogic.DBModel;
 using eUseControlBussinessLogic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eUseControlBussinessLogic
 {
@@ -31,6 +25,11 @@ namespace eUseControlBussinessLogic
         public IProductRepository GetProductRepository()
         {
             return new ProductRepositoryBL();
+        }
+
+        public IBlogPostRepository GetBlogPostRepository()
+        {
+            return new BlogPostRepository();
         }
     }
 }

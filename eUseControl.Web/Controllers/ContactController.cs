@@ -11,11 +11,11 @@ namespace eUseControl.Web.Controllers
 {
     public class ContactController : ApiController
     {
-        private DataContext _context;
+        private EUseControlDbContext _context;
 
         public ContactController()
         {
-            _context = new DataContext(); // Initialize the context
+            _context = new EUseControlDbContext(); // Initialize the context
         }
 
         // GET api/contact

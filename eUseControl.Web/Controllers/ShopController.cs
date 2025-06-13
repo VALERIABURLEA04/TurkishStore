@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,7 +18,7 @@ namespace eUseControl.Web.Controllers
         public ShopController()
         {
             var businessLogic = new BusinesLogic();
-            _productRepository = businessLogic.GetProductRepository(); // manually instantiate — no DI
+            _productRepository = businessLogic.GetProductRepository();
         }
 
         // GET: Shop
@@ -30,25 +31,26 @@ namespace eUseControl.Web.Controllers
             return View(products);
         }
 
-        public ActionResult ProductList()
+        // GET: /Shop/Product
+        public async Task<ActionResult> Product()
         {
             int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+            List<ProductDto> products = await _productRepository.GetAllProducts(userId);
 
-            List<ProductDto> products = _productRepository.GetAllProducts(userId);
-            ViewBag.IsAdmin = User.IsInRole("Admin");
+            ViewBag.IsAuthenticated = Session["LoginStatus"]?.ToString() == "login" ? "true" : "false";
 
             return View(products);
         }
 
-        // GET: Shop/Details/5
-        public ActionResult Details(int? id)
+        // GET: /Shop/ProductDetails/:id
+        public ActionResult ProductDetails(int? id)
         {
             if (id == null)
-                return RedirectToAction("Shop");
+                return RedirectToAction("Product");
 
-            var product = _productRepository.GetProductById(id.Value);
+            var product = _productRepository.GetProductDetailsById(id.Value);
             if (product == null)
-                return RedirectToAction("Shop");
+                return RedirectToAction("Product");
 
             return View(product);
         }
@@ -106,17 +108,34 @@ namespace eUseControl.Web.Controllers
         [HttpPost]
         public ActionResult ToggleFavorite(int id)
         {
-            string userId = Session["UserId"]?.ToString();
-            if (userId == null)
-                return View("Auth/Register");
+            var userId = Session["UserId"]?.ToString();
 
-            var result = _productRepository.UpdateProductToFavorite(int.Parse(userId), id);
+            if (string.IsNullOrEmpty(userId))
+            {
+                var cookie = Request.Cookies["favorites"];
+                var favs = cookie != null
+                    ? JsonConvert.DeserializeObject<List<int>>(cookie.Value) ?? new List<int>()
+                    : new List<int>();
 
-            return Json(new { isFavorite = result });
+                favs.Remove(id);
+
+                var newCookie = new HttpCookie("favorites", JsonConvert.SerializeObject(favs))
+                {
+                    Expires = DateTime.Now.AddDays(30),
+                    Path = "/"
+                };
+                Response.Cookies.Add(newCookie);
+
+                return Json(new { isFavorite = false });
+            }
+
+            bool isNowFav = _productRepository.UpdateProductToFavorite(int.Parse(userId), id);
+            return Json(new { isFavorite = isNowFav });
         }
 
+        // GET: /Shop/Favorite
         [HttpGet]
-        public ActionResult Favorites()
+        public ActionResult Favorite()
         {
             var favoriteIds = new List<int>();
 
@@ -183,6 +202,31 @@ namespace eUseControl.Web.Controllers
             }
 
             return View(favoritesList);
+        }
+
+        [ChildActionOnly]
+        public ActionResult FavoriteCount()
+        {
+            int favCount = 0;
+            if (Session["LoginStatus"]?.ToString() == "login")
+            {
+                var uid = int.Parse(Session["UserId"].ToString());
+                favCount = _productRepository.GetFavoriteProductIds(uid).Count();
+            }
+            else
+            {
+                var cookie = Request.Cookies["favorites"];
+                if (cookie != null)
+                {
+                    try
+                    {
+                        var list = JsonConvert.DeserializeObject<List<int>>(cookie.Value);
+                        favCount = list?.Count ?? 0;
+                    }
+                    catch { }
+                }
+            }
+            return PartialView("_FavoriteCount", favCount);
         }
     }
 }

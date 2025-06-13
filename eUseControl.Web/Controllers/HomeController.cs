@@ -1,7 +1,8 @@
-﻿using businessLogic.Dtos.ContactDtos;
-using businessLogic.Interfaces;
+﻿using businessLogic.Dtos.BlogDtos;
+using businessLogic.Dtos.ProductDtos;
+using businessLogic.Interfaces.Repositories;
 using eUseControlBussinessLogic;
-using eUseControlBussinessLogic.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -9,88 +10,49 @@ namespace ProjectOnlineStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IContact _contactBL;
-        private readonly ISession _sessionBL;
+        private readonly IBlogPostRepository _blogPostRepository;
+        private readonly IProductRepository _productRepository;
 
-        // Parameterless constructor manually instantiating dependencies
         public HomeController()
         {
             var bl = new BusinesLogic();
-            _contactBL = bl.GetContactBL();
-            _sessionBL = bl.GetSessionBL();
+
+            _productRepository = bl.GetProductRepository();
+            _blogPostRepository = bl.GetBlogPostRepository();
         }
 
-        // GET: Home
-        public ActionResult Index()
+        // GET: /Home/Index
+        public async Task<ActionResult> Index()
         {
-            return View();
+            int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+            List<ProductDto> products = await _productRepository.GetAllProducts(userId);
+
+            return View(products);
         }
 
+        // GET: /Home/Blog
+        public async Task<ActionResult> Blog()
+        {
+            List<BlogPostDto> blogPosts = await _blogPostRepository.GetBlogPostsAsync();
+            return View(blogPosts);
+        }
+
+        // GET: /Home/About
         public ActionResult About()
         {
             return View();
         }
 
-        public ActionResult Shop()
+        // GET: /Home/Contact
+        public ActionResult Contact()
         {
             return View();
         }
 
-        public ActionResult ContactUs()
+        // GET /Home/Features
+        public ActionResult Features()
         {
             return View();
         }
-
-        public ActionResult NewIn()
-        {
-            return View();
-        }
-
-        public ActionResult RegisterPage()
-        {
-            return View();
-        }
-
-        public ActionResult Search()
-        {
-            return View();
-        }
-
-        public ActionResult RefundPage()
-        {
-            return View();
-        }
-
-        // POST: Home/ContactUs
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ContactUs(ContactDto contactData)
-        {
-            if (ModelState.IsValid)
-            {
-                await _contactBL.AddAsync(contactData);
-                TempData["SuccessMessage"] = "Your message has been sent successfully!";
-                return RedirectToAction("ContactUs");
-            }
-            return View(contactData);
-        }
-
-        /*
-        [HttpPost]
-        [isAdmin]
-        public async Task<ActionResult> DeleteContact(int id)
-        {
-            var success = await _contactBL.DeleteAsync(id);
-            if (!success)
-                TempData["ErrorMessage"] = "Could not delete contact data.";
-
-            return RedirectToAction("Dashboard", "Admin");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-        */
     }
 }
