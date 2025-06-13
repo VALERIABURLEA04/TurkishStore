@@ -1,6 +1,7 @@
 ﻿using businessLogic.Interfaces.Repositories;
 using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.ListingEntities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace businessLogic.BLStruct
 {
-    public class CartRepositoryBL : ICartRepository
+    public class CartRepositoryBL : ICartRepository, IDisposable
     {
-        private readonly DataContext _context;
+        private readonly EUseControlDbContext _context;
+        private bool _disposed;
 
         public CartRepositoryBL()
         {
-            _context = new DataContext();
+            _context = new EUseControlDbContext();
         }
 
         public async Task<int> CreateAsync(CartItem item)
@@ -72,6 +74,21 @@ namespace businessLogic.BLStruct
 
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _context.Dispose();
+            }
+            _disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

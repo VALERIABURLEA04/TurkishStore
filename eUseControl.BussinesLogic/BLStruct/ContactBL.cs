@@ -13,7 +13,7 @@ namespace businessLogic.BLStruct
     {
         public async Task<IEnumerable<ContactDto>> GetAllAsync()
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 return await context.Contacts
                     .Select(x => new ContactDto
@@ -30,7 +30,7 @@ namespace businessLogic.BLStruct
 
         public async Task<ContactDto> GetByIdAsync(int id)
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 return await context.Contacts
                     .Select(x => new ContactDto
@@ -47,7 +47,7 @@ namespace businessLogic.BLStruct
 
         public async Task<ContactDto> AddAsync(ContactDto model)
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 Contact contact = new Contact
                 {
@@ -67,7 +67,7 @@ namespace businessLogic.BLStruct
         /*
         public async Task<UContactData> UpdateAsync(int id, UContactData contactData)
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 var existing = await context.ContactData.FindAsync(id);
                 if (existing == null) return null;
@@ -85,7 +85,7 @@ namespace businessLogic.BLStruct
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 var contact = await context.Contacts.FindAsync(id);
                 if (contact == null) return false;

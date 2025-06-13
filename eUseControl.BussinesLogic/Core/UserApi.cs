@@ -1,5 +1,5 @@
-﻿using businessLogic.DBModel;
-using businessLogic.Dtos.UserDtos;
+﻿using businessLogic.Dtos.UserDtos;
+using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.SessionEntities;
 using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
@@ -16,7 +16,7 @@ namespace eUseControlBussinessLogic.Core
     {
         public string RegisterUser(UserRegisterDto model)
         {
-            using (var db = new UserContext())
+            using (var db = new EUseControlDbContext())
             {
                 if (db.Users.Any(u => u.Name == model.Name || u.Email == model.Email))
                     return null;
@@ -47,7 +47,7 @@ namespace eUseControlBussinessLogic.Core
                 string hashedPassword = AccessHelper.HashPassword(model.Password);
                 User user;
 
-                using (var dbContext = new UserContext())
+                using (var dbContext = new EUseControlDbContext())
                 {
                     user = dbContext.Users.FirstOrDefault(u => u.Email == model.NameOrEmail);
 
@@ -73,7 +73,7 @@ namespace eUseControlBussinessLogic.Core
                 user.LastLogin = model.LoginDataTime;
                 user.UserIp = HttpContext.Current?.Request.UserHostAddress;
 
-                using (var db = new UserContext())
+                using (var db = new EUseControlDbContext())
                 {
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
@@ -108,7 +108,7 @@ namespace eUseControlBussinessLogic.Core
 
             Session sessionDb;
 
-            using (var db = new SessionContext())
+            using (var db = new EUseControlDbContext())
             {
                 sessionDb = db.Sessions.FirstOrDefault(u => u.UserId == userId);
             }
@@ -120,7 +120,7 @@ namespace eUseControlBussinessLogic.Core
                 sessionDb.Cookie = cookieString.Value;
                 sessionDb.ValidTime = dateTime.AddHours(3);
 
-                using (var db = new SessionContext())
+                using (var db = new EUseControlDbContext())
                 {
                     db.Entry(sessionDb).State = EntityState.Modified;
                     db.SaveChanges();
@@ -135,7 +135,7 @@ namespace eUseControlBussinessLogic.Core
                     ValidTime = dateTime.AddHours(3)
                 };
 
-                using (var db = new SessionContext())
+                using (var db = new EUseControlDbContext())
                 {
                     db.Sessions.Add(sessionDb);
                     db.SaveChanges();
@@ -155,14 +155,14 @@ namespace eUseControlBussinessLogic.Core
             Session session;
             User user;
 
-            using (var db = new SessionContext())
+            using (var db = new EUseControlDbContext())
             {
                 session = db.Sessions.FirstOrDefault(s => s.Cookie.Contains(cookieKey));
             }
 
             if (session != null)
             {
-                using (var db = new UserContext())
+                using (var db = new EUseControlDbContext())
                 {
                     user = db.Users.FirstOrDefault(u => u.Id == session.UserId);
                 }

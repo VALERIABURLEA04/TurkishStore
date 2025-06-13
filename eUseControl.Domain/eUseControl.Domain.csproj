@@ -52,29 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="Entities\Admin\AdminData.cs" />
-    <Compile Include="Entities\Admin\AdminUserDisplay.cs" />
-    <Compile Include="Entities\Cart\CartItems.cs" />
-    <Compile Include="Entities\Contact\ContactMessageEntity.cs" />
-    <Compile Include="Entities\Listings\Cart.cs" />
-    <Compile Include="Entities\Listings\CreateListingViewModel.cs" />
-    <Compile Include="Entities\Listings\Item.cs" />
-    <Compile Include="Entities\Listings\Listing.cs" />
-    <Compile Include="Entities\Product\ProductEn.cs" />
-    <Compile Include="Entities\Product\Products.cs" />
-    <Compile Include="Entities\Session\SessionTable.cs" />
-    <Compile Include="Entities\User\UContactData.cs" />
-    <Compile Include="Entities\User\UserActionResponse\UserCookieResp.cs" />
-    <Compile Include="Entities\User\UserActionResponse\UserResp.cs" />
-    <Compile Include="Entities\User\UserLoginData.cs" />
-    <Compile Include="Entities\User\UserRegisterData.cs" />
-    <Compile Include="Entities\User\UserTable.cs" />
-=======
+    <Compile Include="Common\Attributes\EnumToStringAttribute.cs" />
+    <Compile Include="Entities\BlogEntities\BlogComment.cs" />
+    <Compile Include="Entities\BlogEntities\BlogPost.cs" />
     <Compile Include="Entities\CartEntities\CartItem.cs" />
     <Compile Include="Entities\CartEntities\Cart.cs" />
     <Compile Include="Entities\ListingEntities\Item.cs" />
     <Compile Include="Entities\ListingEntities\Listing.cs" />
+    <Compile Include="Entities\ProductEntities\ProductColor.cs" />
+    <Compile Include="Entities\ProductEntities\ProductImages.cs" />
+    <Compile Include="Entities\ProductEntities\ProductSize.cs" />
     <Compile Include="Entities\ProductEntities\ProductToUser.cs" />
     <Compile Include="Entities\ProductEntities\Products.cs" />
     <Compile Include="Entities\SessionEntities\Session.cs" />
@@ -84,8 +71,10 @@
     <Compile Include="Entities\UserEntities\UserLogin.cs" />
     <Compile Include="Entities\UserEntities\UserRegister.cs" />
     <Compile Include="Entities\UserEntities\User.cs" />
->>>>>>> origin/hotfix/project-fix
     <Compile Include="Enums\LogInResult.cs" />
+    <Compile Include="Enums\ProductCategory.cs" />
+    <Compile Include="Enums\ProductColors.cs" />
+    <Compile Include="Enums\ProductSize.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

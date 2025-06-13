@@ -11,7 +11,7 @@ namespace eUseControlBussinessLogic.Core
     {
         public List<Product> GetProductsList()
         {
-            using (var context = new DataContext())
+            using (var context = new EUseControlDbContext())
             {
                 List<Product> products = context.Products.ToList();
 

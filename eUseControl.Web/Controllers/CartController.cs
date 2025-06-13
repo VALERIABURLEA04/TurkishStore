@@ -1,12 +1,11 @@
 ﻿using eUseControl.Domain.Entities.CartEntities;
 using eUseControl.Domain.Entities.Listings;
-using eUseControl.Web.Logic.Attributes;
 using eUseControlBussinessLogic;
 using System.Web.Mvc;
 
 namespace ProjectOnlineStore.Controllers
 {
-    [CustomAuthorize] // Ensure only logged-in users with valid cookie access cart functions
+    [Authorize] // Ensure only logged-in users with valid cookie access cart functions
     public class CartController : Controller
     {
         private Cart GetCart()

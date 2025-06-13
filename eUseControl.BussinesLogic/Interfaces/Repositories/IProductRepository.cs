@@ -9,9 +9,11 @@ namespace businessLogic.Interfaces.Repositories
     {
         Task<ProductDto> GetByIdAsync(int id);
 
-        List<ProductDto> GetAllProducts(int userId);
+        Task<List<ProductDto>> GetAllProducts(int userId);
 
         ProductDto GetProductById(int id);
+
+        ProductDetailsDto GetProductDetailsById(int id);
 
         void AddProduct(ProductDto product, HttpPostedFileBase image);
 

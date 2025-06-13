@@ -1,18 +1,16 @@
-﻿namespace businessLogic.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using BusinessLogic.DBModel;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BusinessLogic.DBModel.DataContext>
+namespace businessLogic.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<EUseControlDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BusinessLogic.DBModel.DataContext context)
+        protected override void Seed(EUseControlDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

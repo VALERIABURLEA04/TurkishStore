@@ -13,6 +13,7 @@ using eUseControl.Domain.Mappers;
 
 namespace ProjectOnlineStore.Controllers
 {
+    [CustomAuthorize("Admin")]
     public class AdminController : Controller
     {
         private readonly IContact _contactBL;
@@ -27,7 +28,7 @@ namespace ProjectOnlineStore.Controllers
             _productBL = bl.GetProductRepository();
           }
 
-        // GET: Admin/Login
+        // GET: /Admin/Login
         public ActionResult AdminLogin()
         {
             if (Session["AdminUsername"] != null)
@@ -36,17 +37,17 @@ namespace ProjectOnlineStore.Controllers
             return View();
         }
 
-        public ActionResult ProductList()
+        public async Task<ActionResult> Product()
         {
             int userId = int.Parse(Session["UserId"]?.ToString());
-            List<ProductDto> products = _productBL.GetAllProducts(userId);
+            List<ProductDto> products = await _productBL.GetAllProducts(userId);
 
             return View(products);
         }
 
 
         // GET: Admin/Dashboard
-        [isAdmin]
+        [IsAdmin]
         public ActionResult Dashboard()
         {
             if (Session["AdminUsername"] == null)

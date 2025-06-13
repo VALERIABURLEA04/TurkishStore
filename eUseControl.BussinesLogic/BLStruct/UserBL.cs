@@ -1,5 +1,5 @@
-﻿using businessLogic.DBModel;
-using businessLogic.Interfaces;
+﻿using businessLogic.Interfaces;
+using BusinessLogic.DBModel;
 using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
 using eUseControl.Helpers.Session;
@@ -25,7 +25,7 @@ namespace businessLogic.BLStruct
 
             return await Task.Run(() =>
             {
-                using (var db = new UserContext())
+                using (var db = new EUseControlDbContext())
                 {
                     return db.Users.FirstOrDefault(u => u.Name == usernameOrEmail || u.Email == usernameOrEmail);
                 }
@@ -50,7 +50,7 @@ namespace businessLogic.BLStruct
 
         public async Task<User> GetUserByUsernameOrEmailAsync(string identifier)
         {
-            using (var db = new UserContext())
+            using (var db = new EUseControlDbContext())
             {
                 return await db.Users
                     .FirstOrDefaultAsync(u => u.Name == identifier || u.Email == identifier);

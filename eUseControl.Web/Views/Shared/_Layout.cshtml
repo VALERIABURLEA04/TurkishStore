@@ -1,83 +1,378 @@
 ﻿@using System.Web.Optimization
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title -SACCHARINE</title>
-
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
 
     @Styles.Render("~/bundles/css")
 </head>
-<body>
+<body class="animsition">
+    @Html.Partial("_Header")
+    @Html.Partial("_Cart")
 
-
-    @Html.Partial("_Header");
-
-
-
-
-
-    <div class="offcanvas offcanvas-start custom-offcanvas" tabindex="-1" id="sidebar">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Cart</h5>
-            <button type="button" class="btn-close" id="close_btn" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div id="cart-content">
-                <p>Your cart is currently empty.</p>
-            </div>
-            <div class="mt-3">
-                <button class="btn btn-light w-100" id="checkout-btn" style="display: none;">Checkout</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="cartOffcanvas">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Cart</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div id="cart-content">
-                <p style="color: #ffffff;">Your cart is currently empty.</p> <!-
-
-            </div>
-            <div class="mt-3">
-                <button class="btn btn-light w-100" id="checkout-btn" style="display: none;">Checkout</button>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="must-haves text-center">
-        <h1>MAISON</h1>
-        <h2>Must Haves</h2>
-    </div>
-
-
-    <p>helooooooooooooo</p>
-    <div class="must-haves">
-        <h1>MAISON</h1>
-        <h2>Must Haves</h2>
-    </div>
-
-    <div class="container body-content">
+    <div class="main p-t-100">
         @RenderBody()
-
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My website on ASP.NET</p>
-        </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @Html.Partial("_Footer")
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="zmdi zmdi-chevron-up"></i>
+        </span>
+    </div>
+
+    <!-- Modal -->
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="~/Content/images/icons/icon-close.png" alt="CLOSE">
+                </button>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+                                <div class="wrap-slick3-dots"></div>
+                                <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                                <div class="slick3 gallery-lb">
+                                    <div class="item-slick3" data-thumb="@Url.Content("~/Content/images/product-detail-01.jpg")">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="~/Content/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/Content/images/product-detail-01.jpg">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="item-slick3" data-thumb="@Url.Content("~/Content/images/product-detail-02.jpg")">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="~/Content/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/Content/images/product-detail-02.jpg">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="item-slick3" data-thumb="@Url.Content("~/Content/images/product-detail-03.jpg")">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="~/Content/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/Content/images/product-detail-03.jpg">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 p-b-30">
+                        <div class="p-r-50 p-t-5 p-lr-0-lg">
+                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                                Lightweight Jacket
+                            </h4>
+
+                            <span class="mtext-106 cl2">
+                                $58.79
+                            </span>
+
+                            <p class="stext-102 cl3 p-t-23">
+                                Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                            </p>
+
+                            <div class="p-t-33">
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-203 flex-c-m respon6">
+                                        Size
+                                    </div>
+
+                                    <div class="size-204 respon6-next">
+                                        <div class="rs1-select2 bor8 bg0">
+                                            <select class="js-select2" name="time">
+                                                <option>Choose an option</option>
+                                                <option>Size S</option>
+                                                <option>Size M</option>
+                                                <option>Size L</option>
+                                                <option>Size XL</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-203 flex-c-m respon6">
+                                        Color
+                                    </div>
+
+                                    <div class="size-204 respon6-next">
+                                        <div class="rs1-select2 bor8 bg0">
+                                            <select class="js-select2" name="time">
+                                                <option>Choose an option</option>
+                                                <option>Red</option>
+                                                <option>Blue</option>
+                                                <option>White</option>
+                                                <option>Grey</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-204 flex-w flex-m respon6-next">
+                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                            </div>
+
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+
+                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                            </div>
+                                        </div>
+
+                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            Add to cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                <div class="flex-m bor9 p-r-10 m-r-11">
+                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+                                        <i class="zmdi zmdi-favorite"></i>
+                                    </a>
+                                </div>
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+
+                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/animsition/js/animsition.min.js"></script>
+    <script src="~/Scripts/bootstrap/js/popper.js"></script>
+    <script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/select2/select2.min.js"></script>
+    <script>
+        $(".js-select2").each(function () {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        })
+    </script>
+    <script src="~/Scripts/daterangepicker/moment.min.js"></script>
+    <script src="~/Scripts/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/slick/slick.min.js"></script>
+    <script src="~/Scripts/js/slick-custom.js"></script>
+    <script src="~/Scripts/parallax100/parallax100.js"></script>
+    <script>
+        $('.parallax100').parallax100();
+    </script>
+    <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script>
+        $('.gallery-lb').each(function () {
+            $(this).magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+    <script src="~/Scripts/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Scripts/sweetalert/sweetalert.min.js"></script>
+    <script>
+        $('.js-addwish-b2').on('click', function (e) {
+            e.preventDefault();
+        });
+
+        $('.js-addwish-b2').on('click', function (e) {
+            e.preventDefault();
+
+            var $btn = $(this);
+            var nameProduct = $btn.closest('.block2').find('.js-name-b2').text().trim();
+
+            var isNowAdded = !$btn.hasClass('js-addedwish-b2');
+            $btn.toggleClass('js-addedwish-b2', isNowAdded);
+
+            var actionText = isNowAdded ? 'added to' : 'removed from';
+            swal(nameProduct, 'is ' + actionText + ' wishlist!', 'success');
+        });
+
+        $('.js-addwish-detail').on('click', function (e) {
+            e.preventDefault();
+            const $btn = $(this);
+            const nameProduct = $btn.closest('.js-name-detail').text().trim() ||
+                $btn.closest('.block2').find('.js-name-b2').text().trim();
+
+            const isNowAdded = !$btn.hasClass('js-addedwish-detail');
+            $btn.toggleClass('js-addedwish-detail', isNowAdded);
+
+            const actionText = isNowAdded ? 'added to' : 'removed from';
+            swal(nameProduct, `is ${actionText} wishlist!`, 'success');
+        });
+
+        $('.js-addcart-detail').on('click', function (e) {
+            e.preventDefault();
+            const $btn = $(this);
+            const nameProduct = $btn.closest('.js-name-detail').text().trim() ||
+                $btn.closest('.block2').find('.js-name-b2').text().trim();
+            swal(nameProduct, 'is added to cart!', 'success');
+        });
+    </script>
+    <script src="~/Scripts/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            $(this).css('position', 'relative');
+            $(this).css('overflow', 'hidden');
+            var ps = new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false,
+            });
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+    </script>
+    <script src="~/Scripts/js/main.js"></script>
+
+    <script>
+        const isAuthenticated = @Html.Raw(Session["LoginStatus"]?.ToString() == "login" ? "true" : "false");
+
+        function updateHeaderCount(delta) {
+            const el = document.getElementById('favorite-count');
+            if (!el) return;
+            let cnt = parseInt(el.getAttribute('data-notify')) || 0;
+            cnt = Math.max(0, cnt + delta);
+            el.setAttribute('data-notify', cnt);
+        }
+
+        function getFavoritesCookie() {
+            const name = "favorites=";
+            const parts = decodeURIComponent(document.cookie).split(';');
+            for (let c of parts) {
+                c = c.trim();
+                if (c.indexOf(name) === 0) {
+                    try { return JSON.parse(c.substring(name.length)); }
+                    catch { return []; }
+                }
+            }
+            return [];
+        }
+
+        function setFavoritesCookie(list) {
+            const d = new Date();
+            d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000);
+            document.cookie = `favorites=${JSON.stringify(list)};expires=${d.toUTCString()};path=/`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!isAuthenticated) {
+                const favs = getFavoritesCookie();
+                favs.forEach(id => {
+                    const anchor = document.getElementById(`wish-${id}`);
+                    if (anchor) anchor.classList.add('addedwish');
+                });
+            }
+        });
+
+        const emptySrc = '/Content/images/icons/icon-heart-01.png';
+        const fullSrc = '/Content/images/icons/icon-heart-02.png';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.js-addwish-b2').forEach(el => {
+                const id = +el.getAttribute('data-product-id');
+                const img = document.getElementById(`heart-${id}`);
+                if (isAuthenticated) {
+                    if (el.classList.contains('favorited')) {
+                        img.src = fullSrc;
+                    }
+                } else {
+                    if (getFavoritesCookie().includes(id)) {
+                        img.src = fullSrc;
+                    }
+                }
+            });
+        });
+
+        function toggleFavorite(productId) {
+            const img = document.getElementById(`heart-${productId}`);
+            if (isAuthenticated) {
+                fetch(`/Shop/ToggleFavorite/${productId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: productId })
+                })
+                    .then(r => r.json())
+                    .then(data => {
+                        img.src = data.isFavorite ? fullSrc : emptySrc;
+                        updateHeaderCount(data.isFavorite ? +1 : -1);
+                        document.getElementById(`wish-${productId}`)
+                            .classList.toggle('favorited', data.isFavorite);
+                    });
+            } else {
+                let favs = getFavoritesCookie();
+                const idx = favs.indexOf(productId);
+                const add = idx === -1;
+                if (add) favs.push(productId);
+                else favs.splice(idx, 1);
+                setFavoritesCookie(favs);
+                img.src = add ? fullSrc : emptySrc;
+                updateHeaderCount(add ? +1 : -1);
+            }
+        }
+    </script>
+
     @Scripts.Render("~/bundles/js")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

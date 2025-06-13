@@ -12,6 +12,8 @@ namespace ProjectOnlineStore
         private void Application_Start(object sender, EventArgs e)
         {
             DbInitializer.SeedAdmin();
+            DbInitializer.SeedProducts();
+            DbInitializer.SeedBlogs();
 
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
