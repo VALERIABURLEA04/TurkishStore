@@ -58,3 +58,15 @@ C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Helpers\obj\Debug\eUseC
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.CopyComplete
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.dll
 C:\Users\danie\OneDrive\Desktop\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.pdb
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.dll.config
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.dll
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\eUseControl.Helpers.pdb
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.dll
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.xml
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.AssemblyReference.cache
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.csproj.CopyComplete
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.dll
+C:\Users\danie\source\repos\TurkishStore\eUseControl.Helpers\obj\Debug\eUseControl.Helpers.pdb
