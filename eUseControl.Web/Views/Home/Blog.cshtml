@@ -1,6 +1,5 @@
-﻿@using businessLogic.Dtos.BlogDtos;
-﻿@using System.Web.Optimization;
-@model List<BlogPostDto>
+﻿﻿@using System.Web.Optimization;
+@model List<eUSeControl.BusinessLogic.Dtos.BlogDtos.BlogPostDto>
 @{
     ViewBag.Title = "Blog";
 }
@@ -20,7 +19,8 @@
                     @foreach (var post in Model)
                     {
                         <div class="p-b-63">
-                            <a href="@Url.Action("Detail", "Blog", new { id = post.Id })" class="hov-img0 how-pos5-parent">
+                            <a href="#" class="hov-img0 how-pos5-parent">
+                                @*@Url.Action("Detail", "Blog", new { id = post.Id })*@
                                 <img src="@Url.Content(post.ImageUrl)" alt="@post.Title" />
                                 <div class="flex-col-c-m size-123 bg9 how-pos5">
                                     <span class="ltext-107 cl2 txt-center">@post.Day</span>
@@ -29,7 +29,8 @@
                             </a>
                             <div class="p-t-32">
                                 <h4 class="p-b-15">
-                                    <a href="@Url.Action("Detail", "Blog", new { id = post.Id })" class="ltext-108 cl2 hov-cl1 trans-04">
+                                    <a href="#" class="ltext-108 cl2 hov-cl1 trans-04">
+                                        @*@Url.Action("Detail", "Blog", new { id = post.Id })*@
                                         @post.Title
                                     </a>
                                 </h4>
@@ -42,7 +43,8 @@
                                         <span>@post.Categories.Replace(",", ", ") <span class="cl12 m-l-4 m-r-6">|</span></span>
                                         <span>@post.CommentsCount Comments</span>
                                     </span>
-                                    <a href="@Url.Action("Detail", "Blog", new { id = post.Id })" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                    <a href="#" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                        @*@Url.Action("Detail", "Blog", new { id = post.Id })*@
                                         Continue Reading <i class="fa fa-long-arrow-right m-l-9"></i>
                                     </a>
                                 </div>
