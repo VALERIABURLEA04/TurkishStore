@@ -9,9 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Web", "eUseControl.Web\eUseControl.Web.csproj", "{5FC7D261-393D-4D3B-B2AA-C3BA8C37EC1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Common", "eUseControl.Common\eUseControl.Common.csproj", "{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.DataAccess", "eUseControl.DataAccess\eUseControl.DataAccess.csproj", "{1905E30E-6EE2-464F-81F8-EE277DDB8695}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Helpers", "eUseControl.Common\eUseControl.Helpers.csproj", "{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1905E30E-6EE2-464F-81F8-EE277DDB8695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1905E30E-6EE2-464F-81F8-EE277DDB8695}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1905E30E-6EE2-464F-81F8-EE277DDB8695}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1905E30E-6EE2-464F-81F8-EE277DDB8695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

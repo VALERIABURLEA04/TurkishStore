@@ -70,9 +70,9 @@
       <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>
       <Name>eUseControl.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Helpers.csproj">
       <Project>{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}</Project>
-      <Name>eUseControl.Common</Name>
+      <Name>eUseControl.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -55,10 +55,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EUseControlDbContext.cs" />
+    <Compile Include="Data\Seed\DbInitializer.cs" />
     <Compile Include="Dtos\CartDtos\CartItemDto.cs" />
     <Compile Include="Dtos\CartDtos\UpsertCartItemDto.cs" />
     <Compile Include="Interfaces\IBlogPostService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Migrations\202506180827272_InitialMigration.cs" />
+    <Compile Include="Migrations\202506180827272_InitialMigration.Designer.cs">
+      <DependentUpon>202506180827272_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\BlogPostRepository.cs" />
+    <Compile Include="Repositories\CartRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Services\BlogPostService.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\ContactService.cs" />
@@ -89,18 +99,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Helpers.csproj">
       <Project>{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}</Project>
-      <Name>eUseControl.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUseControl.DataAccess\eUseControl.DataAccess.csproj">
-      <Project>{1905e30e-6ee2-464f-81f8-ee277ddb8695}</Project>
-      <Name>eUseControl.DataAccess</Name>
+      <Name>eUseControl.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
       <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>
       <Name>eUseControl.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202506180827272_InitialMigration.resx">
+      <DependentUpon>202506180827272_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -455,13 +455,9 @@
       <Project>{7eb12c28-cbe0-4e02-9adc-79fb7db4e9ce}</Project>
       <Name>eUseControl.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Helpers.csproj">
       <Project>{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}</Project>
-      <Name>eUseControl.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUseControl.DataAccess\eUseControl.DataAccess.csproj">
-      <Project>{1905e30e-6ee2-464f-81f8-ee277ddb8695}</Project>
-      <Name>eUseControl.DataAccess</Name>
+      <Name>eUseControl.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

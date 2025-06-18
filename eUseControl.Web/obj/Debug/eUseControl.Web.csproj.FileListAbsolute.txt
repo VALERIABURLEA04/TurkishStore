@@ -56,7 +56,6 @@ C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\Antlr3.Runtime.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\businessLogic.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\EntityFramework.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\EntityFramework.SqlServer.dll
-C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.DataAccess.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.Helpers.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\Microsoft.Web.Infrastructure.dll
@@ -77,8 +76,6 @@ C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\businessLogic.pdb
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\businessLogic.dll.config
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.Helpers.pdb
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.Helpers.dll.config
-C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.DataAccess.pdb
-C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\eUseControl.DataAccess.dll.config
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\Antlr3.Runtime.pdb
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\EntityFramework.xml
 C:\Users\danie\source\repos\TurkishStore\eUseControl.Web\bin\EntityFramework.SqlServer.xml

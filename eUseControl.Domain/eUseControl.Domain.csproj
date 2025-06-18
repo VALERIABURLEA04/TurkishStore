@@ -77,9 +77,9 @@
     <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Helpers.csproj">
       <Project>{66e04d5c-cd5e-44a3-a5b4-4ddf47065256}</Project>
-      <Name>eUseControl.Common</Name>
+      <Name>eUseControl.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
