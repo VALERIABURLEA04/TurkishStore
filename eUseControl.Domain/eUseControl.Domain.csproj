@@ -77,14 +77,14 @@
     <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Common\eUseControl.Helpers.csproj">
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eUseControl.Helpers\eUseControl.Helpers.csproj">
       <Project>{66e04d5c-cd5e-44a3-a5b4-4ddf47065256}</Project>
       <Name>eUseControl.Helpers</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
