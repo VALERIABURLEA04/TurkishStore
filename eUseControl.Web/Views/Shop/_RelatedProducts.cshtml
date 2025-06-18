@@ -31,9 +31,14 @@
                                     <span class="stext-105 cl3">@product.Price.ToString("N2") MDL</span>
                                 </div>
                                 <div class="block2-txt-child2 flex-r p-t-3">
-                                    <a asp-action="ToggleFavorite" asp-controller="Product" asp-route-id="@product.Id"
-                                       class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                        <i class="zmdi @(product.IsFavorite.Value ? "zmdi-favorite" : "zmdi-favorite-outline")"></i>
+                                    <a onclick="toggleFavorite(@product.Id)"
+                                       class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 m-r-20 @(product.IsFavorite.Value ? "favorited" : "")"
+                                       data-product-id="@product.Id"
+                                       id="wish-@product.Id">
+                                        <img id="heart-@product.Id"
+                                             class="icon-heart dis-block trans-04 ab-t-l"
+                                             src="~/Content/images/icons/icon-heart-01.png"
+                                             alt="heart" />
                                     </a>
                                 </div>
                             </div>
