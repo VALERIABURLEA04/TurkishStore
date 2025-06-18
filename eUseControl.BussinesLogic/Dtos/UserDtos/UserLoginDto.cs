@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace businessLogic.Dtos.UserDtos
+namespace eUSeControl.BusinessLogic.Dtos.UserDtos
 {
     public class UserLoginDto
     {

@@ -1,4 +1,4 @@
-﻿@using businessLogic.Dtos.ProductDtos;
+﻿@using eUSeControl.BusinessLogic.Dtos.ProductDtos;
 @model List<ProductDto>
 @{
     ViewBag.Title = "Products";
@@ -272,12 +272,12 @@
                                     @product.Name
                                 </a>
                                 <span class="stext-105 cl3">
-                                    @product.Price.ToString("C")
+                                    @product.Price.ToString("N2") MDL
                                 </span>
                             </div>
                             <div class="block2-txt-child2 flex-r p-t-3">
                                 <a onclick="toggleFavorite(@product.Id)"
-                                   class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 m-r-20"
+                                   class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 m-r-20 @(product.IsFavorite.Value ? "favorited" : "")"
                                    data-product-id="@product.Id"
                                    id="wish-@product.Id">
                                     <img id="heart-@product.Id"

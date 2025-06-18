@@ -1,6 +1,6 @@
 ﻿using eUseControl.Domain.Enums;
 
-namespace businessLogic.Dtos.UserDtos
+namespace eUSeControl.BusinessLogic.Dtos.UserDtos
 {
     public class UserRespDto
     {

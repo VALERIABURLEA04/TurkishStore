@@ -1,5 +1,5 @@
-﻿using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.ProductEntities;
+﻿using eUseControl.Domain.Entities.ProductEntities;
+using eUSeControl.DataAccess.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

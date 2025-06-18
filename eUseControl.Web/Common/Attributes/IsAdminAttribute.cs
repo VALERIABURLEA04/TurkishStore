@@ -1,6 +1,7 @@
-﻿using businessLogic.Dtos.UserDtos;
+﻿using eUseControl.BusinessLogic.Services;
 using eUseControl.Domain.Enums;
-using eUseControlBussinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Dtos.UserDtos;
+using eUSeControl.BusinessLogic.Services;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -9,12 +10,11 @@ namespace eUseControl.Web.Logic.Attributes
 {
     public class IsAdminAttribute : ActionFilterAttribute
     {
-        private readonly ISession _session;
+        private readonly ISessionService _session;
 
         public IsAdminAttribute()
         {
-            var bl = new eUseControlBussinessLogic.BusinesLogic();
-            _session = bl.GetSessionBL();
+            _session = new SessionService();
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)

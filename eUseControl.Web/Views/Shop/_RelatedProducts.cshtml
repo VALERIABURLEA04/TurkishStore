@@ -1,4 +1,5 @@
-﻿@model List<businessLogic.Dtos.ProductDtos.ProductDto>
+﻿@using eUSeControl.BusinessLogic.Dtos.ProductDtos;
+@model List<ProductDto>
 
 <section class="sec-relate-product bg0 p-t-45 p-b-105">
     <div class="container">
@@ -27,7 +28,7 @@
                                        class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                         @product.Name
                                     </a>
-                                    <span class="stext-105 cl3">@product.Price.ToString("C")</span>
+                                    <span class="stext-105 cl3">@product.Price.ToString("N2") MDL</span>
                                 </div>
                                 <div class="block2-txt-child2 flex-r p-t-3">
                                     <a asp-action="ToggleFavorite" asp-controller="Product" asp-route-id="@product.Id"

@@ -1,5 +1,6 @@
-﻿using eUseControl.Domain.Enums;
-using eUseControlBussinessLogic.Interfaces;
+﻿using eUseControl.BusinessLogic.Services;
+using eUseControl.Domain.Enums;
+using eUSeControl.BusinessLogic.Services;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -13,14 +14,13 @@ namespace eUseControl.Web.Logic.Attributes
     /// </summary>
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        private readonly ISession _session;
+        private readonly ISessionService _session;
 
         public CustomAuthorizeAttribute(string roles = null)
         {
             Roles = roles;
 
-            var bl = new eUseControlBussinessLogic.BusinesLogic();
-            _session = bl.GetSessionBL();
+            _session = new SessionService();
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)

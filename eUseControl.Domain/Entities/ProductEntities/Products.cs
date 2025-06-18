@@ -1,4 +1,5 @@
-﻿using eUseControl.Domain.Enums;
+﻿using eUseControl.Domain.Entities.ListingEntities;
+using eUseControl.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -51,5 +52,8 @@ namespace eUseControl.Domain.Entities.ProductEntities
 
         public virtual ICollection<ProductSize> ProductSizes { get; set; } = new HashSet<ProductSize>();
         public virtual ICollection<ProductColor> ProductColors { get; set; } = new HashSet<ProductColor>();
+
+        [InverseProperty(nameof(Cart.Product))]
+        public virtual ICollection<Cart> CartItems { get; set; } = new HashSet<Cart>();
     }
 }

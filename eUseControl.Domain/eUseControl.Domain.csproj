@@ -55,7 +55,6 @@
     <Compile Include="Common\Attributes\EnumToStringAttribute.cs" />
     <Compile Include="Entities\BlogEntities\BlogComment.cs" />
     <Compile Include="Entities\BlogEntities\BlogPost.cs" />
-    <Compile Include="Entities\CartEntities\CartItem.cs" />
     <Compile Include="Entities\CartEntities\Cart.cs" />
     <Compile Include="Entities\ListingEntities\Item.cs" />
     <Compile Include="Entities\ListingEntities\Listing.cs" />
@@ -71,20 +70,18 @@
     <Compile Include="Entities\UserEntities\UserLogin.cs" />
     <Compile Include="Entities\UserEntities\UserRegister.cs" />
     <Compile Include="Entities\UserEntities\User.cs" />
-    <Compile Include="Enums\LogInResult.cs" />
-    <Compile Include="Enums\ProductCategory.cs" />
-    <Compile Include="Enums\ProductColors.cs" />
-    <Compile Include="Enums\ProductSize.cs" />
-    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IBlogPostRepository.cs" />
+    <Compile Include="Repositories\ICartRepository.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Helpers\eUseControl.Helpers.csproj">
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
       <Project>{66e04d5c-cd5e-44a3-a5b4-4ddf47065256}</Project>
-      <Name>eUseControl.Helpers</Name>
+      <Name>eUseControl.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
