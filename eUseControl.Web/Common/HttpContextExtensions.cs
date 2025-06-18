@@ -1,4 +1,4 @@
-﻿using businessLogic.Dtos.UserDtos;
+﻿using eUSeControl.BusinessLogic.Dtos.UserDtos;
 using System.Web;
 
 namespace eUseControl.Web.Logic

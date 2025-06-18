@@ -92,7 +92,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-5 p-b-30">
+                    @*TODO: this will be implemented in future*@
+
+                    @*<div class="col-md-6 col-lg-5 p-b-30">
                         <div class="p-r-50 p-t-5 p-lr-0-lg">
                             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                                 Lightweight Jacket
@@ -165,28 +167,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                <div class="flex-m bor9 p-r-10 m-r-11">
-                                    <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-                                        <i class="zmdi zmdi-favorite"></i>
-                                    </a>
-                                </div>
-
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -370,6 +352,66 @@
                 updateHeaderCount(add ? +1 : -1);
             }
         }
+
+        const cartList = document.querySelector('.header-cart-wrapitem');
+        const totalDiv = document.querySelector('.header-cart-total');
+
+        function renderCartItems(items) {
+            cartList.innerHTML = '';
+            let total = 0;
+
+            console.log(items)
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "header-cart-item flex-w flex-t m-b-12";
+
+                li.innerHTML = `
+                     <div class="header-cart-item-img">
+                         <img src="${item.ImageUrl}" alt="IMG">
+                     </div>
+                     <div class="header-cart-item-txt p-t-8">
+                         <a href="/Shop/ProductDetails/${item.ProductId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                             ${item.Name}
+                         </a>
+                         <span class="header-cart-item-info">
+                             ${item.Quantity} x ${item.Price} MDL
+                         </span>
+                     </div>
+                 `;
+
+                total += item.Quantity * item.Price;
+                cartList.appendChild(li);
+            });
+
+            totalDiv.textContent = `Total: ${total.toFixed(2)} MDL`;
+        }
+
+        function getCartItemsFromLocalStorage() {
+            try {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            } catch {
+                return [];
+            }
+        }
+
+        function loadCart() {
+            if (isAuthenticated) {
+                fetch('/Cart/GetCartItems')
+                    .then(res => res.json())
+                    .then(data => renderCartItems(data))
+                    .catch(err => console.error("Error loading cart from server:", err));
+            } else {
+                const localItems = getCartItemsFromLocalStorage();
+                renderCartItems(localItems);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.js-show-cart').forEach(btn => {
+                btn.addEventListener('click', loadCart);
+            });
+        });
     </script>
 
     @Scripts.Render("~/bundles/js")

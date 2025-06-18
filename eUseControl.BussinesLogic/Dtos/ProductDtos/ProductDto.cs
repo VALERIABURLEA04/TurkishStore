@@ -1,4 +1,4 @@
-﻿namespace businessLogic.Dtos.ProductDtos
+﻿namespace eUSeControl.BusinessLogic.Dtos.ProductDtos
 {
     public class ProductDto
     {

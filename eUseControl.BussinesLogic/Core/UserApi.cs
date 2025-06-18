@@ -1,10 +1,10 @@
-﻿using businessLogic.Dtos.UserDtos;
-using BusinessLogic.DBModel;
-using eUseControl.Domain.Entities.SessionEntities;
+﻿using eUseControl.Domain.Entities.SessionEntities;
 using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
-using eUseControl.Helpers.AccessFlow;
-using eUseControl.Helpers.Session;
+using eUSeControl.BusinessLogic.Dtos.UserDtos;
+using eUSeControl.Common.AccessFlow;
+using eUSeControl.Common.Session;
+using eUSeControl.DataAccess.Data;
 using System;
 using System.Data.Entity;
 using System.Linq;

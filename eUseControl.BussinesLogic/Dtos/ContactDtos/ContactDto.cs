@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace businessLogic.Dtos.ContactDtos
+namespace eUSeControl.BusinessLogic.Dtos.ContactDtos
 {
     public class ContactDto
     {

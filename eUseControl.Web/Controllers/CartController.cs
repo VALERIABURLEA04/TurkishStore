@@ -1,101 +1,48 @@
-﻿using eUseControl.Domain.Entities.CartEntities;
-using eUseControl.Domain.Entities.Listings;
-using eUseControlBussinessLogic;
+﻿using businessLogic.Dtos.CartDtos;
+using eUSeControl.BusinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ProjectOnlineStore.Controllers
 {
-    [Authorize] // Ensure only logged-in users with valid cookie access cart functions
     public class CartController : Controller
     {
-        private Cart GetCart()
+        private readonly ICartService _cartService;
+
+        public CartController()
         {
-            var bl = new BusinesLogic();
-            var session = bl.GetSessionBL();
-            var user = session.GetUserByCookie(Request.Cookies["X-KEY"]?.Value);
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            // Using UserId instead of Id
-            string cartKey = $"Cart_{user.UserId}";
-            Cart cart = Session[cartKey] as Cart;
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session[cartKey] = cart;
-            }
-            return cart;
-        }
-
-        // Added ShoppingCart action to fix 404 for /Cart/ShoppingCart URL
-        public ActionResult ShoppingCart()
-        {
-            var cart = GetCart();
-            if (cart == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-            return View(cart);
-        }
-
-        // Also keep Index as alternative entry point
-        public ActionResult Index()
-        {
-            return RedirectToAction("ShoppingCart");
+            _cartService = CartService.GetInstance();
         }
 
         [HttpPost]
-        public ActionResult AddToCart(Item item)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddProductToCart(UpsertCartItemDto model)
         {
-            if (ModelState.IsValid)
-            {
-                var cart = GetCart();
-                if (cart == null)
-                {
-                    return RedirectToAction("Login", "Auth");
-                }
-                cart.AddItem(item);
-                return RedirectToAction("ShoppingCart");
-            }
-            return RedirectToAction("Index", "Home");
+            if (Session["LoginStatus"]?.ToString() != "login")
+                return RedirectToAction("Login", "Auth");
+
+            model.UserId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+
+            var message = await _cartService.AddCartItemAsync(model);
+            TempData["CartMessage"] = message;
+
+            return RedirectToAction("Product", "Shop");
         }
 
-        [HttpPost]
-        public ActionResult RemoveFromCart(int clothId)
+        [HttpGet]
+        public async Task<JsonResult> GetCartItems()
         {
-            var cart = GetCart();
-            if (cart == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-            cart.RemoveItem(clothId);
-            return RedirectToAction("ShoppingCart");
-        }
+            var items = new List<CartItemDto>();
 
-        [HttpPost]
-        public ActionResult UpdateQuantity(int clothId, int quantity)
-        {
-            var cart = GetCart();
-            if (cart == null)
+            if (Session["LoginStatus"]?.ToString() == "login")
             {
-                return RedirectToAction("Login", "Auth");
+                int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+                items = await _cartService.GetCartItemsAsync(userId);
             }
-            cart.UpdateQuantity(clothId, quantity);
-            return RedirectToAction("ShoppingCart");
-        }
 
-        public ActionResult ClearCart()
-        {
-            var cart = GetCart();
-            if (cart == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-            cart.Clear();
-            return RedirectToAction("ShoppingCart");
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
     }
 }

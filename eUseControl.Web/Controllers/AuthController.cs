@@ -1,8 +1,8 @@
-﻿using businessLogic.Dtos.UserDtos;
-using businessLogic.Interfaces;
+﻿using eUseControl.BusinessLogic.Services;
 using eUseControl.Domain.Enums;
-using eUseControlBussinessLogic;
-using eUseControlBussinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Dtos.UserDtos;
+using eUSeControl.BusinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Services;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -11,14 +11,13 @@ namespace ProjectOnlineStore.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly ISession _session;
-        private readonly IRegister _register;
+        private readonly ISessionService _sessionService;
+        private readonly IRegisterService _registerService;
 
         public AuthController()
         {
-            var bl = new BusinesLogic();
-            _session = bl.GetSessionBL();
-            _register = bl.GetRegisterBL();
+            _sessionService = SessionService.GetInstance();
+            _registerService = RegisterService.GetInstance();
         }
 
         // GET: /Auth/Register
@@ -45,7 +44,7 @@ namespace ProjectOnlineStore.Controllers
 
                 try
                 {
-                    string token = _register.SignUpLogic(data);
+                    string token = _registerService.SignUpLogic(data);
                 }
                 catch (Exception)
                 {
@@ -80,11 +79,11 @@ namespace ProjectOnlineStore.Controllers
 
                 try
                 {
-                    var userResp = _session.LogInLogic(data);
+                    var userResp = _sessionService.LogInLogic(data);
 
                     if (userResp.Status)
                     {
-                        UserCookieRespDto userCookieResp = _session.GenerateCookieByUser(userResp.UserId);
+                        UserCookieRespDto userCookieResp = _sessionService.GenerateCookieByUser(userResp.UserId);
 
                         HttpCookie cookie = userCookieResp.Cookie;
                         Response.Cookies.Add(cookie);
@@ -115,7 +114,7 @@ namespace ProjectOnlineStore.Controllers
                         return View(loginModel);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     TempData["ErrorMessage"] = "System error. Please try again later.";
                 }

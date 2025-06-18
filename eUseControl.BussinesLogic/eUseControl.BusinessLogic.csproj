@@ -55,177 +55,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLStruct\BlogPostRepository.cs" />
-    <Compile Include="BLStruct\CartBL.cs" />
-    <Compile Include="BLStruct\CartRepositoryBL.cs" />
-    <Compile Include="BLStruct\ContactBL.cs" />
-    <Compile Include="BLStruct\ListingsBL.cs" />
-    <Compile Include="BLStruct\ProductRepositoryBL.cs" />
-    <Compile Include="BLStruct\RegisterBL.cs" />
-    <Compile Include="BLStruct\SessionBL.cs" />
-    <Compile Include="BLStruct\UserBL.cs" />
-    <Compile Include="BusinesLogic.cs" />
+    <Compile Include="Dtos\CartDtos\CartItemDto.cs" />
+    <Compile Include="Dtos\CartDtos\UpsertCartItemDto.cs" />
+    <Compile Include="Interfaces\IBlogPostService.cs" />
+    <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Services\BlogPostService.cs" />
+    <Compile Include="Services\CartService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\RegisterService.cs" />
+    <Compile Include="Services\SessionService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
-    <Compile Include="Data\EUseControlDbContext.cs" />
-    <Compile Include="Data\Seed\DbInitializer.cs" />
     <Compile Include="Dtos\BlogDtos\BlogPostDto.cs" />
     <Compile Include="Dtos\ContactDtos\ContactDto.cs" />
-    <Compile Include="Dtos\CreateListingDto.cs" />
-    <Compile Include="Dtos\ProductDtos\CreateProductDto.cs" />
+    <Compile Include="Dtos\ProductDtos\UpsertProductDto.cs" />
     <Compile Include="Dtos\ProductDtos\ProductDetailsDto.cs" />
     <Compile Include="Dtos\ProductDtos\ProductDto.cs" />
     <Compile Include="Dtos\UserDtos\UserCookieRespDto.cs" />
     <Compile Include="Dtos\UserDtos\UserLoginDto.cs" />
     <Compile Include="Dtos\UserDtos\UserRegisterDto.cs" />
     <Compile Include="Dtos\UserDtos\UserRespDto.cs" />
-    <Compile Include="Interfaces\ICart.cs" />
-    <Compile Include="Interfaces\IContact.cs" />
-    <Compile Include="Interfaces\IListings.cs" />
-    <Compile Include="Interfaces\IRegister.cs" />
-    <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Interfaces\IUser.cs" />
-    <Compile Include="Interfaces\Repositories\IBlogPostRepository.cs" />
-    <Compile Include="Interfaces\Repositories\ICartRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IProductRepository.cs" />
-    <Compile Include="Migrations\202505060531050_InitialCreate.cs" />
-    <Compile Include="Migrations\202505060531050_InitialCreate.Designer.cs">
-      <DependentUpon>202505060531050_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505061105082_Initial.cs" />
-    <Compile Include="Migrations\202505061105082_Initial.Designer.cs">
-      <DependentUpon>202505061105082_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505141754186_UpdateAdminSchema.cs" />
-    <Compile Include="Migrations\202505141754186_UpdateAdminSchema.Designer.cs">
-      <DependentUpon>202505141754186_UpdateAdminSchema.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505142140594_AddProductTable.cs" />
-    <Compile Include="Migrations\202505142140594_AddProductTable.Designer.cs">
-      <DependentUpon>202505142140594_AddProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505142359293_MakeProductFieldsRequired.cs" />
-    <Compile Include="Migrations\202505142359293_MakeProductFieldsRequired.Designer.cs">
-      <DependentUpon>202505142359293_MakeProductFieldsRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505171528249_AddUserTables.cs" />
-    <Compile Include="Migrations\202505171528249_AddUserTables.Designer.cs">
-      <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505190044219_CategoryProduct.cs" />
-    <Compile Include="Migrations\202505190044219_CategoryProduct.Designer.cs">
-      <DependentUpon>202505190044219_CategoryProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505190257528_RemovedCategory.cs" />
-    <Compile Include="Migrations\202505190257528_RemovedCategory.Designer.cs">
-      <DependentUpon>202505190257528_RemovedCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505190402007_MadeURLOptional.cs" />
-    <Compile Include="Migrations\202505190402007_MadeURLOptional.Designer.cs">
-      <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505271933180_AddCartItemsTable.cs" />
-    <Compile Include="Migrations\202505271933180_AddCartItemsTable.Designer.cs">
-      <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506041427243_AddedProductToUserTable.cs" />
-    <Compile Include="Migrations\202506041427243_AddedProductToUserTable.designer.cs">
-      <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506120849308_AddedTypeFieldToProductTable.cs" />
-    <Compile Include="Migrations\202506120849308_AddedTypeFieldToProductTable.designer.cs">
-      <DependentUpon>202506120849308_AddedTypeFieldToProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.cs" />
-    <Compile Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.designer.cs">
-      <DependentUpon>202506120913463_UpdateTypeFieldToEnumFromProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.cs" />
-    <Compile Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.designer.cs">
-      <DependentUpon>202506121227294_AddedBlogPostAndBlogCommentTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506121456295_RenameBlogPostsTable.cs" />
-    <Compile Include="Migrations\202506121456295_RenameBlogPostsTable.designer.cs">
-      <DependentUpon>202506121456295_RenameBlogPostsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506130056497_AddedProductImagesToProductTable.cs" />
-    <Compile Include="Migrations\202506130056497_AddedProductImagesToProductTable.designer.cs">
-      <DependentUpon>202506130056497_AddedProductImagesToProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506130907310_AddColorAndSizeToProductTable.cs" />
-    <Compile Include="Migrations\202506130907310_AddColorAndSizeToProductTable.designer.cs">
-      <DependentUpon>202506130907310_AddColorAndSizeToProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Interfaces\ICartService.cs" />
+    <Compile Include="Interfaces\IContactService.cs" />
+    <Compile Include="Interfaces\IRegisterService.cs" />
+    <Compile Include="Interfaces\ISessionService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
-      <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>
-      <Name>eUseControl.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Helpers\eUseControl.Helpers.csproj">
-      <Project>{66e04d5c-cd5e-44a3-a5b4-4ddf47065256}</Project>
-      <Name>eUseControl.Helpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202505060531050_InitialCreate.resx">
-      <DependentUpon>202505060531050_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505061105082_Initial.resx">
-      <DependentUpon>202505061105082_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505141754186_UpdateAdminSchema.resx">
-      <DependentUpon>202505141754186_UpdateAdminSchema.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505142140594_AddProductTable.resx">
-      <DependentUpon>202505142140594_AddProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505142359293_MakeProductFieldsRequired.resx">
-      <DependentUpon>202505142359293_MakeProductFieldsRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505171528249_AddUserTables.resx">
-      <DependentUpon>202505171528249_AddUserTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505190044219_CategoryProduct.resx">
-      <DependentUpon>202505190044219_CategoryProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505190257528_RemovedCategory.resx">
-      <DependentUpon>202505190257528_RemovedCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505190402007_MadeURLOptional.resx">
-      <DependentUpon>202505190402007_MadeURLOptional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505271933180_AddCartItemsTable.resx">
-      <DependentUpon>202505271933180_AddCartItemsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506041427243_AddedProductToUserTable.resx">
-      <DependentUpon>202506041427243_AddedProductToUserTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506120849308_AddedTypeFieldToProductTable.resx">
-      <DependentUpon>202506120849308_AddedTypeFieldToProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506120913463_UpdateTypeFieldToEnumFromProductTable.resx">
-      <DependentUpon>202506120913463_UpdateTypeFieldToEnumFromProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506121227294_AddedBlogPostAndBlogCommentTables.resx">
-      <DependentUpon>202506121227294_AddedBlogPostAndBlogCommentTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506121456295_RenameBlogPostsTable.resx">
-      <DependentUpon>202506121456295_RenameBlogPostsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506130056497_AddedProductImagesToProductTable.resx">
-      <DependentUpon>202506130056497_AddedProductImagesToProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506130907310_AddColorAndSizeToProductTable.resx">
-      <DependentUpon>202506130907310_AddColorAndSizeToProductTable.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+      <Project>{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}</Project>
+      <Name>eUseControl.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.DataAccess\eUseControl.DataAccess.csproj">
+      <Project>{1905e30e-6ee2-464f-81f8-ee277ddb8695}</Project>
+      <Name>eUseControl.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
+      <Project>{86fa9e51-54b1-48c0-a3ad-0db9bccddda8}</Project>
+      <Name>eUseControl.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

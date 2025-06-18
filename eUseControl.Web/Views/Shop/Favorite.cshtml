@@ -1,5 +1,4 @@
-﻿@using System.Web.Optimization
-@using businessLogic.Dtos.ProductDtos;
+﻿@using eUSeControl.BusinessLogic.Dtos.ProductDtos;
 @model List<ProductDto>
 @{
     ViewBag.Title = "Favorite Products";
@@ -122,22 +121,22 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: +id })
             })
-            .then(r => r.json())
-            .then(data => {
-                if (!data.isFavorite) {
-                    const elem = document.querySelector(`.isotope-item[data-id="${id}"]`);
-                    iso.remove(elem);
-                    iso.layout();
-                    updateHeaderCount(-1);
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.isFavorite) {
+                        const elem = document.querySelector(`.isotope-item[data-id="${id}"]`);
+                        iso.remove(elem);
+                        iso.layout();
+                        updateHeaderCount(-1);
 
-                    if (!document.querySelector('.isotope-item')) {
-                        document.querySelector('.isotope-grid').innerHTML =
-                            '<div class="col-12 text-center p-t-50 p-b-100">' +
-                            '<p class="stext-107">You have no favorite products.</p>' +
-                            '</div>';
+                        if (!document.querySelector('.isotope-item')) {
+                            document.querySelector('.isotope-grid').innerHTML =
+                                '<div class="col-12 text-center p-t-50 p-b-100">' +
+                                '<p class="stext-107">You have no favorite products.</p>' +
+                                '</div>';
+                        }
                     }
-                }
-            });
+                });
         });
     </script>
 }

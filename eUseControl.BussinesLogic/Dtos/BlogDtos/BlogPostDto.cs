@@ -1,4 +1,4 @@
-﻿namespace businessLogic.Dtos.BlogDtos
+﻿namespace eUSeControl.BusinessLogic.Dtos.BlogDtos
 {
     public class BlogPostDto
     {

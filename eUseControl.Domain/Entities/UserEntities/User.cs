@@ -1,4 +1,5 @@
-﻿using eUseControl.Domain.Entities.ProductEntities;
+﻿using eUseControl.Domain.Entities.ListingEntities;
+using eUseControl.Domain.Entities.ProductEntities;
 using eUseControl.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -38,5 +39,8 @@ namespace eUseControl.Domain.Entities.UserEntities
 
         [InverseProperty("User")]
         public ICollection<ProductToUser> ProductsToUsers { get; set; } = new HashSet<ProductToUser>();
+
+        [InverseProperty(nameof(Cart.User))]
+        public virtual ICollection<Cart> CartItems { get; set; } = new HashSet<Cart>();
     }
 }

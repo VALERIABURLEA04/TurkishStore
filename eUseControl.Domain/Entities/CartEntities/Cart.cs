@@ -1,52 +1,43 @@
-﻿using eUseControl.Domain.Entities.Listings;
+﻿using eUseControl.Domain.Entities.ProductEntities;
+using eUseControl.Domain.Entities.UserEntities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace eUseControl.Domain.Entities.CartEntities
+namespace eUseControl.Domain.Entities.ListingEntities
 {
+    [Table("Cart")]
     public class Cart
     {
-        private List<Item> _items = new List<Item>();
+        [Key]
+        public int Id { get; set; }
 
-        public IEnumerable<Item> Items => _items;
+        [Required]
+        public DateTime AddedDate { get; set; }
 
-        public void AddItem(Item item)
-        {
-            var existingItem = _items.FirstOrDefault(i => i.ClothId == item.ClothId);
-            if (existingItem != null)
-            {
-                existingItem.Quantity += item.Quantity;
-            }
-            else
-            {
-                item.AddedDate = DateTime.Now;
-                _items.Add(item);
-            }
-        }
+        [Required]
+        public int Quantity { get; set; }
 
-        public void RemoveItem(int watchId)
-        {
-            _items.RemoveAll(i => i.ClothId == watchId);
-        }
+        [Required]
+        public int ProductId { get; set; }
 
-        public void UpdateQuantity(int watchId, int quantity)
-        {
-            var item = _items.FirstOrDefault(i => i.ClothId == watchId);
-            if (item != null)
-            {
-                item.Quantity = quantity;
-            }
-        }
+        [ForeignKey(nameof(ProductId))]
+        public virtual Product Product { get; set; }
 
-        public decimal GetTotal()
-        {
-            return _items.Sum(i => i.Price * i.Quantity);
-        }
+        [Required]
+        public int UserId { get; set; }
 
-        public void Clear()
-        {
-            _items.Clear();
-        }
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
+
+        public int? SizeId { get; set; }
+
+        [ForeignKey(nameof(SizeId))]
+        public virtual ProductSize Size { get; set; }
+
+        public int? ColorId { get; set; }
+
+        [ForeignKey(nameof(ColorId))]
+        public virtual ProductColor Color { get; set; }
     }
 }

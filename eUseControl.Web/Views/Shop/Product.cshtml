@@ -1,4 +1,4 @@
-﻿@using businessLogic.Dtos.ProductDtos;
+﻿@using eUSeControl.BusinessLogic.Dtos.ProductDtos;
 @model List<ProductDto>
 @{
     ViewBag.Title = "Products";
@@ -258,8 +258,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="@Url.Content(product.ImageUrl)" alt="@product.Name" />
 
-                            <a href="javascript:void(0)"
-                               class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+                            <a href="@Url.Action("ProductDetails", "Shop", new { id = product.Id })"
+                               class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04"
                                data-product-id="@product.Id">
                                 Quick View
                             </a>
@@ -272,12 +272,12 @@
                                     @product.Name
                                 </a>
                                 <span class="stext-105 cl3">
-                                    @product.Price.ToString("C")
+                                    @product.Price.ToString("N2") MDL
                                 </span>
                             </div>
                             <div class="block2-txt-child2 flex-r p-t-3">
                                 <a onclick="toggleFavorite(@product.Id)"
-                                   class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 m-r-20"
+                                   class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 m-r-20 @(product.IsFavorite.Value ? "favorited" : "")"
                                    data-product-id="@product.Id"
                                    id="wish-@product.Id">
                                     <img id="heart-@product.Id"
@@ -292,10 +292,10 @@
             }
         </div>
         <!-- Load more -->
-        <div class="flex-c-m flex-w w-full p-t-45">
-            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
-            </a>
-        </div>
+        @*<div class="flex-c-m flex-w w-full p-t-45">
+                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                    Load More
+                </a>
+            </div>*@
     </div>
 </div>

@@ -160,6 +160,7 @@
     <Content Include="Content\images\gallery-07.jpg" />
     <Content Include="Content\images\gallery-08.jpg" />
     <Content Include="Content\images\gallery-09.jpg" />
+    <Content Include="Content\images\hande-ercel.png" />
     <Content Include="Content\images\icons\favicon.png" />
     <Content Include="Content\images\icons\icon-close.png" />
     <Content Include="Content\images\icons\icon-close2.png" />
@@ -405,7 +406,6 @@
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Shop\Shop.cshtml" />
     <Content Include="Views\Checkout\CheckoutPage.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
@@ -414,11 +414,6 @@
     <Content Include="Views\Admin\Message.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
-    <Content Include="Views\Listings\Create.cshtml" />
-    <Content Include="Views\Listings\Delete.cshtml" />
-    <Content Include="Views\Listings\ListingDetails.cshtml" />
-    <Content Include="Views\Listings\Modify.cshtml" />
-    <Content Include="Views\Listings\Listings.cshtml" />
     <Content Include="Views\Shop\Product.cshtml" />
     <Content Include="Views\Shop\Favorite.cshtml" />
     <Content Include="Content\css\bootstrap\css\bootstrap-grid.css.map" />
@@ -444,6 +439,7 @@
     <Content Include="Views\Shop\ProductDetails.cshtml" />
     <Content Include="Views\Shop\_RelatedProducts.cshtml" />
     <Content Include="Views\Shared\_FavoriteCount.cshtml" />
+    <Content Include="Views\Shared\_CartCount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -459,9 +455,13 @@
       <Project>{7eb12c28-cbe0-4e02-9adc-79fb7db4e9ce}</Project>
       <Name>eUseControl.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
-      <Project>{86FA9E51-54B1-48C0-A3AD-0DB9BCCDDDA8}</Project>
-      <Name>eUseControl.Domain</Name>
+    <ProjectReference Include="..\eUseControl.Common\eUseControl.Common.csproj">
+      <Project>{66E04D5C-CD5E-44A3-A5B4-4DDF47065256}</Project>
+      <Name>eUseControl.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.DataAccess\eUseControl.DataAccess.csproj">
+      <Project>{1905e30e-6ee2-464f-81f8-ee277ddb8695}</Project>
+      <Name>eUseControl.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

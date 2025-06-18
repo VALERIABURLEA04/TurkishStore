@@ -1,7 +1,8 @@
-﻿using businessLogic.Dtos.BlogDtos;
-using businessLogic.Dtos.ProductDtos;
-using businessLogic.Interfaces.Repositories;
-using eUseControlBussinessLogic;
+﻿using businessLogic.Services;
+using eUSeControl.BusinessLogic.Dtos.BlogDtos;
+using eUSeControl.BusinessLogic.Dtos.ProductDtos;
+using eUSeControl.BusinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -10,22 +11,20 @@ namespace ProjectOnlineStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBlogPostRepository _blogPostRepository;
-        private readonly IProductRepository _productRepository;
+        private readonly IBlogPostService _blogPostService;
+        private readonly IProductService _productService;
 
         public HomeController()
         {
-            var bl = new BusinesLogic();
-
-            _productRepository = bl.GetProductRepository();
-            _blogPostRepository = bl.GetBlogPostRepository();
+            _productService = ProductService.GetInstance();
+            _blogPostService = BlogPostService.GetInstance();
         }
 
         // GET: /Home/Index
         public async Task<ActionResult> Index()
         {
             int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
-            List<ProductDto> products = await _productRepository.GetAllProducts(userId);
+            List<ProductDto> products = await _productService.GetAllProductsAsync(userId);
 
             return View(products);
         }
@@ -33,7 +32,7 @@ namespace ProjectOnlineStore.Controllers
         // GET: /Home/Blog
         public async Task<ActionResult> Blog()
         {
-            List<BlogPostDto> blogPosts = await _blogPostRepository.GetBlogPostsAsync();
+            List<BlogPostDto> blogPosts = await _blogPostService.GetBlogPostsAsync();
             return View(blogPosts);
         }
 

@@ -1,6 +1,7 @@
-﻿using businessLogic.Dtos.ProductDtos;
-using businessLogic.Interfaces.Repositories;
-using eUseControlBussinessLogic;
+﻿using eUSeControl.BusinessLogic.Dtos.ProductDtos;
+using eUSeControl.BusinessLogic.eUSeControl.BusinessLogic.Dtos.ProducteUSeControl.BusinessLogic.Dtos;
+using eUSeControl.BusinessLogic.Interfaces;
+using eUSeControl.BusinessLogic.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,20 @@ namespace eUseControl.Web.Controllers
 {
     public class ShopController : Controller
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
         public ShopController()
         {
-            var businessLogic = new BusinesLogic();
-            _productRepository = businessLogic.GetProductRepository();
+            _productService = ProductService.GetInstance();
+            _cartService = CartService.GetInstance();
         }
 
-        // GET: Shop
-        public ActionResult Shop()
+        // GET: /Shop/Index
+        public ActionResult Index()
         {
             int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
-            var products = _productRepository.GetAllProducts(userId);
+            var products = _productService.GetAllProductsAsync(userId);
             ViewBag.IsAdmin = User.IsInRole("Admin");
 
             return View(products);
@@ -35,7 +37,7 @@ namespace eUseControl.Web.Controllers
         public async Task<ActionResult> Product()
         {
             int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
-            List<ProductDto> products = await _productRepository.GetAllProducts(userId);
+            List<ProductDto> products = await _productService.GetAllProductsAsync(userId);
 
             ViewBag.IsAuthenticated = Session["LoginStatus"]?.ToString() == "login" ? "true" : "false";
 
@@ -43,70 +45,69 @@ namespace eUseControl.Web.Controllers
         }
 
         // GET: /Shop/ProductDetails/:id
-        public ActionResult ProductDetails(int? id)
+        public async Task<ActionResult> ProductDetails(int? id)
         {
             if (id == null)
                 return RedirectToAction("Product");
 
-            var product = _productRepository.GetProductDetailsById(id.Value);
+            var product = await _productService.GetProductDetailsByIdAsync(id.Value);
             if (product == null)
                 return RedirectToAction("Product");
 
             return View(product);
         }
 
+        // GET: /Shop/Add
         [HttpGet]
         public ActionResult Add()
         {
             return View();
         }
 
+        // POST: /Shop/Add
         [HttpPost]
-        public ActionResult Add(ProductDto product, HttpPostedFileBase ImageUpload)
+        public async Task<ActionResult> Add(UpsertProductDto model)
         {
             if (ModelState.IsValid)
             {
-                _productRepository.AddProduct(product, ImageUpload);
+                await _productService.AddProductAsync(model);
                 return RedirectToAction("Shop");
             }
 
-            return View(product);
+            return View(model);
         }
 
+        // GET: /Shop/Edit
         [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null) return RedirectToAction("Shop");
 
-            var product = _productRepository.GetProductById(id.Value);
+            var product = _productService.GetProductDetailsByIdAsync(id.Value);
             if (product == null) return RedirectToAction("Shop");
 
             return View(product);
         }
 
+        // POST: /Shop/Edit
         [HttpPost]
-        public ActionResult Edit(ProductDto product, HttpPostedFileBase ImageUpload, bool? RemoveImage)
+        public ActionResult Edit(UpsertProductDto model)
         {
-            _productRepository.UpdateProduct(product, ImageUpload, RemoveImage);
-            return RedirectToAction("Edit", new { id = product.Id });
+            _productService.UpdateProductAsync(model);
+            return RedirectToAction("Edit", new { id = model.Id });
         }
 
-        [HttpPost]
-        public ActionResult DeleteImage(int id)
-        {
-            _productRepository.DeleteImage(id);
-            return RedirectToAction("Edit", new { id = id });
-        }
-
+        // POST: /Shop/Delete/:id
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            _productRepository.DeleteProduct(id);
+            _productService.DeleteProductAsync(id);
             return RedirectToAction("Shop");
         }
 
+        // POST: /Shop/ToggleFavorite/:id
         [HttpPost]
-        public ActionResult ToggleFavorite(int id)
+        public async Task<ActionResult> ToggleFavorite(int id)
         {
             var userId = Session["UserId"]?.ToString();
 
@@ -129,13 +130,13 @@ namespace eUseControl.Web.Controllers
                 return Json(new { isFavorite = false });
             }
 
-            bool isNowFav = _productRepository.UpdateProductToFavorite(int.Parse(userId), id);
+            bool isNowFav = await _productService.UpdateProductToFavoriteAsync(int.Parse(userId), id);
             return Json(new { isFavorite = isNowFav });
         }
 
         // GET: /Shop/Favorite
         [HttpGet]
-        public ActionResult Favorite()
+        public async Task<ActionResult> Favorite()
         {
             var favoriteIds = new List<int>();
 
@@ -144,7 +145,7 @@ namespace eUseControl.Web.Controllers
                 var userId = Session["UserId"]?.ToString();
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    var dbFavs = _productRepository.GetFavoriteProductIds(int.Parse(userId));
+                    var dbFavs = await _productService.GetFavoriteProductIdsAsync(int.Parse(userId));
                     favoriteIds.AddRange(dbFavs);
 
                     HttpCookie cookie = Request.Cookies["favorites"];
@@ -164,7 +165,7 @@ namespace eUseControl.Web.Controllers
                         {
                             if (!favoriteIds.Contains(pid))
                             {
-                                _productRepository.UpdateProductToFavorite(int.Parse(userId), pid);
+                                await _productService.UpdateProductToFavoriteAsync(int.Parse(userId), pid);
                                 favoriteIds.Add(pid);
                             }
                         }
@@ -198,12 +199,13 @@ namespace eUseControl.Web.Controllers
             List<ProductDto> favoritesList = new List<ProductDto>();
             if (favoriteIds.Any())
             {
-                favoritesList = _productRepository.GetProductsByIds(favoriteIds);
+                favoritesList = await _productService.GetProductsByIdsAsync(favoriteIds, 0);
             }
 
             return View(favoritesList);
         }
 
+        // GET: /Shop/FavoriteCount
         [ChildActionOnly]
         public ActionResult FavoriteCount()
         {
@@ -211,7 +213,7 @@ namespace eUseControl.Web.Controllers
             if (Session["LoginStatus"]?.ToString() == "login")
             {
                 var uid = int.Parse(Session["UserId"].ToString());
-                favCount = _productRepository.GetFavoriteProductIds(uid).Count();
+                favCount = _productService.GetFavoriteProductsCount(uid);
             }
             else
             {
@@ -226,7 +228,34 @@ namespace eUseControl.Web.Controllers
                     catch { }
                 }
             }
+
             return PartialView("_FavoriteCount", favCount);
+        }
+
+        [ChildActionOnly]
+        public ActionResult CartCount()
+        {
+            int cartCount = 0;
+            if (Session["LoginStatus"]?.ToString() == "login")
+            {
+                var uid = int.Parse(Session["UserId"].ToString());
+                cartCount = _cartService.GetProductsFromCartByUserId(uid);
+            }
+            else
+            {
+                var cookie = Request.Cookies["productsInCart"];
+                if (cookie != null)
+                {
+                    try
+                    {
+                        var list = JsonConvert.DeserializeObject<List<int>>(cookie.Value);
+                        cartCount = list?.Count ?? 0;
+                    }
+                    catch { }
+                }
+            }
+
+            return PartialView("_CartCount", cartCount);
         }
     }
 }

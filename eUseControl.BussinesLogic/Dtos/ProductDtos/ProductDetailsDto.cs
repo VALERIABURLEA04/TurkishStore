@@ -1,7 +1,8 @@
-﻿using eUseControl.Domain.Enums;
+﻿using businessLogic.Dtos.CartDtos;
+using eUseControl.Domain.Enums;
 using System.Collections.Generic;
 
-namespace businessLogic.Dtos.ProductDtos
+namespace eUSeControl.BusinessLogic.Dtos.ProductDtos
 {
     public class ProductDetailsDto
     {
@@ -22,5 +23,7 @@ namespace businessLogic.Dtos.ProductDtos
         public List<ProductDto> RelatedProducts { get; set; } = new List<ProductDto>();
         public List<string> AvailableSizes { get; set; } = new List<string>();
         public List<string> AvailableColors { get; set; } = new List<string>();
+
+        public UpsertCartItemDto UpsertCartItemDto { get; set; }
     }
 }
