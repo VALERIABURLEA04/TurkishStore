@@ -1,4 +1,5 @@
-﻿@{
+﻿@using eUseControl.Domain.Enums;
+@{
     string currentController = ViewContext.RouteData.Values["controller"] as string;
     string currentAction = ViewContext.RouteData.Values["action"] as string;
     var userName = Session["UserFullName"]?.ToString() ?? "Guest";
@@ -19,7 +20,6 @@
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         Help & FAQs
                     </a>
-
                     @if (Session["LoginStatus"] != null && Session["LoginStatus"].ToString() == "login")
                     {
                         using (Html.BeginForm("Logout", "Auth", FormMethod.Post, new { id = "logoutForm" }))
@@ -30,19 +30,37 @@
                             </a>
                         }
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            @userName
-                        </a>
+                        if (Session["Role"] != null && Session["Role"].ToString() == Enum.GetName(typeof(UserRole), UserRole.Admin))
+                        {
+                            <div class="dropdown custom-dropdown">
+                                <a href="#"
+                                   class="flex-c-m trans-04 p-lr-25 dropdown-toggle"
+                                   id="adminDropdownMobileToggle"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    @userName
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="adminDropdownMobileToggle" style="z-index:2001">
+                                    <a class="dropdown-item" href="@Url.Action("Products", "Admin")">Products</a>
+                                    <a class="dropdown-item" href="@Url.Action("Users", "Admin")">Users</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                @userName
+                            </a>
+                        }
                     }
                     else
                     {
-                        <a href="@Url.Action("Login", "Auth")"
-                           class="flex-c-m trans-04 p-lr-25">
+                        <a href="@Url.Action("Login", "Auth")" class="flex-c-m trans-04 p-lr-25">
                             Login
                         </a>
-
-                        <a href="@Url.Action("Register", "Auth")"
-                           class="flex-c-m trans-04 p-lr-25">
+                        <a href="@Url.Action("Register", "Auth")" class="flex-c-m trans-04 p-lr-25">
                             Register
                         </a>
                     }
@@ -130,30 +148,48 @@
 
             <li>
                 <div class="right-top-bar flex-w h-full">
-
                     @if (Session["LoginStatus"] != null && Session["LoginStatus"].ToString() == "login")
                     {
-                        using (Html.BeginForm("Logout", "Auth", FormMethod.Post, new { id = "logoutForm" }))
+                        using (Html.BeginForm("Logout", "Auth", FormMethod.Post, new { id = "logoutFormMobile" }))
                         {
                             @Html.AntiForgeryToken()
-                            <a href="#" class="flex-c-m p-lr-10 trans-04" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                            <a href="#" class="flex-c-m p-lr-10 trans-04" onclick="event.preventDefault(); document.getElementById('logoutFormMobile').submit();">
                                 Logout
                             </a>
                         }
 
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            @userName
-                        </a>
+                        if (Session["Role"] != null && Session["Role"].ToString() == Enum.GetName(typeof(UserRole), UserRole.Admin))
+                        {
+                            <div class="dropdown custom-dropdown">
+                                <a href="#"
+                                   class="flex-c-m p-lr-10 trans-04 dropdown-toggle "
+                                   id="adminDropdownMobileToggle"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    @userName
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="adminDropdownMobileToggle" style="z-index:2001">
+                                    <a class="dropdown-item" href="@Url.Action("Products", "Admin")">Products</a>
+                                    <a class="dropdown-item" href="@Url.Action("Users", "Admin")">Users</a>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <a href="#" class="flex-c-m p-lr-10 trans-04">
+                                @userName
+                            </a>
+                        }
                     }
                     else
                     {
-                        <a href="@Url.Action("Login", "Auth")"
-                           class="flex-c-m p-lr-10 trans-04">
+                        <a href="@Url.Action("Login", "Auth")" class="flex-c-m p-lr-10 trans-04">
                             Login
                         </a>
-
-                        <a href="@Url.Action("Register", "Auth")"
-                           class="flex-c-m p-lr-10 trans-04">
+                        <a href="@Url.Action("Register", "Auth")" class="flex-c-m p-lr-10 trans-04">
                             Register
                         </a>
                     }

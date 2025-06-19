@@ -334,6 +334,20 @@
                 btn.addEventListener('click', loadCart);
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('#adminDropdownMobileToggle').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    this.closest('.dropdown').classList.toggle('show');
+                });
+            });
+            document.addEventListener('click', function (e) {
+                document.querySelectorAll('.dropdown.show').forEach(function (dd) {
+                    if (!dd.contains(e.target)) dd.classList.remove('show');
+                });
+            });
+        });
     </script>
 
     @Scripts.Render("~/bundles/js")

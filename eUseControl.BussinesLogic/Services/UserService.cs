@@ -1,8 +1,13 @@
-﻿using eUseControl.Domain.Entities.UserEntities;
+﻿using businessLogic.Dtos.UserDtos;
+using businessLogic.Repositories;
+using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
+using eUseControl.Domain.Repositories;
 using eUSeControl.BusinessLogic.Interfaces;
 using eUSeControl.Common.Session;
 using eUSeControl.DataAccess.Data;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +19,13 @@ namespace eUSeControl.BusinessLogic.Services
     {
         private static UserService _instance;
         private static readonly object _lock = new object();
+
+        private readonly IUserRepository _userRepository;
+
+        public UserService()
+        {
+            _userRepository = UserRepository.GetInstance();
+        }
 
         public async Task<User> GetUserFromCookieAsync(HttpRequestBase request)
         {
@@ -72,6 +84,29 @@ namespace eUSeControl.BusinessLogic.Services
             }
 
             return _instance;
+        }
+
+        public async Task<List<UserDto>> GetAllUsersAsync()
+        {
+            var users = await _userRepository.GetAllUsersAsync();
+
+            var result = users
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email,
+                    Role = Enum.GetName(typeof(UserRole), u.Level),
+                    LastLogin = u.LastLogin.ToString("dd/MM/yyyy")
+                })
+                .ToList();
+
+            return result;
+        }
+
+        public void DeleteUserById(int id)
+        {
+            _userRepository.DeleteUserById(id);
         }
     }
 }

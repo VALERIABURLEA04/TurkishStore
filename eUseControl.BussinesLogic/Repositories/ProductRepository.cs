@@ -84,7 +84,7 @@ namespace eUseControl.DataAccesss.Repositories
             foreach (var img in product.ProductImages.ToList())
             {
                 var fileName = System.IO.Path.GetFileName(img.ImageUrl);
-                var path = HttpContext.Current.Server.MapPath("~/images/" + fileName);
+                var path = HttpContext.Current.Server.MapPath("~/Content/images/" + fileName);
                 if (System.IO.File.Exists(path))
                     System.IO.File.Delete(path);
             }
