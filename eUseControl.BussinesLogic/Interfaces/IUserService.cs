@@ -19,5 +19,11 @@ namespace eUSeControl.BusinessLogic.Interfaces
         Task<List<UserDto>> GetAllUsersAsync();
 
         void DeleteUserById(int id);
+
+        Task<UpsertUserDto> GetUserByIdAsync(int id);
+
+        Task<bool> AddUserAsync(UpsertUserDto model);
+
+        Task<bool> UpdateUserAsync(UpsertUserDto model);
     }
 }

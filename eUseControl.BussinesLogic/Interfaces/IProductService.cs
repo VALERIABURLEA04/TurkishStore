@@ -1,5 +1,4 @@
 ﻿using eUSeControl.BusinessLogic.Dtos.ProductDtos;
-using eUSeControl.BusinessLogic.eUSeControl.BusinessLogic.Dtos.ProducteUSeControl.BusinessLogic.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,6 +7,8 @@ namespace eUSeControl.BusinessLogic.Interfaces
     public interface IProductService
     {
         Task<ProductDto> GetByIdAsync(int productId, int userId);
+
+        Task<UpsertProductDto> GetProductByIdAsync(int id);
 
         Task<List<ProductDto>> GetAllProductsAsync(int userId);
 

@@ -59,6 +59,7 @@
     <Compile Include="Data\Seed\DbInitializer.cs" />
     <Compile Include="Dtos\CartDtos\CartItemDto.cs" />
     <Compile Include="Dtos\CartDtos\UpsertCartItemDto.cs" />
+    <Compile Include="Dtos\UserDtos\UpsertUserDto.cs" />
     <Compile Include="Dtos\UserDtos\UserDto.cs" />
     <Compile Include="Interfaces\IBlogPostService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />

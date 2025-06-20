@@ -3,6 +3,7 @@ using eUseControl.Domain.Repositories;
 using eUSeControl.DataAccess.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,6 +49,38 @@ namespace businessLogic.Repositories
             _context.Users.Remove(user);
 
             _context.SaveChanges();
+        }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            if (id == 0)
+                return new User();
+
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return user;
+        }
+
+        public async Task<bool> ExistsByUsernameOrEmailAsync(string username, string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Name == username || u.Email == email);
+        }
+
+        public async Task<bool> AddUserAsync(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            await Task.CompletedTask;
+            return true;
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            _context.Users.AddOrUpdate(user);
+            _context.SaveChanges();
+
+            await Task.CompletedTask;
+            return true;
         }
     }
 }

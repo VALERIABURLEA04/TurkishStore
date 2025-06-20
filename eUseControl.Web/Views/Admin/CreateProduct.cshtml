@@ -1,0 +1,155 @@
+﻿@model eUSeControl.BusinessLogic.Dtos.ProductDtos.UpsertProductDto
+@{
+    ViewBag.Title = "Add Product";
+}
+
+<div class="animsition container-fluid px-4 py-5">
+    <div class="row justify-content-center animate__animated animate__fadeIn">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">@ViewBag.Title</h3>
+                    <a href="@Url.Action("Products","Admin")" class="btn btn-outline-light btn-sm">
+                        <i class="fa fa-arrow-left mr-1"></i> Back
+                    </a>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-4">
+                                <label><i class="zmdi zmdi-label mr-1"></i>@Html.DisplayNameFor(m => m.Name)</label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg", placeholder = "Product name", required = "required" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Name)</div>
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label><i class="fa fa-barcode mr-1"></i>@Html.DisplayNameFor(m => m.Sku)</label>
+                                @Html.TextBoxFor(m => m.Sku, new { @class = "form-control form-control-lg", placeholder = "SKU", required = "required" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Sku)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label><i class="fa fa-pencil-square-o mr-1"></i>@Html.DisplayNameFor(m => m.Description)</label>
+                            @Html.TextAreaFor(m => m.Description, 3, 0, new { @class = "form-control", placeholder = "Short description" })
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label><i class="fa fa-align-left mr-1"></i>@Html.DisplayNameFor(m => m.FullDescription)</label>
+                            @Html.TextAreaFor(m => m.FullDescription, 5, 0, new { @class = "form-control", placeholder = "Detailed description" })
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-4">
+                                <label><i class="fa fa-dollar mr-1"></i>@Html.DisplayNameFor(m => m.Price)</label>
+                                @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01", required = "required" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Price)</div>
+                            </div>
+                            <div class="form-group col-md-4 mb-4">
+                                <label><i class="fa fa-list-alt mr-1"></i>@Html.DisplayNameFor(m => m.Category)</label>
+                                @Html.DropDownListFor(m => m.Category,
+                                                                  new SelectList(Enum.GetValues(typeof(eUseControl.Domain.Enums.ProductCategoryEnum))),
+                                                                  "Select category", new { @class = "form-control select2", required = "required" })
+                                <div class="invalid-feedback">Category is required</div>
+                            </div>
+                            <div class="form-group col-md-4 mb-4">
+                                <label><i class="fa fa-archive mr-1"></i>@Html.DisplayNameFor(m => m.Stock)</label>
+                                @Html.TextBoxFor(m => m.Stock, new { @class = "form-control", type = "number", required = "required" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Stock)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row mb-4">
+                            <div class="form-group col-md-6">
+                                <label><i class="fa fa-cube mr-1"></i>@Html.DisplayNameFor(m => m.Weight)</label>
+                                @Html.TextBoxFor(m => m.Weight, new { @class = "form-control", type = "number", step = "0.01" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><i class="fa fa-arrows-alt mr-1"></i>@Html.DisplayNameFor(m => m.Dimensions)</label>
+                                @Html.TextBoxFor(m => m.Dimensions, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <!-- SIZES -->
+                            <div class="col-md-6">
+                                <label class="form-label d-block mb-2">
+                                    <i class="fa fa-expand mr-1"></i>Sizes
+                                </label>
+                                <div class="btn-group btn-group-toggle d-flex flex-wrap" data-toggle="buttons">
+                                    @foreach (var sz in Enum.GetValues(typeof(eUseControl.Domain.Enums.ProductSizeEnum))
+                                                            .Cast<eUseControl.Domain.Enums.ProductSizeEnum>())
+                                    {
+                                        if (sz != eUseControl.Domain.Enums.ProductSizeEnum.None)
+                                        {
+                                            var isChecked = Model?.Sizes.Contains(sz.ToString()) == true;
+                                            <label class="btn btn-outline-primary btn-sm m-1 @(isChecked ? "active" : "")">
+                                                <input type="checkbox"
+                                                       name="Sizes"
+                                                       value="@sz"
+                                                       autocomplete="off"
+                                                       @(isChecked ? "checked" : "") /> @sz
+                                                </label>
+                                            }
+                                        }
+                                </div>
+                            </div>
+
+                            <!-- COLORS -->
+                            <div class="col-md-6">
+                                <label class="form-label d-block mb-2">
+                                    <i class="fa fa-paint-brush mr-1"></i>Colors
+                                </label>
+                                <div class="btn-group btn-group-toggle d-flex flex-wrap" data-toggle="buttons">
+                                    @foreach (var cl in Enum.GetValues(typeof(eUseControl.Domain.Enums.ProductColorEnum))
+                                                            .Cast<eUseControl.Domain.Enums.ProductColorEnum>())
+                                    {
+                                        if (cl != eUseControl.Domain.Enums.ProductColorEnum.None)
+                                        {
+                                            var isChecked = Model?.Colors.Contains(cl.ToString()) == true;
+                                            <label class="btn btn-outline-secondary btn-sm m-1 @(isChecked ? "active" : "")">
+                                                <input type="checkbox"
+                                                       name="Colors"
+                                                       value="@cl"
+                                                       autocomplete="off"
+                                                       @(isChecked ? "checked" : "") /> @cl
+                                                </label>
+                                            }
+                                        }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label><i class="fa fa-image mr-1"></i>Images</label>
+                            <input type="file" name="Images" multiple class="form-control-file" />
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success btn-lg px-4">
+                                <i class="fa fa-plus-circle mr-2"></i> Create
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        document.querySelector('input[name="Images"]').addEventListener('change', function (evt) {
+            const maxBytes = 50 * 1024 * 1024;
+            for (let file of evt.target.files) {
+                if (file.size > maxBytes) {
+                    alert(`${file.name} is too big! Please select files under 50 MB.`);
+                    evt.target.value = '';
+                    break;
+                }
+            }
+        });
+    </script>
+}

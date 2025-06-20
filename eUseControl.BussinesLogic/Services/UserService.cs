@@ -4,6 +4,7 @@ using eUseControl.Domain.Entities.UserEntities;
 using eUseControl.Domain.Enums;
 using eUseControl.Domain.Repositories;
 using eUSeControl.BusinessLogic.Interfaces;
+using eUSeControl.Common.AccessFlow;
 using eUSeControl.Common.Session;
 using eUSeControl.DataAccess.Data;
 using System;
@@ -107,6 +108,65 @@ namespace eUSeControl.BusinessLogic.Services
         public void DeleteUserById(int id)
         {
             _userRepository.DeleteUserById(id);
+        }
+
+        public async Task<UpsertUserDto> GetUserByIdAsync(int id)
+        {
+            var userEntity = await _userRepository.GetUserByIdAsync(id);
+            if (userEntity == null)
+                return null;
+
+            return new UpsertUserDto
+            {
+                Id = userEntity.Id,
+                Name = userEntity.Name,
+                Email = userEntity.Email,
+                Level = userEntity.Level,
+                RegisterDataTime = userEntity.LastLogin,
+                Password = string.Empty,
+                ConfirmPassword = string.Empty
+            };
+        }
+
+        public async Task<bool> AddUserAsync(UpsertUserDto model)
+        {
+            if (await _userRepository.ExistsByUsernameOrEmailAsync(model.Name, model.Email))
+                return false;
+
+            var user = new User
+            {
+                Name = model.Name,
+                Email = model.Email,
+                Password = AccessHelper.HashPassword(model.Password),
+                LastLogin = model.RegisterDataTime == default
+                                ? DateTime.UtcNow
+                                : model.RegisterDataTime,
+                UserIp = HttpContext.Current?.Request.UserHostAddress,
+                Level = model.Level
+            };
+
+            await _userRepository.AddUserAsync(user);
+            return true;
+        }
+
+        public async Task<bool> UpdateUserAsync(UpsertUserDto model)
+        {
+            var user = await _userRepository.GetUserByIdAsync(model.Id);
+            if (user == null)
+                return false;
+
+            user.Name = model.Name;
+            user.Email = model.Email;
+
+            if (!string.IsNullOrWhiteSpace(model.Password))
+            {
+                user.Password = AccessHelper.HashPassword(model.Password);
+            }
+
+            user.Level = model.Level;
+
+            await _userRepository.UpdateUserAsync(user);
+            return true;
         }
     }
 }

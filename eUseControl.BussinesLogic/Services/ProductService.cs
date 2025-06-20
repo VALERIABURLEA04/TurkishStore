@@ -3,7 +3,6 @@ using eUseControl.DataAccesss.Repositories;
 using eUseControl.Domain.Entities.ProductEntities;
 using eUseControl.Domain.Repositories;
 using eUSeControl.BusinessLogic.Dtos.ProductDtos;
-using eUSeControl.BusinessLogic.eUSeControl.BusinessLogic.Dtos.ProducteUSeControl.BusinessLogic.Dtos;
 using eUSeControl.BusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -117,9 +116,9 @@ namespace eUSeControl.BusinessLogic.Services
                 {
                     var fn = Path.GetFileName(img.FileName);
                     var un = Guid.NewGuid() + Path.GetExtension(fn);
-                    var save = HostingEnvironment.MapPath("~/images/" + un);
+                    var save = HostingEnvironment.MapPath("/Content/images/" + un);
                     img.SaveAs(save);
-                    product.ProductImages.Add(new ProductImage { ImageUrl = "/images/" + un, SortOrder = product.ProductImages.Count + 1 });
+                    product.ProductImages.Add(new ProductImage { ImageUrl = "/Content/images/" + un, SortOrder = product.ProductImages.Count + 1 });
                 }
             }
             return await _repository.AddProductAsync(product);
@@ -128,40 +127,51 @@ namespace eUSeControl.BusinessLogic.Services
         public async Task<bool> UpdateProductAsync(UpsertProductDto model)
         {
             if (model == null || !model.Id.HasValue) return false;
-            var existing = await _repository.GetProductByIdAsync(model.Id.Value);
-            if (existing == null) return false;
-            existing.Name = model.Name;
-            existing.Description = model.Description;
-            existing.FullDescription = model.FullDescription;
-            existing.Price = model.Price;
-            existing.Sku = model.Sku;
-            existing.CategoryValue = model.Category;
-            existing.Stock = model.Stock;
-            existing.Weight = model.Weight;
-            existing.Dimensions = model.Dimensions;
-            existing.Materials = model.Materials;
 
-            // add new images
-            foreach (var img in model.Images)
+            var existingDto = await _repository.GetProductByIdAsync(model.Id.Value);
+            if (existingDto == null) return false;
+
+            var updated = new Product
             {
-                if (img?.ContentLength > 0)
-                {
-                    var fn = Path.GetFileName(img.FileName);
-                    var un = Guid.NewGuid() + Path.GetExtension(fn);
-                    var save = HostingEnvironment.MapPath("~/images/" + un);
-                    img.SaveAs(save);
-                    existing.ProductImages.Add(new ProductImage { ImageUrl = "/images/" + un, SortOrder = existing.ProductImages.Count + 1 });
-                }
-            }
-            // update sizes
-            existing.ProductSizes.Clear();
-            foreach (var size in model.Sizes)
-                existing.ProductSizes.Add(new ProductSize { SizeValue = size });
-            // update colors
-            existing.ProductColors.Clear();
-            foreach (var color in model.Colors)
-                existing.ProductColors.Add(new ProductColor { ColorValue = color });
-            return await _repository.UpdateProductAsync(existing);
+                Id = model.Id.Value,
+                Name = model.Name,
+                Description = model.Description,
+                FullDescription = model.FullDescription,
+                Price = model.Price,
+                Sku = model.Sku,
+                CategoryValue = model.Category,
+                Stock = model.Stock,
+                Weight = model.Weight,
+                Dimensions = model.Dimensions,
+                Materials = model.Materials
+            };
+
+            updated.ProductSizes = model.Sizes
+                .Select(s => new ProductSize { SizeValue = s })
+                .ToList();
+
+            updated.ProductColors = model.Colors
+                .Select(c => new ProductColor { ColorValue = c })
+                .ToList();
+
+            updated.ProductImages = existingDto.ProductImages
+                .Concat(model.Images
+                    .Where(img => img?.ContentLength > 0)
+                    .Select((img, i) =>
+                    {
+                        var fn = Path.GetFileName(img.FileName);
+                        var un = Guid.NewGuid() + Path.GetExtension(fn);
+                        var savePath = HostingEnvironment.MapPath("~/Content/images/" + un);
+                        img.SaveAs(savePath);
+                        return new ProductImage
+                        {
+                            ImageUrl = "/Content/images/" + un,
+                            SortOrder = existingDto.ProductImages.Count + 1 + i
+                        };
+                    }))
+                .ToList();
+
+            return await _repository.UpdateProductAsync(updated);
         }
 
         public async Task<bool> DeleteProductAsync(int id)
@@ -220,6 +230,41 @@ namespace eUSeControl.BusinessLogic.Services
                 IsFavorite = x.ProductsToUsers.FirstOrDefault(pu => pu.UserId == userId)?.IsFavorite ?? false,
                 Stock = x.Stock
             };
+        }
+
+        public async Task<UpsertProductDto> GetProductByIdAsync(int id)
+        {
+            var product = await _repository.GetProductByIdAsync(id);
+
+            if (product == null)
+                return new UpsertProductDto { Id = id };
+
+            var result = new UpsertProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                FullDescription = product.FullDescription,
+                Price = product.Price,
+                Sku = product.Sku,
+                Category = product.CategoryValue,
+                Stock = product.Stock,
+                Weight = product.Weight,
+                Dimensions = product.Dimensions,
+                Materials = product.Materials,
+                Sizes = product.ProductSizes
+                                      .Select(ps => ps.SizeValue)
+                                      .ToList(),
+                Colors = product.ProductColors
+                                      .Select(pc => pc.ColorValue)
+                                      .ToList(),
+                ExistingImageUrls = product.ProductImages
+                                 .OrderBy(pi => pi.SortOrder)
+                                 .Select(pi => pi.ImageUrl)
+                                 .ToList()
+            };
+
+            return result;
         }
     }
 }
