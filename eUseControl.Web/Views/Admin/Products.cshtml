@@ -1,0 +1,119 @@
+﻿@model List<eUSeControl.BusinessLogic.Dtos.ProductDtos.ProductDto>
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="container-fluid px-4 p-b-96">
+    <div class="d-flex justify-content-between align-items-center mb-4 mx-3">
+        <h2>Products</h2>
+        <a href="@Url.Action("CreateProduct", "Admin")" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus mr-1"></i>Add Product
+        </a>
+    </div>
+
+    <div class="mb-3 mx-3">
+        <button class="btn btn-outline-secondary btn-sm filter-button active" data-filter="*">All</button>
+        @foreach (var cat in Model.Select(p => p.Category).Distinct())
+        {
+            <button class="btn btn-outline-secondary btn-sm filter-button" data-filter=".@cat.Replace(" ", "-")">@cat</button>
+        }
+    </div>
+
+    <div id="productsGrid" class="grid mx-3">
+        <div class="row">
+            @if (Model == null || !Model.Any())
+            {
+                <p class="cl3 mx-auto">No products found.</p>
+            }
+            else
+            {
+                foreach (var p in Model)
+                {
+                    var categoryClass = p.Category.Replace(" ", "-");
+                    <div class="col-12 col-md-6 mb-3 grid-item @categoryClass block2" data-id="@p.Id">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="card-title mb-0 js-name-b2">@p.Name</h6>
+                                    <div>
+                                        <a href="@Url.Action("UpdateProduct", "Admin", new { id = p.Id })"
+                                           class="btn btn-outline-secondary btn-sm mr-1" style="width:80px">Edit</a>
+                                        <button type="button"
+                                                class="btn btn-outline-danger btn-sm js-delete-product"
+                                                style="width:80px"
+                                                data-id="@p.Id">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul class="list-unstyled small mb-0">
+                                    <li><strong>SKU:</strong> @p.Sku</li>
+                                    <li><strong>Price:</strong> @p.Price.ToString("F2") MDL</li>
+                                    <li><strong>Category:</strong> @p.Category</li>
+                                    <li><strong>Stock:</strong> @p.Stock</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var grid = document.querySelector('#productsGrid .row');
+            var iso = new Isotope(grid, {
+                itemSelector: '.grid-item',
+                layoutMode: 'fitRows'
+            });
+
+            var filters = document.querySelectorAll('.filter-button');
+            filters.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var filterValue = btn.getAttribute('data-filter');
+                    iso.arrange({ filter: filterValue });
+                    filters.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('.js-delete-product').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var container = this.closest('.grid-item');
+                    var id = this.getAttribute('data-id');
+                    var name = container.querySelector('.js-name-b2').textContent.trim();
+
+                    swal({
+                        title: "Delete this product?",
+                        text: name,
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (!willDelete) return;
+                        fetch(`@Url.Action("DeleteProduct", "Admin")?id=${id}`, {
+                            method: 'POST',
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                iso.remove(container);
+                                iso.layout();
+                                swal("Deleted!", name + " has been removed.", "success");
+                            } else {
+                                swal("Error", data.message || "Could not delete.", "error");
+                            }
+                        })
+                        .catch(() => swal("Error", "Server error.", "error"));
+                    });
+                });
+            });
+        });
+    </script>
+}

@@ -26,7 +26,7 @@ public class BundleConfig
                   "~/Scripts/jquery/jquery-3.2.1.min.js",
                   "~/Scripts/animsition/js/animsition.min.js",
                   "~/Scripts/bootstrap/js/popper.js",
-                  "~/Scripts/bootstrap/js/bootstrap.min.js",
+                  "~/Scripts/bootstrap/js/bootstrap.bundle.min.js",
                   "~/Scripts/select2/select2.min.js",
                   "~/Scripts/daterangepicker/moment.min.js",
                   "~/Scripts/daterangepicker/daterangepicker.js",

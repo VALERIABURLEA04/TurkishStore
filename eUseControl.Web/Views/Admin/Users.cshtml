@@ -1,0 +1,99 @@
+﻿@model List<businessLogic.Dtos.UserDtos.UserDto>
+@{
+    ViewBag.Title = "Users";
+}
+<div class="container-fluid mt-5 p-b-96">
+    <div class="d-flex justify-content-between align-items-center mb-4 mx-3">
+        <h2>Users</h2>
+        <a href="@Url.Action("CreateUser", "Admin")" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus mr-1"></i>Add User
+        </a>
+    </div>
+
+    <div class="row mx-1">
+        @if (Model == null || !Model.Any())
+        {
+            <p class="cl3 mx-auto">No users found.</p>
+        }
+        else
+        {
+            foreach (var u in Model)
+            {
+                <div class="col-12 col-md-6 mb-3 grid-item block2" data-id="@u.Id">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="card-title mb-0 js-name-b2">@u.Name</h6>
+                                <div>
+                                    <a href="@Url.Action("UpdateUser","Admin", new { id = u.Id })" class="btn btn-outline-secondary btn-sm mr-1" style="width:80px">Edit</a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm js-delete-user" style="width:80px">Delete</button>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled small mb-0">
+                                <li><strong>Email:</strong> @u.Email</li>
+                                <li><strong>Role:</strong> @u.Role</li>
+                                <li><strong>Last Login:</strong> @u.LastLogin</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var grid = document.querySelector('#productsGrid .row');
+            var iso = new Isotope(grid, {
+                itemSelector: '.grid-item',
+                layoutMode: 'fitRows'
+            });
+            document.querySelectorAll('.filter-button').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    iso.arrange({ filter: btn.getAttribute('data-filter') });
+                    document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('.js-delete-product').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var container = this.closest('.grid-item');
+                    var id = container.getAttribute('data-id');
+                    var name = container.querySelector('.js-name-b2').textContent.trim();
+                    swal({ title: "Delete this product?", text: name, icon: "warning", buttons: true, dangerMode: true })
+                        .then(willDelete => {
+                            if (!willDelete) return;
+                            fetch(`@Url.Action("DeleteProduct","Admin")?id=${id}`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                              .then(r => r.json())
+                              .then(data => {
+                                  if (data.success) { iso.remove(container); iso.layout(); swal("Deleted!", name + " removed.", "success"); }
+                                  else swal("Error", data.message||"Could not delete.", "error");
+                              }).catch(() => swal("Error","Server error.","error"));
+                        });
+                });
+            });
+
+            document.querySelectorAll('.js-delete-user').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var container = this.closest('.block2');
+                    var id = container.getAttribute('data-id');
+                    var name = container.querySelector('.js-name-b2').textContent.trim();
+                    swal({ title: "Delete this user?", text: name, icon: "warning", buttons: true, dangerMode: true })
+                        .then(willDelete => {
+                            if (!willDelete) return;
+                            fetch(`@Url.Action("DeleteUser","Admin")?id=${id}`, { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                              .then(r => r.json())
+                              .then(data => {
+                                  if (data.success) { container.remove(); swal("Deleted!", name + " removed.", "success"); }
+                                  else swal("Error", data.message||"Could not delete.", "error");
+                              }).catch(() => swal("Error","Server error.","error"));
+                        });
+                });
+            });
+        });
+    </script>
+}

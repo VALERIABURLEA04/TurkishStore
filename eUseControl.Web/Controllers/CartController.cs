@@ -44,5 +44,21 @@ namespace ProjectOnlineStore.Controllers
 
             return Json(items, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _cartService.RemoveCartItemAsync(id);
+
+            var items = new List<CartItemDto>();
+
+            if (Session["LoginStatus"]?.ToString() == "login")
+            {
+                int userId = int.Parse(Session["UserId"]?.ToString() ?? "0");
+                items = await _cartService.GetCartItemsAsync(userId);
+            }
+
+            return Json(items, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -59,6 +59,8 @@
     <Compile Include="Data\Seed\DbInitializer.cs" />
     <Compile Include="Dtos\CartDtos\CartItemDto.cs" />
     <Compile Include="Dtos\CartDtos\UpsertCartItemDto.cs" />
+    <Compile Include="Dtos\UserDtos\UpsertUserDto.cs" />
+    <Compile Include="Dtos\UserDtos\UserDto.cs" />
     <Compile Include="Interfaces\IBlogPostService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Migrations\202506180827272_InitialMigration.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Repositories\BlogPostRepository.cs" />
     <Compile Include="Repositories\CartRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\BlogPostService.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\ContactService.cs" />

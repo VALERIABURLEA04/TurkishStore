@@ -282,31 +282,58 @@
             cartList.innerHTML = '';
             let total = 0;
 
-            console.log(items)
-
             items.forEach(item => {
                 const li = document.createElement('li');
                 li.className = "header-cart-item flex-w flex-t m-b-12";
 
                 li.innerHTML = `
-                     <div class="header-cart-item-img">
-                         <img src="${item.ImageUrl}" alt="IMG">
-                     </div>
-                     <div class="header-cart-item-txt p-t-8">
-                         <a href="/Shop/ProductDetails/${item.ProductId}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                             ${item.Name}
-                         </a>
-                         <span class="header-cart-item-info">
-                             ${item.Quantity} x ${item.Price} MDL
-                         </span>
-                     </div>
-                 `;
+                    <div class="header-cart-item-img" data-id="${item.Id}">
+                        <img src="${item.ImageUrl}" alt="IMG">
+                    </div>
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="/Shop/ProductDetails/${item.ProductId}"
+                           class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            ${item.Name}
+                        </a>
+                        <span class="header-cart-item-info">
+                            ${item.Quantity} x ${item.Price.toFixed(2)} MDL
+                        </span>
+                    </div>
+                `;
+
+                const imgContainer = li.querySelector('.header-cart-item-img');
+                imgContainer.addEventListener('click', () => {
+                    const id = imgContainer.dataset.id;
+                    deleteCartItem(id);
+                });
 
                 total += item.Quantity * item.Price;
                 cartList.appendChild(li);
             });
 
             totalDiv.textContent = `Total: ${total.toFixed(2)} MDL`;
+        }
+
+        async function deleteCartItem(id) {
+            try {
+                const response = await fetch(`/Cart/Delete/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                }
+
+                const items = await response.json();
+
+                renderCartItems(items);
+
+            } catch (err) {
+                console.error('Delete failed:', err);
+            }
         }
 
         function getCartItemsFromLocalStorage() {
@@ -332,6 +359,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.js-show-cart').forEach(btn => {
                 btn.addEventListener('click', loadCart);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('#adminDropdownMobileToggle').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    this.closest('.dropdown').classList.toggle('show');
+                });
+            });
+            document.addEventListener('click', function (e) {
+                document.querySelectorAll('.dropdown.show').forEach(function (dd) {
+                    if (!dd.contains(e.target)) dd.classList.remove('show');
+                });
             });
         });
     </script>

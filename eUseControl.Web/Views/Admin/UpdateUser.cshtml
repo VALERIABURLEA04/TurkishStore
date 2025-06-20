@@ -1,0 +1,72 @@
+﻿@model businessLogic.Dtos.UserDtos.UpsertUserDto
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="animsition container-fluid px-4 py-5">
+    <div class="row justify-content-center animate__animated animate__fadeIn">
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">@ViewBag.Title</h3>
+                    <a href="@Url.Action("Users","Admin")" class="btn btn-outline-light btn-sm">
+                        <i class="fa fa-arrow-left mr-1"></i> Back
+                    </a>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("UpdateUser", "Admin", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+
+                        <div class="form-group mb-4">
+                            <label for="Name"><i class="zmdi zmdi-account mr-1"></i>@Html.DisplayNameFor(m => m.Name)</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg", placeholder = "Enter full name", required = "required" })
+                            <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Name)</div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="Email"><i class="fa fa-envelope mr-1"></i>@Html.DisplayNameFor(m => m.Email)</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", type = "email", placeholder = "Enter email", required = "required" })
+                            <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Email)</div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="Password"><i class="fa fa-lock mr-1"></i>Password</label>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Leave blank to keep existing" })
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="ConfirmPassword"><i class="fa fa-lock mr-1"></i>Confirm Password</label>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Repeat password" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ConfirmPassword)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            @{
+                                var roles = Enum.GetValues(typeof(eUseControl.Domain.Enums.UserRole))
+                                               .Cast<eUseControl.Domain.Enums.UserRole>()
+                                               .Select(r => new SelectListItem
+                                               {
+                                                   Text = r.ToString(),
+                                                   Value = r.ToString(),
+                                                   Selected = Model.Level == r
+                                               });
+                            }
+                            <label for="Level"><i class="fa fa-user-circle-o mr-1"></i>@Html.DisplayNameFor(m => m.Level)</label>
+                            @Html.DropDownListFor(m => m.Level, roles, "Select Role", new { @class = "form-control select2", required = "required" })
+                            <div class="invalid-feedback">Role is required</div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success btn-lg px-4">
+                                Update
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

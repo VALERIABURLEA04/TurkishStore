@@ -121,6 +121,7 @@ namespace eUSeControl.BusinessLogic.Services
             var result = cartItems
                 .Select(x => new CartItemDto
                 {
+                    Id = x.Id,
                     ProductId = x.ProductId,
                     Name = x.Product.Name,
                     Price = x.Product.Price,

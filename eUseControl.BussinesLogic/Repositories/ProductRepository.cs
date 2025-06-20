@@ -66,12 +66,59 @@ namespace eUseControl.DataAccesss.Repositories
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
+
             return true;
         }
 
-        public async Task<bool> UpdateProductAsync(Product product)
+        public async Task<bool> UpdateProductAsync(Product updated)
         {
-            _context.Entry(product).State = EntityState.Modified;
+            if (updated == null || updated.Id == 0)
+                return false;
+
+            var existing = await _context.Products
+                .Include(p => p.ProductSizes)
+                .Include(p => p.ProductColors)
+                .Include(p => p.ProductImages)
+                .FirstOrDefaultAsync(p => p.Id == updated.Id);
+
+            if (existing == null)
+                return false;
+
+            _context.Entry(existing).CurrentValues.SetValues(updated);
+
+            _context.ProductSizes.RemoveRange(existing.ProductSizes);
+            _context.ProductColors.RemoveRange(existing.ProductColors);
+            _context.ProductImages.RemoveRange(existing.ProductImages);
+            await _context.SaveChangesAsync();
+
+            foreach (var sz in updated.ProductSizes)
+            {
+                _context.ProductSizes.Add(new ProductSize
+                {
+                    SizeValue = sz.SizeValue,
+                    ProductId = existing.Id
+                });
+            }
+
+            foreach (var cl in updated.ProductColors)
+            {
+                _context.ProductColors.Add(new ProductColor
+                {
+                    ColorValue = cl.ColorValue,
+                    ProductId = existing.Id
+                });
+            }
+
+            foreach (var img in updated.ProductImages)
+            {
+                _context.ProductImages.Add(new ProductImage
+                {
+                    ImageUrl = img.ImageUrl,
+                    SortOrder = img.SortOrder,
+                    ProductId = existing.Id
+                });
+            }
+
             await _context.SaveChangesAsync();
             return true;
         }
@@ -84,7 +131,7 @@ namespace eUseControl.DataAccesss.Repositories
             foreach (var img in product.ProductImages.ToList())
             {
                 var fileName = System.IO.Path.GetFileName(img.ImageUrl);
-                var path = HttpContext.Current.Server.MapPath("~/images/" + fileName);
+                var path = HttpContext.Current.Server.MapPath("~/Content/images/" + fileName);
                 if (System.IO.File.Exists(path))
                     System.IO.File.Delete(path);
             }
